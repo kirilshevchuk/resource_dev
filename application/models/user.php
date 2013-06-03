@@ -8,9 +8,44 @@
 		
 		public function send_signup_mail($email){		 
 			$this->email->from(ADMIN_EMAIL,ADMIN_NAME);
-			$this->email->to($email);			
+			$this->email->to($email);
+		$firstname = $this->input->post('login_firstname');
+		$lastname = $this->input->post('login_lastname');
+		$username = $this->input->post('login_username');
+		$loginphone = $this->input->post('login_phone');
+		$password = $this->input->post('login_password');
+                $login_link = base_url()."";
+                $message = "
+                    <p>Dear $firstname $lastname.</p>
+                    <p>Thanks for signup&nbsp;and w<span style='font-family:arial,tahoma,verdana,sans-serif'><span style='font-size:small'>elcome to our system! We</span>&nbsp;<span style='font-size:small'>will be here to support you every step of</span>&nbsp;<span style='font-size:small'>the way on your journey to success online.</span><br />
+                    <span style='font-size:small'>The first thing you need to do is login:</span><br />
+                    <a href='http://'".$login_link."><span style='font-size:small'>$login_link</span></a><br />
+                        Login:&nbsp;</span>$username</p>
+                    <p><span style='font-family:arial,tahoma,verdana,sans-serif'>Password:&nbsp;</span>$password<br />
+                    <span style='font-family:arial,tahoma,verdana,sans-serif'><span style='font-size:small'>Once you&#39;re inside the system, all you</span><br />
+                    <span style='font-size:small'>need to do is watch the welcome video</span><br />
+                    <span style='font-size:small'>and follow the steps on the left.</span></span></p>
+                    <p>​<span style='font-family:arial,tahoma,verdana,sans-serif; font-size:small'>Best regards</span><br />
+                    <span style='font-family:arial,tahoma,verdana,sans-serif'>Login:&nbsp;</span>&quot;Teame name&quot;</p>
+                        ";
+                $message1 = "
+Dear $firstname $lastname.
+
+Thanks for signup and welcome to our system! We will be here to support you every step of the way on your journey to success online.
+The first thing you need to do is login:
+$login_link
+Login: $username
+
+Password: $password
+Once you're inside the system, all you
+need to do is watch the welcome video
+and follow the steps on the left.
+
+​Best regards
+Login: 'Teame name'
+                        ";
 			$this->email->subject('Email Test');
-			$this->email->message('Thanks for signup.');
+			$this->email->message($message1);
 			$this->email->send();
 			//$this->email->print_debugger();
 		}
@@ -50,36 +85,90 @@
 			}
 		}
 	 
+		function check_for_valid_affliate_id($id){
+			$this -> db -> select('*');
+			$this -> db -> from('users');
+			$this -> db -> where('user_track_id', $id);
+			$query = $this->db->get();
+			return $query->num_rows;
+		}
+
+		function check_for_allready_signup($info=array()){
+			// echo '<pre>';
+			// print_r($info);
+			// echo '</pre>';
+
+			$this -> db -> select('*');
+			$this -> db -> from('users');
+			$this -> db -> where('affiliate_user_id', $info['affiliate_user_id']);
+			$this -> db -> where('user_email', $info['user_email']);
+			$this -> db -> where('role', 'user');
+			$query = $this->db->get();
+			// echo $query->num_rows;
+			// die();
+			return $query->num_rows;
+		}
+		
 		function signup($wholedata=array())
-		{
-			//execute the insert operation 
-			$result = $this->db->insert('users',$wholedata);
-			if($result)
-			{
-				$lastuserid = $this->db->insert_id();
-				$track_id = $lastuserid.$this->create_track_id($length=6,$use_upper=1,$use_lower=1,$use_number=1,$use_custom="@");
-				$datatoupdate = array(
-									'user_track_id'=>$track_id,
-								);
-				$this->db->where('id', $lastuserid);
-				$this->db->trans_start();
-				$status = $this->db->update('users', $datatoupdate);
-				if($status){
-					$this->send_signup_mail($wholedata['user_email']);
-	 			}		
-				$this->db->trans_complete();
+		{	
+			$is_refer=0;
+			$is_valid_affliate_id=1;
+			if (array_key_exists('affiliate_user_id', $wholedata)){
+				$is_refer=1;
+				$aff_res=$this->check_for_valid_affliate_id($wholedata['affiliate_user_id']);
+				if($aff_res!=0){
+					// echo 'Valid_affliate_id';
+					// die("valid");
+					$is_valid_affliate_id=1;
+				}else{
+					$is_valid_affliate_id=0;
+					// echo 'invalid_affliate_id';
+					return 'invalid_affliate_id';
+					die(' Die due to invalid_affliate_id');
+				}	
+				// echo "The 'first' element is in the array-{$wholedata[affiliate_user_id]}";
+			}
+			if($is_valid_affliate_id==1){
+				//check whether user allready signup using same link
+				if($is_refer==1){
+					$is_first_signup=$this->check_for_allready_signup($wholedata);
+					if($is_first_signup!=0){
+						return 'allready_signup';
+						die('die due to allready_signup');
+					}	
+				}
 				
-				$userarray = array(
-					'id' => $lastuserid,
-					'user_name'	=> $wholedata['user_name'],
-					'full_name' =>$wholedata['first_name']." ".$wholedata['last_name'],
-					'role'  => $wholedata['role'],
-					'user_tack_id'  => $track_id
-				);
-				return $userarray;
+				//execute the insert operation 
+				$result = $this->db->insert('users',$wholedata);
+				if($result)
+				{
+					$lastuserid = $this->db->insert_id();
+					$track_id = $lastuserid.$this->create_track_id($length=6,$use_upper=1,$use_lower=1,$use_number=1,$use_custom="#");
+					$datatoupdate = array(
+										'user_track_id'=>$track_id,
+									);
+					$this->db->where('id', $lastuserid);
+					$this->db->trans_start();
+					$status = $this->db->update('users', $datatoupdate);
+					if($status){
+						$this->send_signup_mail($wholedata['user_email']);
+					}		
+					$this->db->trans_complete();
+					
+					$userarray = array(
+						'id' => $lastuserid,
+						'user_name'	=> $wholedata['user_name'],
+						'full_name' =>$wholedata['first_name']." ".$wholedata['last_name'],
+						'role'  => $wholedata['role'],
+						'user_track_id'  => $track_id
+					);
+					return $userarray;
+				}
+			}else{
+				return false;
 			}
 		}
-		 
+			 
 		 /*******=======---------------- Create Custom/Random String ---------- =========************/
 
     /*---Let??? see the  Function parameters Specificateion-------------------
@@ -122,17 +211,15 @@
 		}
 		/*******=======-------------End of  Create Custom/Random String ---------- =========**********/
 		
-		function check_email_exists($emailaddress)
+		function check_username_exists($username)
 		{
-			$this -> db -> select('user_email');
+			$this -> db -> select('user_name');
 			$this -> db -> from('users');
-			$this -> db -> where('user_email', $emailaddress);
+			$this -> db -> where('user_name', $username);
 			$query = $this->db->get();
-			if($query->num_rows == 1) {
-				return $query->result();			
-			}else{
-				return false;
-			}
+			return $query->num_rows;
+			// die(">>>>");
+			// return $query->num_rows;
 		}
 		
 		function get_admin_login_detail(){
@@ -214,6 +301,8 @@
 			return $status;
 		}
 
+		
+	
 	 //here the login functions ends now the user management functions on the admin end as well as user's front end
 	 
 	 

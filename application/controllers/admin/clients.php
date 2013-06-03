@@ -11,7 +11,7 @@
 		// check for validate user login
 		$session_login_user=$this->session->userdata('logged_in');
 		if (!($session_login_user['login_state'] == 'active' && $session_login_user['role'] == 'admin')) {
-			redirect('login', 'refresh');
+			redirect('/', 'refresh');
 		}
 	 }
 	 
@@ -21,8 +21,7 @@
 		$this->data['subview']=  'admin/clients/clients_listing';
 		$this->load->view('admin/_layout_main.php', $this->data);
 	}
-	
-	
+
 	function deleteclient($id){
 		// echo $id;
 		if(isset($id)){

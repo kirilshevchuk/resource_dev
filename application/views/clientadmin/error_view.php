@@ -60,9 +60,9 @@
 	<div class="row-fluid">
 		<div class="http-error">
 			<h1>Oops!</h1>
-			<p class="info">Something happened that we didn't expect.</p>
+			<p class="info"><?php if(isset($error_message) &&($error_message!='')){ echo $error_message; }else{ ?>Something happened that we didn't expect.<?php } ?></p>
 			<p><i class="icon-home"></i></p>
-			<p><a href="<?php echo base_url(); ?>">Back to the home page</a></p>
+			<p><a href="<?php if(isset($error_redirect) &&($error_redirect!='')){ echo $error_redirect; }else{  echo base_url(); } ?>">Click Here</a></p>
 		</div>
 	</div>
    

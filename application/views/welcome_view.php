@@ -67,7 +67,7 @@
 	<footer>
 		<center>
 			<a href="javascript:void(0);" style="text-decoration:none;">
-			<div>Copyright � resourcebay.com 2013</div>
+			<div>Copyright © resourcebay.com 2013</div>
 			Privacy Policy | Earnings Disclaimer | Terms of Service | Contact
 			</a>
 		</center>

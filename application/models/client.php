@@ -100,6 +100,59 @@
 				//$this->email->print_debugger();
 		}
 		
+		function save_emp_id_from_dashboard($gvoid = false){
+			$login_client=$this->get_current_login_client_detail();
+					
+			$datatoupdate = array(
+									'emp_netwrok_user_name'=>$gvoid
+								);
+			$this->db->where('id', $login_client['id']);
+			$this->db->where('user_track_id', $login_client['user_track_id']);
+			$this->db->trans_start();
+			$status = $this->db->update('users', $datatoupdate);
+			$this->db->trans_complete();
+			if($status){
+				return true;
+			};
+		}
+		
+		function save_pure_id_from_dashboard($gvoid = false){
+			$login_client=$this->get_current_login_client_detail();
+					
+			$datatoupdate = array(
+									'leverage_user_name'=>$gvoid
+								);
+			$this->db->where('id', $login_client['id']);
+			$this->db->where('user_track_id', $login_client['user_track_id']);
+			$this->db->trans_start();
+			$status = $this->db->update('users', $datatoupdate);
+			$this->db->trans_complete();
+			if($status){
+				return true;
+			};
+		}
+		function save_gvo_id_from_dashboard($gvoid = false){
+				$login_client=$this->get_current_login_client_detail();
+					
+				$datatoupdate = array(
+										'gvo_user_name'=>$gvoid
+									);
+				$this->db->where('id', $login_client['id']);
+				$this->db->where('user_track_id', $login_client['user_track_id']);
+				$this->db->trans_start();
+				$status = $this->db->update('users', $datatoupdate);
+				$this->db->trans_complete();
+				if($status){
+					return true;
+				};
+				
+				// echo '<pre>';
+				// print_r($info);
+				// echo '</pre>';
+				// die();
+				// return true;
+		}	
+		
 		function remove_client($deleteid = false)
 		{
 			$this->db->delete('users', array('id' => $deleteid,'role'=>'user')); 
@@ -150,12 +203,18 @@
 			$lname = $this->input->post('txtLname');
 			$phone = $this->input->post('txtPhone');
 			$email = $this->input->post('txtEmail');
+			$gvo_name = $this->input->post('txt_gvo_user');
+			$leverage_name = $this->input->post('txt_lev_user');
+			$empower_name = $this->input->post('txt_emp_user');
 			
 			$datatoupdate = array(
 								'first_name'=>$fname,
 								'last_name'=>$lname,
 								'phone_number'=>$phone,
-								'user_email'=>$email
+								'user_email'=>$email,
+								'gvo_user_name'=>$gvo_name,
+								'leverage_user_name'=>$leverage_name,
+								'emp_netwrok_user_name'=>$empower_name
 							);
 			
 			$this->db->where('id', $session_login_client['id']);
@@ -291,13 +350,17 @@
 		}
 		
 		
-		function get_client_followup_email(){
+		function get_client_followup_email($track_id=false){
 			$t=$this->session->userdata('client_login');
 			$this -> db -> select('*');
 			$this -> db -> from('email_rules');
 			$this -> db -> where('email_type', 'follow');
-			$this -> db -> where('user_track_id', $t['user_track_id']);
-			$this -> db -> where('user_id', $t['id']);
+			if(isset($track_id) && ($track_id!='')){
+				$this -> db -> where('user_track_id', $track_id);
+			}else{
+				$this -> db -> where('user_track_id', $t['user_track_id']);
+				$this -> db -> where('user_id', $t['id']);
+			}
 			$this -> db -> limit(1);
 			$query = $this->db->get();
 			return $query->row_array(); 
@@ -336,6 +399,54 @@
 		/*===============End of Code for follow up email rule ====================*/
 	
 	/* ### **** ### *** ###-- End of Code to set Email rules --### *** ### *** ### **** ### *** ### ****/
-		
+		function send_followup_email($user_detail=array())
+		{
+			// echo '<pre>';
+			// print_r($user_detail);
+			// echo '</pre>';
+			// fetch follow up mail template of affliatate user 
+			$result=$this->get_client_followup_email($user_detail['affiliate_user_id']);
+			$is_followup_email=count($result);
+			// proceed if client allready set welcome email rules
+			if($is_followup_email){
+				$s1=$result;
+				$send=array(
+						'from_email'=>$s1['from_email'],
+						'email_subject'=>$s1['subject'],
+						'message'=>$s1['message'],
+						);
+			}else{
+				// case when client not set welcome email rules
+				$send=$this->get_default_welcome_email_array();
+			}
+			
+			$config['protocol'] = 'mail';
+			$config['wordwrap'] = FALSE;
+			$config['mailtype'] = 'html';
+			$config['charset'] = 'utf-8';
+			$config['crlf'] = "\r\n";
+			$config['newline'] = "\r\n";
+			$this->email->initialize($config);
+				
+			$this->email->from($send['from_email']);
+			$this->email->subject($send['email_subject']);
+			$this->email->to($user_detail['user_email']);
+			$mail_temp=$send['message'];
+			$strLink=base_url()."landing/affuser/".$user_detail['affiliate_user_id'];
+			$receiver_name=$user_detail['first_name'].' '.$user_detail['last_name'];
+			// $sender_name=$t2['first_name'].' '.$t2['last_name'];
+			$mail_temp=str_replace("{{receiver_name}}",$receiver_name,$mail_temp); 
+			// $mail_temp=str_replace("{{sender_name}}",$sender_name,$mail_temp); 
+			$mail_temp=str_replace("{{my_afflitate_link}}",$strLink,$mail_temp); 
+			$this->email->message($mail_temp);
+			$this->email->send();
+			return true;
+			
+			// echo '<pre>';
+			// print_r($res);
+			// echo '</pre>';
+			
+			
+		}	
 	}
 	?>
