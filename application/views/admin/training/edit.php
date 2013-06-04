@@ -59,7 +59,7 @@
 $training = $trainingdata->first_row();
 //Video adding form.
 echo validation_errors(); 
- echo form_open('admin/training/edit');?>
+ echo form_open("admin/training/edit/$training->id");?>
 	<div class="field">
 		<label for="title">Title</label> 
 		<input id="title" value="<?php echo $training->title; ?>" name="title" size="50" type="text" class="medium" />

@@ -64,6 +64,15 @@ class Programs_Model extends CI_Model{
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
     public function deleteProgram($pid){
+        $this->load->helper('file');
+        $this->db->select('logo');
+        $this->db->from('programs');
+        $this->db->where('id',$pid);
+        $query = $this->db->get();
+        $row = $query->first_row();
+        if(file_exists('./uploads/logo/'.$row->logo)){
+            unlink('./uploads/logo/'.$row->logo);
+        }
         $this->db->where('id',$pid);
         $this->db->delete('programs');
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;

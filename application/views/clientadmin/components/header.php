@@ -91,7 +91,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 							<li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Dashboard</a></li>
 							<li><a href="#" >Commissions</a></li>
 							<li><a href="<?php echo base_url(); ?>clientadmin/training">Marketing Videos</a></li>
-							<li><a href="#">How To Videos</a></li>
+							<li><a href="<?php echo base_url(); ?>clientadmin/programs">How To Videos</a></li>
 							<li><a href="<?php echo base_url(); ?>clientadmin/promotesite" >Promote Web</a></li>
 							<li><a href="#">Tools</a></li>
 							<li>

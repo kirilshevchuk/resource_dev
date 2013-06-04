@@ -11,8 +11,14 @@
 		if (!($session_login_client['login_state'] == 'active' && $session_login_client['role'] == 'user')) {
 			redirect('login', 'refresh');
 		}
+		$this->load->model('training_model','',TRUE);
 		$this->load->model('client','',TRUE);
 		$this->load->library('form_validation');
+	 }
+	 
+	 function tabs(){
+			$this->data['subview']=  'clientadmin/site_dashboard';
+			$this->load->view('clientadmin/_layout_main', $this->data);
 	 }
 	 
 	 function index()
@@ -21,8 +27,10 @@
 		{
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
 			$this->data['metatitle'] = 'EAP Training';
+			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
+			 $this->data['query']=$this->training_model->getCategories();
+             
 			$this->data['subview']=  'clientadmin/training_view';
-			// $this->data['subview']=  'clientadmin/site_dashboard';
 			$this->load->view('clientadmin/_layout_main', $this->data);
 		}
 		else
@@ -31,7 +39,10 @@
 			redirect('login', 'refresh');
 		}
 	 }
-	 
+	   function showdata($category){
+			// echo 'i mmmmmmm';
+			echo $html=$this->training_model->get_traing_data_by_category($category);
+		}
 	
 }
 	 

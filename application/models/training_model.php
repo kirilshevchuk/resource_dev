@@ -179,8 +179,46 @@ class Training_model extends CI_Model{
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
     function deleteTraining($id){
+        $this->db->select('tv.training_video as video');
+        $this->db->from('training as t');
+        $this->db->join('training_video as tv','t.id=tv.training_id','LEFT');
+        $this->db->where('t.id',$id);
+        $query = $this->db->get();
+        var_dump($query);
+        if($query->num_rows>0){
+        foreach($query->result() as $row){
+            if(empty($row))continue;
+            if(file_exists('./uploads/training/video/'.$row->video)){
+                unlink('./uploads/training/video/'.$row->video);
+            }
+        }
+        }
+        $this->db->select('ti.training_image as images');
+        $this->db->from('training as t');
+        $this->db->join('training_images as ti','t.id=ti.training_image','LEFT');
+        $this->db->where('t.id',$id);
+        var_dump($query1);
+        $query1 = $this->db->get();
+        echo $this->db->last_query();
+        if($query1->num_rows>0){
+        foreach($query1->result() as $row1){
+            var_dump($row1);
+            if(file_exists('./uploads/training/images/'.$row->images)){
+                unlink('./uploads/training/images/'.$row->images);
+            }
+        }
+        }
         $this->db->where('id',$id);
         $this->db->delete('training');
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+    function editTraining($id){
+        $data=array(
+            'title'=>$this->input->post('title'),
+            'link'=>$this->input->post('link')
+        );
+        $this->db->where('id',$id);
+        $this->db->update('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
 }

@@ -64,10 +64,12 @@ foreach($query->result() as $training ):
           <td>
 			<!--<a href="<?php //echo base_url();?>admin/videos/updatevideo/<?php //echo $marketing->id; ?>" >
    <i class="icon-pencil"></i></a>-->
-              <i onclick="delpro(this.id);" id="<?php //echo $marketing->id; ?>" class="icon-remove" style="cursor:pointer"></i>
+              <i onclick="delpro(this.id);" id="<?php echo $training->id; ?>" class="icon-remove" style="cursor:pointer"></i>
               <a href="<?php echo base_url();?>admin/training/delete_training/<?php echo $training->id; ?>" ></a>
 		<a href="<?php echo base_url();?>admin/training/edit/<?php echo $training->id; ?>" >Edit</a> 
                 <a href="<?php echo base_url();?>admin/training/preview/<?php //echo $training->id; ?>" >Preview</a>
+                <input type="hidden" name="current_action" id="current_action" value="admin/training/delete_training/">
+                <input type="hidden" name="baseurl" id="baseurl" value="<?php echo base_url(); ?>">
           </td>
         </tr>
 <?php endforeach; ?>  

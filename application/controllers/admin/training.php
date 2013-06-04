@@ -55,6 +55,11 @@ class Training extends CI_Controller {
             if($this->data['trainingdata']->num_rows===0){
                 redirect("admin/training");
             }
+            if($this->input->post('edit_training')){
+                if($this->training_model->editTraining($id)){
+                    redirect("admin/training");
+                }
+            }
             $this->data['subview']='admin/training/edit';
             $this->load->view('admin/_layout_main.php', $this->data);
         }
@@ -198,7 +203,7 @@ class Training extends CI_Controller {
         }
         function delete_training($id){
             $this->training_model->deleteTraining($id);
-            redirect("admin/training");
+            //redirect("admin/training");
         }
     
 }
