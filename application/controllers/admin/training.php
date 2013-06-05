@@ -22,6 +22,7 @@ class Training extends CI_Controller {
         }
         public function add(){
             $this->data['categories']=  $this->training_model->getCategories();
+            $this->data['types']=  $this->training_model->getTypes();
             if($this->input->post('add_training')!==FALSE){
                 $this->form_validation->set_rules('title', 'Title', 'required');
                 $this->form_validation->set_rules('link', 'Link', 'required');

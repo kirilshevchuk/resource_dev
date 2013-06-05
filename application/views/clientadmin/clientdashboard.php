@@ -94,13 +94,23 @@ img#video_bg{
 }
 img.step_done{
 	height: 80%;
+    margin: -24px 11% 0 -35%;
+    position: relative;
+    width: 25%;
+    z-index: 1;
+	display:none;
+}
+
+/* img.step_done{
+	height: 80%;
     margin: -14% 7% -1% -31%;
     position: relative;
     width: 25%;
 	z-index: 1;
 	display:none;
 }
-span.number {
+ */
+ span.number {
     background: none repeat scroll 0 0 #78A0B1; 
    /*  background:url("<?php echo base_url(); ?>/images/check.png"); */
     border-radius: 10px 10px 10px 10px;
@@ -156,7 +166,7 @@ span.number {
 					</li>
 					<li>
 						
-						<a href="#" class="video_tabs" onclick="set_my_video(this,document.frmVideo.txtNext.value,document.frmVideo.txtNextTitle.value);">
+						<a href="#" class="video_tabs" onclick="set_my_video(this,document.frmVideo.txtNext.value,document.frmVideo.txtNextTitle.value,'what');">
 							<img src="<?php echo base_url();?>images/check.png" class="step_done" />
 							<span class="number">4</span>	What's<br/> Next?
 						</a>
@@ -185,7 +195,9 @@ span.number {
 					<div id="videopreview">Loading the player...</div>
 		</div>
 		
+	
 	</div>
+	
 </form>
 <style>
 .idArea{
@@ -240,6 +252,7 @@ fieldset { margin: 10px 0 22px 0; border: 1px solid #095D92; padding: 12px 17px;
 legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #FFFFFF; font-weight: bold; padding: 4px 8px; }
 </style>
 <!--/**********************************************************/-->
+		
 		<div class="idArea" id="gvo">
 			<form method="post" action="<?php echo base_url();?>clientadmin/clientdashboard/savegvo">
 				<div class="affiliateLink">
@@ -321,6 +334,10 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 			</form>
 		</div>
 		
+		<div class="idArea" id="what">
+			 <input type="button" class="claimbtn" value="Click Here To Go To The Next Step" />
+		</div>
+			
 		<!--/**********************************************************/-->	
 </div>
 <!-- /wrapperMain -->

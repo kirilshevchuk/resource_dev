@@ -7,8 +7,10 @@ class Training_model extends CI_Model{
         parent::__construct();
     }
     function getTrainingData($id = 0){
-        $this->db->select('*');
-        $this->db->from('training');
+        $this->db->select('t.id, t.title, t.link, tc.category_name as category, tt.type_name as t_type');
+        $this->db->from('training as t');
+        $this->db->join('training_category as tc',"t.training_category = tc.id");
+        $this->db->join('training_type as tt',"t.training_type = tt.id");
         if($id!=0){
             $this->db->where('id',$id);
         }
@@ -22,6 +24,45 @@ class Training_model extends CI_Model{
         $query = $this->db->get();
         return $query;
     }
+    function get_traing_data_by_category($cid){
+		$this->db->select('t.id AS id, 
+            t.link AS link, 
+            t.title AS title, 
+            tv.training_video AS video, 
+            tt.training_text AS t_text');
+        $this->db->from('training AS t');
+        $this->db->join('training_video AS tv','t.id=tv.training_id','LEFT');
+        $this->db->join('training_text AS tt','t.id=tt.training_id','LEFT');
+        $this->db->where('t.training_category',$cid);
+        $query = $this->db->get();
+		// echo $this->db->last_query();
+		$trn_html='';		
+		$base_url=base_url();
+		foreach($query->result() as $training ){ 
+			$trn_html.="
+				<div class='main_tab' >
+					<div class='m_t_tab-close tab_close tab_child_1' onclick='show_div(this,{$training->id});'>{$training->title}
+						<img  src='{$base_url}images/transparent.gif' class='open_close open_tab' width='36' height='29'>
+					</div>
+					<div class='show-tab-content tab_child_2' style='display: none;'>
+						<p>
+							{$training->t_text}
+						</p>
+						<input type='hidden' id='id_videopreview_{$training->id}' value='{$training->video}'>
+									
+						<div class='video_preveiw' style=''>
+									<script type='text/javascript'>jwplayer.key='oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==';</script>
+									<div id='videopreview_{$training->id}'>Loading the player...</div>
+						</div>
+					
+						
+					</div>
+				</div>
+					";	
+		}
+		return $trn_html;
+	}
+	
     function getTrainingFullData($id){
         $this->db->select('t.id AS id, 
             t.link AS link, 
@@ -39,7 +80,8 @@ class Training_model extends CI_Model{
         $data=array(
             'link'=>$this->input->post('link'),
             'title'=>$this->input->post('title'),
-            'training_category'=>$this->input->post('category')
+            'training_category'=>$this->input->post('category'),
+            'training_type'=>$this->input->post('type')
         );
         $this->db->insert('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
@@ -152,6 +194,15 @@ class Training_model extends CI_Model{
     function getCategories($id=0){
         $this->db->select('*');
         $this->db->from('training_category');
+        if($id!==0){
+            $this->db->where('id',$id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+    function getTypes($id=0){
+        $this->db->select('*');
+        $this->db->from('training_type');
         if($id!==0){
             $this->db->where('id',$id);
         }

@@ -186,8 +186,10 @@
 									'user_track_id' => $row->user_track_id,
 									);
 					if($row->affiliate_user_id!=''){	
-						$sponser_qry=$this->client->GetClientData($row->affiliate_user_id);
-						$sponser_data=$sponser_qry->row_array();
+						//$sponser_qry=$this->client->GetClientData($row->affiliate_user_id);
+						//$sponser_data=$sponser_qry->row_array();
+						//$sponser_full_name=$sponser_data['first_name'].' '.$sponser_data['last_name'];
+						$sponser_data=$this->user->getSponsor($row->affiliate_user_id);
 						$sponser_full_name=$sponser_data['first_name'].' '.$sponser_data['last_name'];
 						
 						// echo '<pre>';

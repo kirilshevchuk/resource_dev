@@ -169,6 +169,18 @@ Login: 'Teame name'
 			}
 		}
 			 
+                function getSponsor($trackid){
+                    $this->db->select('first_name, last_name, id');
+                    $this->db->from('users');
+                    $this->db->where('user_track_id',$trackid);
+                    $query = $this->db->get();
+                    $row=$query->first_row();
+                    return array(
+                        'id'=>$row->id,
+                        'first_name'=>$row->first_name,
+                        'last_name'=>$row->last_name
+                    );
+                }
 		 /*******=======---------------- Create Custom/Random String ---------- =========************/
 
     /*---Let??? see the  Function parameters Specificateion-------------------
@@ -221,7 +233,13 @@ Login: 'Teame name'
 			// die(">>>>");
 			// return $query->num_rows;
 		}
-		
+		function check_user_trackid($trackid){
+                    $this->db->select('id');
+                    $this->db->from('users');
+                    $this->db->where('user_track_id',$trackid);
+                    $query = $this->db->get();
+                    return $query->num_rows>0;
+                }
 		function get_admin_login_detail(){
 			$t=$this->session->userdata('logged_in');
 			// echo '<pre>';

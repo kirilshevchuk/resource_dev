@@ -46,6 +46,8 @@
           <th>#</th>
           <th>Title</th>
           <th>Link</th>
+          <th>Category</th>
+          <th>Type</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -61,6 +63,8 @@ foreach($query->result() as $training ):
           <td><?php echo $i+=1; ?></td>
           <td><?php echo $training->title;?></td>
           <td><?php echo $training->link; ?></td>
+          <td><?php echo $training->category; ?></td>
+          <td><?php echo $training->t_type; ?></td>
           <td>
 			<!--<a href="<?php //echo base_url();?>admin/videos/updatevideo/<?php //echo $marketing->id; ?>" >
    <i class="icon-pencil"></i></a>-->

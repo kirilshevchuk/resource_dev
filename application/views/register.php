@@ -70,16 +70,17 @@ background: none !important;
 	// echo '<pre>';
 	// print_r($stylelist);
 	// echo '</pre>';
-	$is_afflitate_user=$this->session->userdata('affuserid');
-	$is_fresh_signup=1;
-	if(isset($is_afflitate_user) && $is_afflitate_user!=''){
+        
+	//$is_afflitate_user=$this->session->userdata('affuserid');
+	//$is_fresh_signup=1;
+	/*if(isset($is_afflitate_user) && $is_afflitate_user!=''){
 		//echo 'refere by some user';
 		// $this->session->unset_userdata('affuserid');
 		$is_fresh_signup=0;
 	}else{
 		//echo 'Fresh Sign up';
 		
-	}
+	}//*/
 
 							
 	$data=$query->result();
@@ -144,9 +145,9 @@ background: none !important;
                                 <input  class="smallinput" type="password" name="login_password" id="login_password" placeholder="Password*" >
                                 </div>
 							<?php
-								if(!$is_fresh_signup){
+								if(isset($sponsor)){
 							?>
-                                <input type="hidden" name="afflitate_user_id" id="afflitate_user_id" value="<?php echo $is_afflitate_user; ?>">
+                                <input type="hidden" name="afflitate_user_id" id="afflitate_user_id" value="<?php echo $sponsor; ?>">
 				            <?php } ?>
                                 <div class="input_line">
                                 <input  type="submit" id="register_user" value="">

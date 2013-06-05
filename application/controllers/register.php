@@ -31,8 +31,11 @@
 		$this->load->view('user_registration',$this->data);
                 
 	 }
-	 function index(){
+	 function index($sponsor=0){
              $this->data['query'] = $this->logo->GetInitData();
+             if($sponsor!==0 && $this->user->check_user_trackid($sponsor)){
+                 $this->data['sponsor'] = $sponsor;
+             }
              $this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
              $this->data['stylelist'][]='video-js/video-js.css';
              $this->data['stylelist'][]='css/style.css';
@@ -148,10 +151,11 @@
 		$loginemail = $this->input->post('login_email');
 		$encryptpass=md5($loginpassword);
 		$strdate=date("Y-m-d h:i:s");
+                $sponsor = array();
 		$is_username_exist=$this->user->check_username_exists($username);
 		if($is_username_exist==0)
 		{
-			$is_afflitate_user=$this->session->userdata('affuserid');
+			
 			$wholedata1=array(	
 								'first_name' => $firstname ,
 								'last_name' => $lastname ,
@@ -163,8 +167,9 @@
 								'phone_number' => $loginphone, 	
 								'signup_date' => $strdate 	
 							);
-			if(isset($is_afflitate_user) && $is_afflitate_user!=''){
+			if($this->input->post('afflitate_user_id')){
 				$affuser=array('affiliate_user_id'=>$this->input->post('afflitate_user_id'));
+                                $sponsor = $this->user->getSponsor($this->input->post('afflitate_user_id'));
 				$wholedata = array_merge($affuser,$wholedata1);
 			}else{
 				$wholedata = $wholedata1;
@@ -201,7 +206,7 @@
 				// echo '</pre>';
 				// die(">>>>>>");
 				$sess_array = array();
-				$sess_array = array(
+				$sess_array1 = array(
 									'id' => $result['id'],
 									'username' => $result['user_name'],
 									'fullname' => $result['full_name'],
@@ -209,6 +214,13 @@
 									'user_track_id' => $result['user_track_id'],
 									'login_state' => 'active',
 									);
+                                if(!empty($sponsor)){
+                                    $sess_array2 = array('sponser_full_name'=>$sponsor['first_name']." ".$sponsor['last_name']);
+                                    $sess_array=array_merge($sess_array1,$sess_array2);
+                                }
+                                else{
+                                     $sess_array=$sess_array1;
+                                }
 				$this->session->set_userdata('client_login', $sess_array);
 				return TRUE;
 				die();

@@ -37,6 +37,8 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /* Some useful Constant for Admin */  
+// define('CONTACT_SUPPORT_EMAIL','vipinwebguru@gmail.com');
+define('CONTACT_SUPPORT_EMAIL','support@easyaccessprofits.com');
 define('ADMIN_EMAIL','vipinwebguru@gmail.com');
 define('ADMIN_NAME','Nissapian');
 
