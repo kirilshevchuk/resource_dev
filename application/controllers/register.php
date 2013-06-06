@@ -31,16 +31,14 @@
 		$this->load->view('user_registration',$this->data);
                 
 	 }
-	 function index($sponsor=0){
+	 function index(){
              $this->data['query'] = $this->logo->GetInitData();
-             if($sponsor!==0 && $this->user->check_user_trackid($sponsor)){
-                 $this->data['sponsor'] = $sponsor;
-             }
              $this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
              $this->data['stylelist'][]='video-js/video-js.css';
              $this->data['stylelist'][]='css/style.css';
              $this->data['scriptlist'][]='scripts/user_registration.js';
-             $this->data['scriptlist'][]='video-js/video.js';
+             $this->data['scriptlist'][]='jwplayer/jwplayer.js';
+             $this->data['scriptlist'][]='scripts/program_video.js';
              $this->data['title'] = 'Registration';
              $this->load->view('register',$this->data);
          }
@@ -151,11 +149,10 @@
 		$loginemail = $this->input->post('login_email');
 		$encryptpass=md5($loginpassword);
 		$strdate=date("Y-m-d h:i:s");
-                $sponsor = array();
 		$is_username_exist=$this->user->check_username_exists($username);
 		if($is_username_exist==0)
 		{
-			
+			$is_afflitate_user=$this->session->userdata('affuserid');
 			$wholedata1=array(	
 								'first_name' => $firstname ,
 								'last_name' => $lastname ,
@@ -167,9 +164,8 @@
 								'phone_number' => $loginphone, 	
 								'signup_date' => $strdate 	
 							);
-			if($this->input->post('afflitate_user_id')){
+			if(isset($is_afflitate_user) && $is_afflitate_user!=''){
 				$affuser=array('affiliate_user_id'=>$this->input->post('afflitate_user_id'));
-                                $sponsor = $this->user->getSponsor($this->input->post('afflitate_user_id'));
 				$wholedata = array_merge($affuser,$wholedata1);
 			}else{
 				$wholedata = $wholedata1;
@@ -196,17 +192,8 @@
 				die();
 			}else{
 				// send follow up email after user sign up by affliate user
-				if (array_key_exists('affiliate_user_id', $wholedata)){
-					$this->client->send_followup_email($wholedata);
-				}
-				$this->session->unset_userdata('affuserid');
-				// $t=$this->session->all_userdata();
-				// echo '<pre>';
-				// print_r($t);
-				// echo '</pre>';
-				// die(">>>>>>");
 				$sess_array = array();
-				$sess_array1 = array(
+				$res_array = array(
 									'id' => $result['id'],
 									'username' => $result['user_name'],
 									'fullname' => $result['full_name'],
@@ -214,13 +201,27 @@
 									'user_track_id' => $result['user_track_id'],
 									'login_state' => 'active',
 									);
-                                if(!empty($sponsor)){
-                                    $sess_array2 = array('sponser_full_name'=>$sponsor['first_name']." ".$sponsor['last_name']);
-                                    $sess_array=array_merge($sess_array1,$sess_array2);
-                                }
-                                else{
-                                     $sess_array=$sess_array1;
-                                }
+				
+				if (array_key_exists('affiliate_user_id', $wholedata)){
+					$this->client->send_followup_email($wholedata);
+					
+					$sponser_qry=$this->client->get_sponser_by_id($wholedata['affiliate_user_id']);
+					$sponser_data=$sponser_qry->row_array();
+					$sponser_full_name=$sponser_data['first_name'].' '.$sponser_data['last_name'];
+					
+					$t_array = array('sponser_full_name'=>$sponser_full_name);
+					$sess_array=array_merge($res_array, $t_array);
+					// echo 'I m her'; die('fffffffffffffffff');
+				}else{
+					$sess_array=$res_array;
+				}
+				$this->session->unset_userdata('affuserid');
+				// $t=$this->session->all_userdata();
+				// echo '<pre>';
+				// print_r($sess_array);
+				// echo '</pre>';
+				// die(">>>>>>");
+				
 				$this->session->set_userdata('client_login', $sess_array);
 				return TRUE;
 				die();

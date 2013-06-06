@@ -9,11 +9,11 @@
 		public function send_signup_mail($email){		 
 			$this->email->from(ADMIN_EMAIL,ADMIN_NAME);
 			$this->email->to($email);
-		$firstname = $this->input->post('login_firstname');
-		$lastname = $this->input->post('login_lastname');
-		$username = $this->input->post('login_username');
-		$loginphone = $this->input->post('login_phone');
-		$password = $this->input->post('login_password');
+			$firstname = $this->input->post('login_firstname');
+			$lastname = $this->input->post('login_lastname');
+			$username = $this->input->post('login_username');
+			$loginphone = $this->input->post('login_phone');
+			$password = $this->input->post('login_password');
                 $login_link = base_url()."";
                 $message = "
                     <p>Dear $firstname $lastname.</p>
@@ -25,7 +25,7 @@
                     <span style='font-family:arial,tahoma,verdana,sans-serif'><span style='font-size:small'>Once you&#39;re inside the system, all you</span><br />
                     <span style='font-size:small'>need to do is watch the welcome video</span><br />
                     <span style='font-size:small'>and follow the steps on the left.</span></span></p>
-                    <p>​<span style='font-family:arial,tahoma,verdana,sans-serif; font-size:small'>Best regards</span><br />
+                    <p><span style='font-family:arial,tahoma,verdana,sans-serif; font-size:small'>Best regards</span><br />
                     <span style='font-family:arial,tahoma,verdana,sans-serif'>Login:&nbsp;</span>&quot;Teame name&quot;</p>
                         ";
                 $message1 = "
@@ -41,7 +41,7 @@ Once you're inside the system, all you
 need to do is watch the welcome video
 and follow the steps on the left.
 
-​Best regards
+Best regards
 Login: 'Teame name'
                         ";
 			$this->email->subject('Email Test');
@@ -169,18 +169,6 @@ Login: 'Teame name'
 			}
 		}
 			 
-                function getSponsor($trackid){
-                    $this->db->select('first_name, last_name, id');
-                    $this->db->from('users');
-                    $this->db->where('user_track_id',$trackid);
-                    $query = $this->db->get();
-                    $row=$query->first_row();
-                    return array(
-                        'id'=>$row->id,
-                        'first_name'=>$row->first_name,
-                        'last_name'=>$row->last_name
-                    );
-                }
 		 /*******=======---------------- Create Custom/Random String ---------- =========************/
 
     /*---Let??? see the  Function parameters Specificateion-------------------
@@ -233,13 +221,7 @@ Login: 'Teame name'
 			// die(">>>>");
 			// return $query->num_rows;
 		}
-		function check_user_trackid($trackid){
-                    $this->db->select('id');
-                    $this->db->from('users');
-                    $this->db->where('user_track_id',$trackid);
-                    $query = $this->db->get();
-                    return $query->num_rows>0;
-                }
+		
 		function get_admin_login_detail(){
 			$t=$this->session->userdata('logged_in');
 			// echo '<pre>';

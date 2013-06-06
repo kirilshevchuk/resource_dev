@@ -76,7 +76,7 @@ echo validation_errors();
                 </select>
 	</div>
 	<div class="field">
-		<label for="type">Category</label> 
+		<label for="type">Type</label> 
                 <select id="type" name="type" class="medium" >
                     <?php foreach ($types->result() as $type):?>
                     <option value="<?php echo $type->id; ?>"><?php echo $type->type_name; ?></option>

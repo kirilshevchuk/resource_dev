@@ -13,10 +13,14 @@
         endif; ?>
 <style>  
 .video_preveiw{
-	margin: 38px 3px 2px 115px;
+	margin: 28px 3px 2px 91px;
 	position: absolute;
 	text-align: center;
 	/* width: 50%; */
+}
+#videopreview{
+    width: 717px !important;
+    height: 403px !important;
 }
 .get_started{
     font-family: "Myriad Pro";
@@ -70,17 +74,16 @@ background: none !important;
 	// echo '<pre>';
 	// print_r($stylelist);
 	// echo '</pre>';
-        
-	//$is_afflitate_user=$this->session->userdata('affuserid');
-	//$is_fresh_signup=1;
-	/*if(isset($is_afflitate_user) && $is_afflitate_user!=''){
+	$is_afflitate_user=$this->session->userdata('affuserid');
+	$is_fresh_signup=1;
+	if(isset($is_afflitate_user) && $is_afflitate_user!=''){
 		//echo 'refere by some user';
 		// $this->session->unset_userdata('affuserid');
 		$is_fresh_signup=0;
 	}else{
 		//echo 'Fresh Sign up';
 		
-	}//*/
+	}
 
 							
 	$data=$query->result();
@@ -118,11 +121,23 @@ background: none !important;
             <div id="container">
             	 <div class="profitsContainer">
                         <div id="video_viewer">
-                                <video id="register_page_vieo" class="video-js vjs-default-skin"
+                                <!--<video id="register_page_vieo" class="video-js vjs-default-skin"
                                        controls preload="auto" width="600" height="400" autoplay
                                        >
-                                    <source src="<?php echo base_url(); ?>uploads/videos/<?php echo $login_video; ?>" type='video/mp4' />
-                                </video>
+                                    <source src="<?php //echo base_url(); ?>uploads/videos/<?php //echo $login_video; ?>" type='video/mp4' />
+                                </video>-->
+        <div class="video_preveiw" style="">
+            <script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
+            <div id="videopreview">Loading the player...</div>
+        </div>
+        <?php if(preg_match("/youtube\.com/", $login_video)): ?>
+        <input type="hidden" id="baseurl" value="">
+        <input type="hidden" id="video_file_path" value="">
+        <?php else: ?>
+        <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+        <input type="hidden" id="video_file_path" value="uploads/videos/">
+        <?php endif; ?>
+        <input type="hidden" id="id_videopreview" value="<?php echo $login_video; ?>">
                                 <img src="<?php echo base_url(); ?>images/webBg2.png" id="videobg"/>
                         </div>
                      <p class="get_started">Get Started Right Now!</p>
@@ -145,9 +160,9 @@ background: none !important;
                                 <input  class="smallinput" type="password" name="login_password" id="login_password" placeholder="Password*" >
                                 </div>
 							<?php
-								if(isset($sponsor)){
+								if(!$is_fresh_signup){
 							?>
-                                <input type="hidden" name="afflitate_user_id" id="afflitate_user_id" value="<?php echo $sponsor; ?>">
+                                <input type="hidden" name="afflitate_user_id" id="afflitate_user_id" value="<?php echo $is_afflitate_user; ?>">
 				            <?php } ?>
                                 <div class="input_line">
                                 <input  type="submit" id="register_user" value="">

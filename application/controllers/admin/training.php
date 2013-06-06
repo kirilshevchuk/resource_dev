@@ -48,6 +48,8 @@ class Training extends CI_Controller {
         public function edit($id){
             $this->data['styles'][]='css/store_programs.css';
             //$this->data['styles'][]='css/style.css';
+            $this->data['categories']=  $this->training_model->getCategories();
+            $this->data['types']=  $this->training_model->getTypes();
             $this->data['scripts'][]='jwplayer/jwplayer.js';
             $this->data['scripts'][]='scripts/program_video.js';
             $this->data['scripts'][]='scripts/user_registration.js';
