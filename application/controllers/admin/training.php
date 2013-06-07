@@ -206,7 +206,7 @@ class Training extends CI_Controller {
         }
         function delete_training($id){
             $this->training_model->deleteTraining($id);
-            //redirect("admin/training");
+            redirect("admin/training");
         }
     
 }

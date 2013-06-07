@@ -95,6 +95,8 @@ background: none !important;
 								break;
 			case 'login_video':
 								$login_video=$info->file_name_in_folder;
+								$title_text=$info->tab_title;
+								
 								break;
 		}
 	}
@@ -140,7 +142,7 @@ background: none !important;
         <input type="hidden" id="id_videopreview" value="<?php echo $login_video; ?>">
                                 <img src="<?php echo base_url(); ?>images/webBg2.png" id="videobg"/>
                         </div>
-                     <p class="get_started">Get Started Right Now!</p>
+                     <p class="get_started"><?php if(isset($title_text) && ($title_text!='')){ echo $title_text; }else{ echo 'Get Started Right Now!'; } ?> </p>
                         <div class="formArea">
                             <form action="<?php echo base_url();?>register/verifysignup" method="post" >
                                 <div class="input_line">

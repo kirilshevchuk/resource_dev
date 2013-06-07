@@ -42,6 +42,8 @@ img.procees_img{
 <script>
 	function load_train_data(cat_id){
 		// alert(cat_id);
+		$('.cat_tabs').removeClass('active');
+		$('#ctab_'+cat_id).addClass('active');
 		var base_url=$("#baseurl").val();
 		var dataString = 'cat_id=' +cat_id;  
 		var process_image='<img src="'+base_url+'images/loader.gif" class="procees_img" alt="wait...">';
@@ -91,23 +93,30 @@ img.procees_img{
 			}).play(false);
 		
 	} 
+	$(document).ready(function(){
+		var firstCategory = $("#firstCategory").val();
+		load_train_data(firstCategory);
+	});
 	
 	//jQuery(document).on('click', '.jwdisplayIcon', function(event) { jwplayer( 'videopreview' ).pause(); })
 	
 </script>
-
 	<div class="webleft">
 			<div class="leftnav">
 				<ul>
 					<?php foreach($query->result() as $category ){ ?>
-						<li onclick="load_train_data(<?php echo $category->id; ?>);"><a href="#"><?php echo $category->category_name; ?></a></li>
+						<li onclick="load_train_data(<?php echo $category->id; ?>);" ><a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#"><?php echo $category->category_name; ?></a></li>
 					<?php } ?>
 					<!--<li><a href="#" class="active">System Training-2</a></li>-->
 				</ul>
 			</div>
 	</div>
 	<div class="webright">
+			<?php 
+				$first_cat = $query->row();
+			?>
 
+			<input type="hidden" id="firstCategory" value="<?php echo $first_cat->id;?>">
 			<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
 			<input type="hidden" id="id_videopreview" value="default.mp4">
 				

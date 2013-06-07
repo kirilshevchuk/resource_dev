@@ -45,6 +45,8 @@ else if (isset($status) && $status=="failure"){ ?>
       <thead>
         <tr>
           <th>#</th>
+          <th>Nav Title</th>
+          <th>Navigtion Position</th>
           <th>Video Name</th>
           <th>Description</th>
           <th>Last modified</th>
@@ -86,6 +88,8 @@ $change_url='';
 	
 		<tr>
           <td><?php echo $i; ?></td>
+          <td><?php if($singlevideo->tab_title=='') echo 'None'; else echo $singlevideo->tab_title; ?></td>
+          <td><?php if($singlevideo->position==0) echo 'Default'; else echo $singlevideo->position; ?></td>
           <td><?php echo $singlevideo->file_name; ?></td>
           <td><?php echo $singlevideo->description; ?></td>
           <td><?php echo $singlevideo->added_date; ?></td>

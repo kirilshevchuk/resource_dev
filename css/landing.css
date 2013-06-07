@@ -109,3 +109,14 @@ body {
 	margin-right:auto;
 	background-repeat:repeat-y;
 }
+#text-holder-side p {
+margin: 10px 125px;
+text-align: left;
+}
+#text-holder-side p:first-child {
+text-align: center;
+margin-top: 0px;
+}
+#text-holder-side p:last-child {
+margin-bottom: 0px;
+}
