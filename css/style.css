@@ -345,7 +345,7 @@ address{
 	overflow:hidden;
 }
 .sponsor{
-	padding-right:60px;
+	padding-right:0px;
 	color:#fff;
 	float:left;
 }
@@ -410,6 +410,9 @@ nav.maniNav ul li a {
     text-decoration: none;
 	display:block;
 	font-weight:bold;
+}
+nav.maniNav ul li:last-child a{
+    border-right: none;
 }
 nav.maniNav ul li a:hover, nav.maniNav ul li a.active {
     text-decoration:underline;

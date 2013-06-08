@@ -23,7 +23,19 @@
 					<!--/header-->
 				</div>
 <div id="wrapper">
-
+    <?php $session_menu = $this->session->userdata('menu_data_in_session'); 
+    if(!empty($session_menu)):
+    ?>
+    <nav class="maniNav">
+        <ul>
+            <?php
+            foreach($session_menu as $key=>$value){
+                ?>
+            <li><a href="<?php echo base_url().$session_menu[$key]->menu_url; ?>"><?php echo  $session_menu[$key]->menu_title; ?></a></li>
+                <?php } ?>
+        </ul>
+    </nav>
+        <?php endif; ?>
 
 <div id="text-holder-top"></div>
 <div id="text-holder-side">

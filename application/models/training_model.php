@@ -253,9 +253,9 @@ class Training_model extends CI_Model{
         $this->db->join('training_video as tv','t.id=tv.training_id','LEFT');
         $this->db->where('t.id',$id);
         $query = $this->db->get();
-        if($query->num_rows>0&&!empty($query->row_data)){
+        if($query->num_rows>0){
         foreach($query->result() as $row){
-            if(empty($row))continue;
+            if(empty($row->video))continue;
             if(file_exists('./uploads/training/video/'.$row->video)){
                 unlink('./uploads/training/video/'.$row->video);
             }
@@ -263,14 +263,14 @@ class Training_model extends CI_Model{
         }
         $this->db->select('ti.training_image as images');
         $this->db->from('training as t');
-        $this->db->join('training_images as ti','t.id=ti.training_image','LEFT');
+        $this->db->join('training_images as ti','t.id=ti.training_id','LEFT');
         $this->db->where('t.id',$id);
         $query1 = $this->db->get();
-        echo $this->db->last_query();
-        if($query1->num_rows>0&&!empty($query1->row_data)){
+        if($query1->num_rows>0){
         foreach($query1->result() as $row1){
-            if(file_exists('./uploads/training/images/'.$row->images)){
-                unlink('./uploads/training/images/'.$row->images);
+            if(empty($row1->images))continue;
+            if(file_exists('./uploads/training/images/'.$row1->images)){
+                unlink('./uploads/training/images/'.$row1->images);
             }
         }
         }
