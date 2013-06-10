@@ -5,7 +5,7 @@
 	</div>
 	<!-- /logo -->
 	<!-- header right -->
-	<div class="siteHeaderRight homeRight">
+	<div class="siteHeaderRight">
             <?php 
             $session_data = $this->session->userdata('client_login');
             if(empty($session_data)):

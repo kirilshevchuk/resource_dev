@@ -243,9 +243,25 @@ class Training_model extends CI_Model{
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
     function deleteCategory($id){
+        $this->db->select('id');
+        $this->db->from('training');
+        $this->db->where('training_category',$id);
+        $query = $this->db->get();
+        foreach($query->result() as $row){
+            if($this->trainingExists($row->id)){
+                $this->deleteTraining($row->id);
+            }
+        }
         $this->db->where('id',$id);
         $this->db->delete('training_category');
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+    function trainingExists($id){
+        $this->db->select('id');
+        $this->db->from('training');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        return($query->num_rows>0);
     }
     function deleteTraining($id){
         $this->db->select('tv.training_video as video');

@@ -408,6 +408,7 @@ nav.maniNav ul li a {
     margin: 0;
     padding: 3px 12px;
     text-decoration: none;
+    font-family: Arial,Helvetica,sans-serif;
 	display:block;
 	font-weight:bold;
 }

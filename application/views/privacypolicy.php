@@ -22,6 +22,7 @@
 					<?php $this->load->view('global/header.php'); ?>
 					<!--/header-->
 				</div>
+</div>
 <div id="wrapper">
     <?php $session_menu = $this->session->userdata('menu_data_in_session'); 
     if(!empty($session_menu)):
@@ -77,10 +78,8 @@ Your personal information is used for four main purposes and they are as follows
 <br />
 4. To enlighten you about new products, services, tool, upgrades, special offers and information which I feel may be of use to you.<br />
 <br />
-<!--[if !supportLineBreakNewLine]--><br />
+<!--[if !supportLineBreakNewLine]<br />-->
 <!--[endif]--></span></p>
-
-<p><span style="color:black; font-family:arial,sans-serif; font-size:10.5pt">&nbsp;</span></p>
 
 <p><span style="color:black; font-family:arial,sans-serif; font-size:10.5pt">I will only disclose your personal information, without notice, if required to do so by law or in the good faith belief that such action is necessary to:<br />
 <br />
@@ -95,9 +94,11 @@ Your personal information is used for four main purposes and they are as follows
 
 </div>
 
-<div id="footer"><br /><br /><div id="hyperlink"><a href="<?php echo base_url(); ?>landing/termsofservice">Terms of Service</a> 
+<div id="footer"><br /><br />
+    <div id="hyperlink"><a href="<?php echo base_url(); ?>landing/termsofservice">Terms of Service</a> 
         | <a href="<?php echo base_url(); ?>landing/privacypolicy">Privacy Policy</a> 
-        | <a href="<?php echo base_url(); ?>landing/earningdisclaimer">Earnings Disclaimer</a></div>
+        | <a href="<?php echo base_url(); ?>landing/earningdisclaimer">Earnings Disclaimer</a>
+    </div>
 
 </div>
 
