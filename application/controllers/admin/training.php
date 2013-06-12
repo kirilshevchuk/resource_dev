@@ -14,13 +14,16 @@ class Training extends CI_Controller {
 		}
 	}
         public function index(){
-            //$this->data['stylelist'][]='';
-            //$this->data['scriptlist'][]='';
+            $this->data['styles'][]='css/training.css';
+            $this->data['scripts'][]='scripts/training.js';
             $this->data['query']=  $this->training_model->getTrainingData();
             $this->data['subview']=  'admin/training/training';
             $this->load->view('admin/_layout_main.php', $this->data);
         }
         public function add(){
+            $new_id = $this->training_model->addNewTraining();
+            redirect("admin/training/edit/$new_id");
+            /*
             $this->data['categories']=  $this->training_model->getCategories();
             $this->data['types']=  $this->training_model->getTypes();
             if($this->input->post('add_training')!==FALSE){
@@ -43,14 +46,17 @@ class Training extends CI_Controller {
             else{
 				$this->data['subview']=  'admin/training/add';
 				$this->load->view('admin/_layout_main.php', $this->data);
-            }
+            }//*/
         }
         public function edit($id){
+            //header("X-XSS-Protection: 0");
             $this->data['styles'][]='css/store_programs.css';
             //$this->data['styles'][]='css/style.css';
             $this->data['categories']=  $this->training_model->getCategories();
             $this->data['types']=  $this->training_model->getTypes();
+            $this->data['statuses'] = $this->training_model->getStatus();
             $this->data['scripts'][]='jwplayer/jwplayer.js';
+            $this->data['scripts'][]='ckeditor/ckeditor.js';
             $this->data['scripts'][]='scripts/program_video.js';
             $this->data['scripts'][]='scripts/user_registration.js';
             $this->data['trainingdata']=$this->training_model->getTrainingFullData($id);
@@ -203,6 +209,27 @@ class Training extends CI_Controller {
         function delete_category($id){
             $this->training_model->deleteCategory($id);
             redirect("admin/training/categories");
+        }
+        function delete_group(){
+            //redirect("admin/training");return;
+            if($this->input->post('selected_rows')){
+                $trainingstring = $this->input->post('selected_rows');
+                //echo $trainingstring."<br>";
+                if(preg_match("/^[0-9]+(\/[0-9]+)*/i", $trainingstring)){
+                    $trainings = explode('/', $trainingstring);
+                    foreach ($trainings as $training){
+                        //echo $training."<br>";
+                        $this->training_model->deleteTraining($training);
+                    }
+                    redirect("admin/training");
+                }
+                else{
+                    redirect("admin/training");
+                }
+            }
+            else{
+                redirect("admin/training");
+            }
         }
         function delete_training($id){
             $this->training_model->deleteTraining($id);

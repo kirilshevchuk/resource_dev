@@ -1,0 +1,6 @@
+.first_element{
+    cursor: pointer;
+}
+.selected_row{
+    background-color: #36c;
+}

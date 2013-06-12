@@ -60,6 +60,7 @@ $training = $trainingdata->first_row();
 //Video adding form.
 echo validation_errors(); 
  echo form_open("admin/training/edit/$training->id");?>
+    <div id="left_form_part">
 	<div class="field">
 		<label for="title">Title</label> 
 		<input id="title" value="<?php echo $training->title; ?>" name="title" size="50" type="text" class="medium" />
@@ -88,6 +89,20 @@ echo validation_errors();
                     <?php endforeach; ?>
                 </select>
 	</div>
+	<div class="field">
+		<label for="status">Status</label> 
+                <select id="status" name="status" class="medium" >
+                    <?php foreach ($statuses->result() as $status):?>
+                    <option value="<?php echo $status->id; ?>" <?php if($training->sid==$status->id) echo 'selected'?> >
+                        <?php echo $status->status; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+	</div>
+    </div>
+    <textarea id="training_text" class="ckeditor" name="training_text" rows="10" cols="50" >
+        <?php if(!empty($training->t_text)){echo $training->t_text;} ?>
+    </textarea><!--class="ckeditor" -->
 
 	<input id="edit_training" name="edit_training" type="submit" class="btn" value="Save"/>
 <?php echo form_close();
@@ -114,7 +129,7 @@ if(!empty($training->video)):?>
         </iframe>
     <?php
     else: ?>
-        <video id="register_page_vieo" class="video-js vjs-default-skin"
+         <video id="register_page_vieo" class="video-js vjs-default-skin"
                controls preload="auto" width="480" height="360">
             <source src="<?php echo base_url(); ?>uploads/training/video/<?php echo $training->video; ?>" type='video/mp4' />
         </video>
@@ -132,7 +147,7 @@ $addvideo = array(
 echo form_open("admin/training/addvideo/$training->id");
 echo form_submit($addvideo);
 echo form_close();
-        endif;
+        endif;/*
         if(!empty($training->t_text)):
 ?>
         <div>
@@ -155,21 +170,7 @@ $addtext = array(
 echo form_open("admin/training/addtext/$training->id");
 echo form_submit($addtext);
 echo form_close();
-endif;
-if($trainingimages->num_rows>0):
-    foreach ($trainingimages->result() as $image): ?>
-        <img src="<?php echo base_url();?>uploads/training/images/<?php echo $image->training_image; ?>" height="100"/>
-    <?php endforeach;
-endif; 
-$addimages = array(
-    'id'=>'add_images',
-    'name'=>'add_tr_images',
-    'class'=>'btn',
-    'value'=>'Add Images'
-);
-echo form_open("admin/training/addimages/$training->id");
-echo form_submit($addimages);
-echo form_close();
+endif; //*/
 ?>
 
 </div>

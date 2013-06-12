@@ -28,8 +28,7 @@
  
 
 
-<a class="btn" href="<?php echo base_url(); ?>admin/training/add">Add</a>
- 
+
 <div class="btn-toolbar">
     <!--<a href="<?php //echo base_url();?>admin/videos/addvideo" >
     <button class="btn btn-primary" id="btn_addnewproduct">
@@ -60,7 +59,8 @@ $i=0;
 foreach($query->result() as $training ):
 
 ?> <tr>
-          <td><?php echo $i+=1; ?></td>
+    <input type="hidden" value="<?php echo $training->id; ?>">
+          <td class='first_element'><?php echo $i+=1; ?></td>
           <td><?php echo $training->title;?></td>
           <td><?php echo $training->link; ?></td>
           <td><?php echo $training->category; ?></td>
@@ -80,3 +80,10 @@ foreach($query->result() as $training ):
       </tbody>
     </table>
 </div>
+<a class="btn" href="<?php echo base_url(); ?>admin/training/add">Add</a>
+<div class="btn" id='delete_selection' >Delete Selection</div>
+ <?php $attrib=array('id'=>'seldcted_rows_form');
+ echo form_open("admin/training/delete_group",$attrib);?>
+ <input type="hidden" id="selected_rows" name="selected_rows" value="">
+ <?php echo form_close(); ?>
+

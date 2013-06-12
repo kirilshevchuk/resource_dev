@@ -72,12 +72,14 @@ class Training_model extends CI_Model{
             t.title AS title, 
             tv.training_video AS video, 
             tt.training_text AS t_text,tc.id as cid, 
-            tc.category_name as category, ttp.id as tid, ttp.type_name as t_type');
+            tc.category_name as category, ttp.id as tid, ttp.type_name as t_type,
+            ts.id AS sid, ts.status AS t_status');
         $this->db->from('training AS t');
         $this->db->join('training_category as tc',"t.training_category = tc.id");
         $this->db->join('training_type as ttp',"t.training_type = ttp.id");
         $this->db->join('training_video AS tv','t.id=tv.training_id','LEFT');
         $this->db->join('training_text AS tt','t.id=tt.training_id','LEFT');
+        $this->db->join('training_status AS ts','t.status=ts.id');
         $this->db->where('t.id',$id);
         $this->db->order_by('t.id', "asc"); 
         $query = $this->db->get();
@@ -92,6 +94,23 @@ class Training_model extends CI_Model{
         );
         $this->db->insert('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+    function addNewTraining(){
+        $query=  $this->getCategories();
+        $first_category=$query->first_row();
+        $query = $this->getTypes();
+        $first_type= $query->first_row();
+        $query = $this->getStatus();
+        $first_status=$query->first_row();
+        $data=array(
+            'link'=>"New Title",
+            'title'=>"New Link",
+            'training_category'=>$first_category->id,
+            'training_type'=>$first_type->id,
+            'status'=>$first_status->id
+        );
+        $this->db->insert('training',$data);
+        return ($this->db->affected_rows() > 0) ? $this->db->insert_id() : FALSE;
     }
     function addVideo($id){
         $config['upload_path'] = './uploads/training/video/';
@@ -226,6 +245,15 @@ class Training_model extends CI_Model{
         }
         $query = $this->db->get();
         return $query;
+    }
+    function getStatus($id=0){
+        $this->db->select('*');
+        $this->db->from('training_status');
+        if($id!==0){
+            $this->db->where('id',$id);
+        }
+        $query = $this->db->get();
+        return $query;        
     }
     function addCategory(){
         $data=array(

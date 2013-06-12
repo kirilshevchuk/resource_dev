@@ -345,9 +345,19 @@ address{
 	overflow:hidden;
 }
 .sponsor{
-	padding-right:0px;
+	padding-right:60px;
 	color:#fff;
 	float:left;
+	margin-top: -20px;
+}
+
+span.downline{
+	padding:7px 2px 35px 0px;
+	
+}
+span#sponser{
+	padding:7px 2px 35px 0px;
+	
 }
 .sponsor a{
 	text-decoration:underline;
@@ -388,12 +398,13 @@ nav.headertop ul li a.last {
 }
 
 nav.maniNav{
-	background:url(../images/navBg.png) repeat-x left top;
-	padding:4px 8px 7px 10px;
+	/* background:url(../images/navBg.png) repeat-x left top; */
+	/* padding:4px 0px 6px 2px; */
 	font: 16px Arial,Helvetica,sans-serif;
     margin-bottom: 30px;
 	height:auto;
 	overflow:hidden;
+	 margin-top: 3px;
 }
 nav.maniNav ul li {
     display: block;;
@@ -401,22 +412,41 @@ nav.maniNav ul li {
     margin: 0;
     padding: 0;
 	float:left;
+	background:url(../images/navBg.png) repeat-x left top;
+	padding-top: 2px;
 }
 nav.maniNav ul li a {
     border-right: 1px solid #25292e;
     color: #fff;
     margin: 0;
-    padding: 3px 12px;
+    padding: 5px 57px;
     text-decoration: none;
-    font-family: Arial,Helvetica,sans-serif;
 	display:block;
+	font-weight:normal;
+}
+
+ nav.maniNav ul li a:hover{
+    text-decoration:none;
+	box-shadow:6px 3px 6px -1px #FFFFFF inset; 
+	background: none repeat scroll 0 0 #FFB618;
+ 	padding: 5px 52px;
+	line-height:20px;
+	color:#48697E;
 	font-weight:bold;
-}
-nav.maniNav ul li:last-child a{
-    border-right: none;
-}
-nav.maniNav ul li a:hover, nav.maniNav ul li a.active {
-    text-decoration:underline;
+	cursor: pointer;
+	border-left: 1px solid #25292e;
+} 
+
+nav.maniNav ul li a.active {
+    text-decoration:none;
+	box-shadow:6px 3px 6px -1px #FFFFFF inset; 
+	background: none repeat scroll 0 0 #FFB618;
+ 	padding: 5px 52px;
+	line-height:20px;
+	color:#48697E;
+	font-weight:bold;
+	cursor: pointer;
+	border-left: 1px solid #25292e;
 }
 nav.maniNav ul li a.last {
     border-right: medium none;

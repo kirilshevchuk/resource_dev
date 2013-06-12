@@ -116,7 +116,7 @@ var jq172 = jQuery.noConflict();
         <ul id="dashboard-menu" class="nav nav-list collapse  <?php if(isset($curPageName) && ($curPageName=='listing' || $curPageName=='dashboard' || $curPageName=='empower_video' || $curPageName=='logolist') || $curPageName=='addlogo' || $curPageName=='addwelvideo' || $curPageName=='addvideo' || $curPageName=='gvo_video' || $curPageName=='pure_leverage_video' || $curPageName=='next_video' || $curPageName=='menu_listing'|| $curPageName=='menu_edit_view' ){ echo 'in'; } ?>">
             
             <li><a href="<?php echo base_url(); ?>admin/videos">Manage Welcome Video</a></li>
-			<li><a href="<?php echo base_url(); ?>admin/menu">Menu Mangement</a></li>
+			<li><a href="<?php echo base_url(); ?>admin/menu">Menu Management</a></li>
 			<li><a href="<?php echo base_url(); ?>admin/dashboard">Home</a></li>
             <!--<li><a href="<?php echo base_url(); ?>admin/logos">Manage Logo</a></li>-->
             
