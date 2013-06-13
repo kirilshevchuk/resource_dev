@@ -8,10 +8,11 @@ class Training_model extends CI_Model{
     }
     function getTrainingData($id = 0){
         $this->db->select('t.id, t.title, t.link,tc.id as cid, 
-            tc.category_name as category, tt.id as tid, tt.type_name as t_type');
+            tc.category_name as category, tt.id as tid, tt.type_name as t_type, ts.status as t_status');
         $this->db->from('training as t');
         $this->db->join('training_category as tc',"t.training_category = tc.id");
         $this->db->join('training_type as tt',"t.training_type = tt.id");
+        $this->db->join('training_status as ts',"t.status = ts.id");
         if($id!=0){
             $this->db->where('t.id',$id);
         }
@@ -37,6 +38,7 @@ class Training_model extends CI_Model{
         $this->db->join('training_text AS tt','t.id=tt.training_id','LEFT');
         $this->db->where('t.training_category',$cid);
         $this->db->where('t.training_type',$tid);
+        $this->db->where('t.status',2);
         $query = $this->db->get();
 		// echo $this->db->last_query();
 		$trn_html='';		
@@ -103,8 +105,8 @@ class Training_model extends CI_Model{
         $query = $this->getStatus();
         $first_status=$query->first_row();
         $data=array(
-            'link'=>"New Title",
-            'title'=>"New Link",
+            'link'=>"New Link",
+            'title'=>"New Title",
             'training_category'=>$first_category->id,
             'training_type'=>$first_type->id,
             'status'=>$first_status->id
@@ -148,12 +150,21 @@ class Training_model extends CI_Model{
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
     function editText($id){
+        $this->db->select('id');
+        $this->db->from('training_text');
+        $this->db->where('training_id',$id);
+        $query = $this->db->get();
+        if($query->num_rows>0){
         $data = array(
             'training_text'=> $this->input->post('training_text')
         );
         $this->db->where('training_id',$id);
         $this->db->update('training_text',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+        }
+        else{
+            return $this->addText($id);
+        }
     }
     function editVideo($id){
         $config['upload_path'] = './uploads/training/video/';
@@ -178,10 +189,21 @@ class Training_model extends CI_Model{
         else{
             return FALSE;
         }
+        $this->db->select('id');
+        $this->db->from('training_video');
+        $this->db->where('training_id',$id);
+        $query = $this->db->get();
+        if($query->num_rows!==0){
         $data = array('training_video'=>$video);
         $this->db->where('training_id',$id);
         $this->db->update('training_video',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+        }
+        else{
+        $data = array('training_video'=>$video,'training_id'=>$id);
+        $this->db->insert('training_video',$data);
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+        }
     }
     function addImages($id) {
         //echo 'function started.';
@@ -232,6 +254,7 @@ class Training_model extends CI_Model{
         $this->db->from('training as t');
         $this->db->join('training_category as tc',"t.training_category=tc.id");
         $this->db->where('training_type',$tid);
+        $this->db->where('t.status',2);
         $this->db->group_by('training_category');
         $this->db->order_by('tc.id', "asc"); 
         $query = $this->db->get();
@@ -327,10 +350,16 @@ class Training_model extends CI_Model{
             'title'=>$this->input->post('title'),
             'link'=>$this->input->post('link'),
             'training_category'=>$this->input->post('category'),
-            'training_type'=>$this->input->post('type')
+            'training_type'=>$this->input->post('type'),
+            'status'=>$this->input->post('status')
         );
         $this->db->where('id',$id);
         $this->db->update('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
+    function delete_video($id){
+        $this->db->where('training_id',$id);
+        $this->db->delete('training_video');
+    }
+    
 }

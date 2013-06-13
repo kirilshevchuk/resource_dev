@@ -127,13 +127,13 @@ var jq172 = jQuery.noConflict();
 		<ul id="client-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='clients_listing')){ echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/clients">View Clients</a></li>
         </ul>
-		<!--<a href="#program-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Program Menu<i class="icon-chevron-up"></i></a>
+		<a href="#program-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Program Menu<i class="icon-chevron-up"></i></a>
         
 		<ul id="program-menu" class="nav nav-list collapse <?php if($this->uri->segment(2)=='programs') { echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/programs">All Programs</a></li>
             <li><a href="<?php echo base_url(); ?>admin/programs/add">New Programs</a></li>
         </ul>
-		-->
+		
 		<a href="#marketing-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Marketing Programs<span class="label label-info">+2</span></a>
         
 		<ul id="marketing-menu" class="nav nav-list collapse <?php if($this->uri->segment(2)=='marketing'){ echo 'in'; } ?>">

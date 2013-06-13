@@ -18,5 +18,28 @@ $(document).ready(function(){
         $("#selected_rows").val(string);
         $("#seldcted_rows_form").submit();
     });
+    $("#header_first_element").click(function(){
+        if($('.selected_row .first_element').length>0){
+            if($('.selected_row').length<$('.first_element').length){
+                 $('.selected_row').removeClass('selected_row');
+                 var $rows = $('.first_element');
+                 for(var i=0;i<$rows.length;++i){
+                     $($rows[i]).parent().toggleClass('selected_row');
+                 }
+            }
+            else{
+                var $rows = $('.first_element');
+                for(var i=0;i<$rows.length;++i){
+                    $($rows[i]).parent().toggleClass('selected_row');
+                }
+            }
+        }
+        else{
+            var $rows = $('.first_element');
+            for(var i=0;i<$rows.length;++i){
+                $($rows[i]).parent().toggleClass('selected_row');
+            }
+        }
+    });
 });
 

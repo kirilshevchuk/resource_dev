@@ -1,8 +1,15 @@
-<?php 
+<?php
 // echo '<pre>';
 // print_r($client_full_data);
 // echo '</pre>';
-
+		$video_data=array();
+		foreach($video_query->result() as $singlevideo ){	
+			$video_data[$singlevideo->type]=$singlevideo;
+		} 
+		// echo '<pre>';
+		// print_r($video_data);
+		// echo '</pre>';
+		
 	if(isset($status) && $status=="gvo_success"){?>
 			<div class="infomessage"><?php echo "Gvo user name set successfully"?> </div>
 <?php }else if (isset($status) && $status=="pure_success"){?>
@@ -40,7 +47,7 @@
 		var previewfile = document.getElementById("txtVideo_"+id).value;
 		var video_title = document.getElementById("txtTitle_"+id).value;
 		// alert(previewfile);
-		$("div.video_title").text('Sign up for program '+video_title);
+		$("div.video_title").text(video_title);
 		jwplayer("videopreview").setup({
 				file: baseurl+'uploads/videos/'+previewfile,
 				height: 325,
@@ -50,21 +57,12 @@
 		
 	} 
 	
-	/* function set_my_video1(obj,video_name,video_title,showid){ 
-		$(obj).find('.step_done').show();
-		$(obj).find('span.number').css({
-											'color':'#386886',
-											'background-color':'#FFFFFF',
-													});
-		// $(this).closest('li').find(':checkbox').prop("checked", true);
-	   
-		$(".idArea").hide();
-		$('#'+showid).show();
+	$(document).ready(function() { 
 		var baseurl = $("#baseurl").val();
-		$('.video_tabs').removeClass('active');
-		$(obj).addClass('active');
+		var previewfile = $("#txtWelcome").val();
+		var video_title = $("#txtWelcomeTitle").val();
+		// alert(previewfile);
 		$("div.video_title").text(video_title);
-		var previewfile = video_name;
 		// alert(previewfile);
 		if(previewfile=="")
 		{
@@ -76,12 +74,54 @@
 				width: 580,
 				image: baseurl+'uploads/images/preview.jpg',
 			}).play();
-		} */
+		
+	})
 	
 	jQuery(document).on('click', '.jwplayer button', function(event) { event.preventDefault(); })
 	
+	function save_id(prog_id){
+	   var base_url=$("#baseurl").val();
+	   var aff_id=$("#txtdata_"+prog_id).val();
+	   // alert(base_url);
+		var dataString = 'prog_id=' +prog_id+ '&aff_id='+aff_id;  
+		//alert (dataString);return false;  
+		
+		$.ajax({  
+		  type: "POST",  
+		  url: base_url+"clientadmin/programs/save/"+prog_id,  
+		  data: dataString,  
+		  success: function(msg) {  
+			$("div#response").html('<div class="infomessage">Username save successfully</div>');
+			show_message_div();
+		  }  
+		});  
+		
+	}
+	function show_message_div(){
+		setTimeout(function() { 
+			$('.infomessage').fadeOut('fast');
+			} , 1750);
+	}
+	
+
+	
 </script>
 <style>
+
+.infomessage{
+	background: none repeat scroll 0 0 #00ADEB;
+    border: 1px solid black;
+    color: #FFFFFF;
+    font-size: 25px;
+    height: 45px;
+    margin-top: -200px;
+    padding-top: 25px;
+    position: fixed;
+    text-align: center;
+    top: 60%;
+    width: 98%;
+    z-index: 100;
+}
 
 .video_preveiw {
   /*  margin: 51px 5px 4px 82px; */
@@ -155,9 +195,10 @@ fieldset { margin: 10px 0 22px 0; border: 1px solid #095D92; padding: 12px 17px;
 legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #FFFFFF; font-weight: bold; padding: 4px 8px; }
 
 </style>
-	
+
+<div id="response"></div>
 <form name="frmVideo" method="post" >		
-<div class="video_title">Sign Up for Programs</div>	
+<div class="video_title">Welcome User</div>	
 
 	<div class="webleft">
 			<div class="leftnav2">
@@ -168,37 +209,35 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 						{ 
 					?>
 							<li>
-								
 								<a href="#" class="video_tabs" onclick="set_my_video(this,<?php echo $programs->id;?>);">
 									<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
-									<span class="number"><?php echo ++$count; ?></span><?php echo $programs->title;?> 
+									<span class="number"><?php echo ++$count; ?></span><?php echo $programs->leftnav_title;?> 
 								</a>
 							</li>
 							
-							<input type="hidden" id="txtVideo_<?php echo $programs->id;?>"  name="txtVideo_<?php echo $programs->id;?>" value="<?php echo $programs->video_file; ?>">
-							<input type="hidden" id="txtTitle_<?php echo $programs->id;?>"  name="txtTitle_<?php echo $programs->id;?>" value="<?php echo $programs->title; ?>">
+							<input type="hidden" id="txtVideo_<?php echo $programs->id;?>"  name="txtVideo_<?php echo $programs->id;?>" value="<?php echo $programs->video_name_in_folder; ?>">
+							<input type="hidden" id="txtTitle_<?php echo $programs->id;?>"  name="txtTitle_<?php echo $programs->id;?>" value="<?php echo $programs->video_title; ?>">
 		
 					
 				<?php 	
 					/****====== Code of custom form =====**/
 				$html['link_'.$programs->id]="
-						<div class='idArea' id='myform_{$programs->id}' >
-							<form method='post' action=''>
+						<div class='idArea' id='myform_{$programs->id}' name='myform_{$programs->id}' >
+							<form method='post' action='clientadmin/programs/save/{$programs->id}'>
 									<div class='affiliateLink' id='link_{$programs->id}' >
-										<a href='{$programs->link}'>Click URL To Join {$programs->title}</a>
+										<a href='{$programs->signup_link}'>Click URL To Join {$programs->program_title}</a>
 									</div>
 									<fieldset>
-										<legend>{$programs->title}</legend>
+										<legend>{$programs->program_title}</legend>
 										<TABLE class='sign_up_acc'>
-											<TR>
-												<TD class='lable_txt'>
-													Save Your Affliate Id: 
-												</TD>
-											</tr>
+											
 											<tr>
+											<TD class='id_image'>
+												<img src='".base_url()."uploads/logo/{$programs->logo}' style='height: 100px;margin-top:-21px;width:134px;' class='img_signup' />
+											</TD>
 												<TD class='id_control'>
-														<input  required  value='' class='biginput' type='text' placeholder='Enter Id' name='txtGvoid' >
-													<input type='submit' value='Save'  name='btnGvo' class='save_btn'>
+														<input  required  value='' class='biginput' type='text' placeholder='Enter {$programs->program_title} Username' name='txtdata_{$programs->id} 'id='txtdata_{$programs->id}' >
+													<input type='button' value='Save {$programs->program_title} Username'  name='btnGvo' class='claimbtn2' onclick='save_id({$programs->id})'>
 												</TD>
 											</TR>
 										</TABLE>
@@ -208,6 +247,14 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 					/****====== end of Code of custom form =====**/
 				
 				} ?>
+					<!-- Next Tab Li code start here -->
+					<li>
+						<a href="#" class="video_tabs" onclick="set_my_video(this,'<?php echo $video_data['next_video']->type; ?>');">
+							<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
+							<span class="number"><?php echo ++$count; ?></span><?php echo $video_data['next_video']->tab_title; ?> 
+						</a>
+					</li>
+					<!-- End of Next Tab Li code start here -->
 					
 				</ul>
 			</div>
@@ -224,20 +271,31 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 		</div>
 		
 		
-		
-		
 		<?php 
-		foreach($html as $forms )
-		{
-			echo $forms;
+		if(isset($html)){
+			foreach($html as $forms )
+			{
+				echo $forms;
+			}
 		}
 		// echo '<pre>';
 			// print_r($html);
 		// echo '</pre>';
-
-		?>
 		
+		?>
+		<!-- next program button -->
+		<div class="idArea" id="myform_<?php echo $video_data['next_video']->type; ?>" name="myform_<?php echo $video_data['next_video']->type; ?>" >
+				 <a href="<?php echo $video_data['next_video']->custom_link; ?>" ><input type="button" class="claimbtn" value="Click Here To Go To The Next Step" style="cursor:pointer;" /></a>
+		</div>
+		<!-- end of next program button -->
 	</div>
+	
+	<input type="hidden" id="txtVideo_<?php echo $video_data['next_video']->type; ?>"  name="txtVideo_<?php echo $video_data['next_video']->type; ?>" value="<?php echo $video_data['next_video']->file_name_in_folder; ?>">
+	<input type="hidden" id="txtTitle_<?php echo $video_data['next_video']->type; ?>"  name="txtTitle_<?php echo $video_data['next_video']->type; ?>" value="<?php echo $video_data['next_video']->file_name; ?>">
+	<input type="hidden" id="txtWelcome"  name="txtWelcome" value="<?php echo $video_data['welcome_video']->file_name_in_folder; ?>">
+	<input type="hidden" id="txtWelcomeTitle"  name="txtWelcomeTitle" value="<?php echo $video_data['welcome_video']->file_name; ?>">
+	
+	
 </form>
 
 <!--/**********************************************************/-->

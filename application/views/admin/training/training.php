@@ -42,11 +42,12 @@
     <table class="table" id="mt">
       <thead>
         <tr>
-          <th>#</th>
+          <th id="header_first_element">#</th>
           <th>Title</th>
           <th>Link</th>
           <th>Category</th>
           <th>Type</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -57,7 +58,7 @@
 		//var_dump($query->result());exit;
 $i=0;
 foreach($query->result() as $training ):
-
+    //var_dump($training);
 ?> <tr>
     <input type="hidden" value="<?php echo $training->id; ?>">
           <td class='first_element'><?php echo $i+=1; ?></td>
@@ -65,6 +66,7 @@ foreach($query->result() as $training ):
           <td><?php echo $training->link; ?></td>
           <td><?php echo $training->category; ?></td>
           <td><?php echo $training->t_type; ?></td>
+          <td><?php echo $training->t_status; ?></td>
           <td>
 			<!--<a href="<?php //echo base_url();?>admin/videos/updatevideo/<?php //echo $marketing->id; ?>" >
    <i class="icon-pencil"></i></a>-->

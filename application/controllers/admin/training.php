@@ -51,6 +51,7 @@ class Training extends CI_Controller {
         public function edit($id){
             //header("X-XSS-Protection: 0");
             $this->data['styles'][]='css/store_programs.css';
+            $this->data['styles'][]='css/edit_training.css';
             //$this->data['styles'][]='css/style.css';
             $this->data['categories']=  $this->training_model->getCategories();
             $this->data['types']=  $this->training_model->getTypes();
@@ -65,16 +66,22 @@ class Training extends CI_Controller {
                 redirect("admin/training");
             }
             if($this->input->post('edit_training')){
+                $this->training_model->editText($id);
                 if($this->training_model->editTraining($id)){
                     redirect("admin/training");
                 }
             }
+            elseif($this->input->post('training_text')){
+                //echo $this->input->post('training_text');
+                $this->training_model->editText($id);
+            }
+            $this->data['trainingdata']=$this->training_model->getTrainingFullData($id);
             $this->data['subview']='admin/training/edit';
             $this->load->view('admin/_layout_main.php', $this->data);
         }
         public function addvideo($id){
-            $this->data['button']='Add Video';
-            $this->data['action']='addvideo';
+            //$this->data['button']='Add Video';
+            //$this->data['action']='addvideo';
             $this->data['trainingdata']=$this->training_model->getTrainingData($id);
             if($this->data['trainingdata']->num_rows===0){
                 redirect("admin/training");
@@ -84,9 +91,11 @@ class Training extends CI_Controller {
                     redirect("admin/training/edit/$id");
                 }
             }
+            redirect("admin/training/edit/$id");
+            /*
             $this->data['trainingid']=$id;
             $this->data['subview']='admin/training/addvideo';
-            $this->load->view('admin/_layout_main.php', $this->data);
+            $this->load->view('admin/_layout_main.php', $this->data);//*/
         }
         public function addtext($id){
             $this->data['action']='addtext';
@@ -159,14 +168,14 @@ class Training extends CI_Controller {
                     $this->training_model->editText($id);
                 }
             }
-            $this->data['trainingdata']=$this->training_model->getTrainingFullData($id);
+            $this->data['trainingdat4a']=$this->training_model->getTrainingFullData($id);
             $this->data['trainingid']=$id;
             $this->data['subview']='admin/training/addtext';
             $this->load->view('admin/_layout_main.php', $this->data);
         }
         function editvideo($id){
-            $this->data['button']='Change Video';
-            $this->data['action']='editvideo';
+            //$this->data['button']='Change Video';
+            //$this->data['action']='editvideo';
             $this->data['trainingdata']=$this->training_model->getTrainingData($id);
             if($this->data['trainingdata']->num_rows===0){
                 redirect("admin/training");
@@ -176,9 +185,11 @@ class Training extends CI_Controller {
                     redirect("admin/training/edit/$id");
                 }
             }
+            redirect("admin/training/edit/$id");
+            /*
             $this->data['trainingid']=$id;
             $this->data['subview']='admin/training/addvideo';
-            $this->load->view('admin/_layout_main.php', $this->data);
+            $this->load->view('admin/_layout_main.php', $this->data);//*/
         }
         function categories(){
             $this->data['query']=$this->training_model->getCategories();
@@ -234,6 +245,10 @@ class Training extends CI_Controller {
         function delete_training($id){
             $this->training_model->deleteTraining($id);
             redirect("admin/training");
+        }
+        function delete_video($id){
+            $this->training_model->delete_video($id);
+            redirect("admin/training/edit/$id");
         }
     
 }

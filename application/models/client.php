@@ -441,7 +441,81 @@
 			}
 					
 		}
-	
+				
+		function save_program_user_name($progid){
+			$login_client=$this->get_current_login_client_detail();
+			$user_id=$login_client['id'];
+			$user_name=$this->input->post('aff_id');
+			$program_id=$this->input->post('prog_id');
+			$data = array(
+                        'userid'=>$user_id,
+                        'programid'=>$program_id,
+                        'user_name'=>$user_name
+						);
+			// check for duplicate
+			$this->db->select('m.*');
+			$this->db->from('programs_meta as m');
+			$this->db->where('userid',$user_id);
+			$this->db->where('programid',$program_id);
+			$query = $this->db->get();
+			$is_record_exist=$query->num_rows;
+			// echo $this->db->last_query(); 
+			$this->db->trans_start();
+			if(isset($is_record_exist) && $is_record_exist=='0'){ 
+				$result=$this->db->insert('programs_meta',$data);
+			}else{
+				$this->db->where('userid',$user_id);
+				$this->db->where('programid',$program_id);
+				$result = $this->db->update('programs_meta', $data); 
+			}
+			$this->db->trans_complete();
+			if($result){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		/* function save_program_affliate_id($progid){
+			$login_client=$this->get_current_login_client_detail();
+			$user_id=$login_client['id'];
+			$affliate_id=$this->input->post('aff_id');
+			$program_id=$this->input->post('prog_id');
+			$data = array(
+                        'userid'=>$user_id,
+                        'programid'=>$program_id,
+                        'affilateid'=>$affliate_id,
+						);
+			// check for duplicate
+			$this->db->select('s.*');
+			$this->db->from('stored_programs as s');
+			$this->db->where('userid',$user_id);
+			$this->db->where('programid',$program_id);
+			$query = $this->db->get();
+			$is_record_exist=$query->num_rows;
+			// echo $this->db->last_query(); 
+			$this->db->trans_start();
+			if(isset($is_record_exist) && $is_record_exist=='0'){ 
+				$result=$this->db->insert('stored_programs',$data);
+			}else{
+				$result = $this->db->update('stored_programs', $data); 
+			}
+			$this->db->trans_complete();
+			// echo $result;
+			if($result){
+				return true;
+			}else{
+				return false;
+			}
+			// return $query;			
+			// echo '<pre>';
+			// print_r($login_client);
+			// echo '</pre>';die();
+
+		}	 */
+
+
+		
 	/* ### **** ### *** ###-- End of Code to set Email rules --### *** ### *** ### **** ### *** ### ****/
 		function send_followup_email($user_detail=array())
 		{

@@ -18,8 +18,7 @@ CKEDITOR.editorConfig = function( config ) {
      config.toolbar=	[['Source','-','Save','NewPage','Preview','-','Templates'],
     ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print', 'SpellChecker', 'Scayt'],
     ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
-   
-    ['BidiLtr', 'BidiRtl'], ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+    ['TextColor','BGColor'],
     '/',
     ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
     ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],
@@ -28,7 +27,7 @@ CKEDITOR.editorConfig = function( config ) {
     ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],//'jwplayer',
     '/',
     ['Styles','Format','Font','FontSize'],
-    ['TextColor','BGColor'],
+    ['BidiLtr', 'BidiRtl'], ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
     ['Maximize', 'ShowBlocks','-','About']]; 
      /*
    config.toolbar = 'MediaToolbar';
