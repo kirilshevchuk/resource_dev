@@ -38,7 +38,13 @@
 </div>
 
 <div class="well">
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#mt').dataTable( {
+                "sPaginationType": "full_numbers"
+            } );
+        } );
+    </script>
     <table class="table" id="mt">
       <thead>
         <tr>
@@ -84,6 +90,7 @@ foreach($query->result() as $training ):
 </div>
 <a class="btn" href="<?php echo base_url(); ?>admin/training/add">Add</a>
 <div class="btn" id='delete_selection' >Delete Selection</div>
+<a class="btn" href="<?php echo base_url(); ?>admin/training/download" target="_blank">Download</a>
  <?php $attrib=array('id'=>'seldcted_rows_form');
  echo form_open("admin/training/delete_group",$attrib);?>
  <input type="hidden" id="selected_rows" name="selected_rows" value="">

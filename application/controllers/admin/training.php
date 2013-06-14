@@ -15,7 +15,9 @@ class Training extends CI_Controller {
 	}
         public function index(){
             $this->data['styles'][]='css/training.css';
+            $this->data['styles'][]='datatable/css/jquery.dataTables.css';
             $this->data['scripts'][]='scripts/training.js';
+            $this->data['scripts'][]='datatable/js/jquery.dataTables.min.js';
             $this->data['query']=  $this->training_model->getTrainingData();
             $this->data['subview']=  'admin/training/training';
             $this->load->view('admin/_layout_main.php', $this->data);
@@ -249,6 +251,28 @@ class Training extends CI_Controller {
         function delete_video($id){
             $this->training_model->delete_video($id);
             redirect("admin/training/edit/$id");
+        }
+        function download(){
+            $query = $this->training_model->getTrainingData();
+            if($query->num_rows===0){
+                redirect("admin/training");
+                return;
+            }
+            $datalist=array();
+            $i=0;
+            foreach($query->result_array() as $row){
+                $temp_row = array(
+                    'N'=>++$i,
+                    'title'=>$row['title'],
+                    'link'=>$row['link'],
+                    'category'=>$row['category'],
+                    'type'=>$row['t_type'],
+                    'status'=>$row['t_status']
+                ); 
+                $datalist[]=$temp_row;
+            }
+            $this->training_model->download_send_headers("data_export_" . date("Y-m-d") . ".csv");
+            echo $this->training_model->array2csv($datalist);
         }
     
 }

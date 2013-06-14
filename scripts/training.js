@@ -19,6 +19,7 @@ $(document).ready(function(){
         $("#seldcted_rows_form").submit();
     });
     $("#header_first_element").click(function(){
+        return;
         if($('.selected_row .first_element').length>0){
             if($('.selected_row').length<$('.first_element').length){
                  $('.selected_row').removeClass('selected_row');
