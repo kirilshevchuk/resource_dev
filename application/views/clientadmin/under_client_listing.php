@@ -38,6 +38,7 @@
 		</thead>
 	<tbody>
 	<?php 
+        $display=($query->num_rows>0)?TRUE:FALSE;
 $i=1;
 foreach($query->result() as $client ){
 
@@ -59,4 +60,6 @@ foreach($query->result() as $client ){
 	</table>
  </div>
 <!-- /promoteArea -->
-
+<?php if($display): ?>
+<a class="btn" href="<?php echo base_url(); ?>clientadmin/promotesite/download_downline" target="_blank" >Download</a>
+<?php endif; ?>
