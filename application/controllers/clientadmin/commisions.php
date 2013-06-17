@@ -27,7 +27,7 @@
 	 function index()
 	 {
              $this->data['account_detail'] = $this->client->get_current_login_client_detail();
-             $this->data['metatitle'] = 'EAP Training';
+             $this->data['metatitle'] = 'Commision';
              $this->data['scriptlist'][]='jwplayer/jwplayer.js';
              $this->data['query']=$this->training_model->getCurrentCategories(2);
              $this->data['subview']=  'clientadmin/commision_view';

@@ -11,6 +11,10 @@ class Landing extends CI_Controller {
 	    $this->load->model('logo','',TRUE);
 	    $this->load->model('user','',TRUE);
 	    //$this->load->model('video','',TRUE);
+		/*$session_login_client=$this->session->userdata('client_login');
+		if (!empty($session_login_client)) {
+			redirect('clientadmin/programs', 'refresh');
+		}//*/
             
 	 }
 	 	 
@@ -18,7 +22,7 @@ class Landing extends CI_Controller {
 	 {
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
-			redirect('clientadmin/clientdashboard', 'refresh');
+			redirect('clientadmin/programs', 'refresh');
 		}//*/
 		$this->load->helper(array('form'));
 		// unset previous affuserid from session
@@ -35,7 +39,7 @@ class Landing extends CI_Controller {
 	public function affuser($id=false){
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
-			redirect('clientadmin/clientdashboard', 'refresh');
+			redirect('clientadmin/programs', 'refresh');
 		}//*/
 		$affuser_id = $this->uri->segment(3);
 		// $this->data['affuserid'] = $this->uri->segment(3);

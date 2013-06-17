@@ -110,6 +110,10 @@
 		 }
 		 
 		function index(){//clientlogin
+		$session_login_client=$this->session->userdata('client_login');
+		if (!empty($session_login_client)) {
+			redirect('clientadmin/programs', 'refresh');
+		}//*/
 			if($this->input->post('client_login')!==NULL){
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 				$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_client_database');
@@ -128,7 +132,7 @@
 					// echo '</pre>';
 					// die("hhhhhhhhhhhhh");
 					if($client_sessionarray['role'] == "user"){
-						redirect('clientadmin/clientdashboard', 'refresh');
+						redirect('clientadmin/programs', 'refresh');
 					}
 					else
 					{

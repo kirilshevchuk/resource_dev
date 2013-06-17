@@ -345,10 +345,11 @@ address{
 	overflow:hidden;
 }
 .sponsor{
-	padding-right:60px;
+	padding-right:10px;
 	color:#fff;
 	float:left;
 	margin-top: -20px;
+        width: 380px;
 }
 
 span.downline{
@@ -409,6 +410,8 @@ nav.maniNav{
 nav.maniNav ul li {
     display: block;;
     line-height: normal;
+    width: 215px;
+    text-align: center;
     margin: 0;
     padding: 0;
 	float:left;
@@ -418,8 +421,8 @@ nav.maniNav ul li {
 nav.maniNav ul li a {
     border-right: 1px solid #25292e;
     color: #fff;
-    margin: 0;
-    padding: 5px 57px;
+    margin: auto;
+    padding: 5px 5px;
     text-decoration: none;
 	display:block;
 	font-weight:normal;
@@ -429,10 +432,8 @@ nav.maniNav ul li a {
     text-decoration:none;
 	box-shadow:6px 3px 6px -1px #FFFFFF inset; 
 	background: none repeat scroll 0 0 #FFB618;
- 	padding: 5px 52px;
 	line-height:20px;
 	color:#48697E;
-	font-weight:bold;
 	cursor: pointer;
 	border-left: 1px solid #25292e;
 } 
@@ -441,10 +442,8 @@ nav.maniNav ul li a.active {
     text-decoration:none;
 	box-shadow:6px 3px 6px -1px #FFFFFF inset; 
 	background: none repeat scroll 0 0 #FFB618;
- 	padding: 5px 52px;
 	line-height:20px;
 	color:#48697E;
-	font-weight:bold;
 	cursor: pointer;
 	border-left: 1px solid #25292e;
 }

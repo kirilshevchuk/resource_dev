@@ -70,20 +70,20 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 							<!-- /logo -->
 							<!-- header right -->
 							<div class="siteHeaderRight">
-								<div class="sponsor">
-									<span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
-									<br/>
-									<span class="downline">Your Affliate Id : <?php echo $session_data['user_track_id'];?></span>
-								 </div>
 								
 								 <nav class="headertop">
+                                                                     <div><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></div>
 									<ul>
-										<li><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></li>
 										<li><a href="<?php echo base_url()?>clientadmin/setting">Edit Profile</a></li>
 										<li><a href="<?php echo base_url()?>clientadmin/clientdashboard/logout">Logout</a></li>
 										<li><a  class="last modalbox" href="#inline">Contact Support</a></li>
 									</ul>
 								 </nav>
+								<div class="sponsor">
+									<span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
+									<br/>
+									<span>Your Affliate Id : </span><span><?php echo base_url()?>landing/affuser/<?php echo $session_data['user_track_id'];?></span>
+								 </div>
 							</div>
 							<!-- /header right -->
 						</div>

@@ -86,6 +86,33 @@ class Programs_Model extends CI_Model{
 			return FALSE;
 		}
 	}
+	
+	public function getProgram_for_clentdashboard($id = 0){
+		/* $this->db->select('p.*');
+        $this->db->from('programs as p');
+        if($id!=0){
+            $this->db->where('p.id',$id);
+        }
+		$this->db->order_by("nav_position", "asc");
+		$this->db->limit('3');
+        $query = $this->db->get(); */
+		
+		$session_login_client=$this->session->userdata('client_login');
+		
+		// echo '<pre>';
+		// print_r($session_login_client);
+		// echo '</pre>';
+
+		$this->db->select('p.*,m.user_name');
+		$this->db->from('programs as p');
+		$this->db->join('programs_meta as m', "p.id = m.programid and m.userid={$session_login_client['id']}", 'left');
+		$this->db->order_by("p.nav_position", "asc");
+		$this->db->limit('3');
+		$query = $this->db->get();
+		// echo $this->db->last_query();
+		return $query;
+	}
+	
 	public function getProgram($id = 0){
         $this->db->select('p.*');
         $this->db->from('programs as p');

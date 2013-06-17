@@ -18,8 +18,8 @@
 	 
 	function index()
 	{
-            $this->data['styles'][]='datatable/css/jquery.dataTables.css';
-            $this->data['scripts'][]='datatable/js/jquery.dataTables.min.js';
+		$this->data['styles'][]='datatable/css/jquery.dataTables.css';
+		$this->data['scripts'][]='datatable/js/jquery.dataTables.min.js';
 		$this->data['query'] = $this->client->GetClientData();
 		$this->data['subview']=  'admin/clients/clients_listing';
 		$this->load->view('admin/_layout_main.php', $this->data);
