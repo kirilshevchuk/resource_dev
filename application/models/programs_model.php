@@ -129,7 +129,8 @@ class Programs_Model extends CI_Model{
 		// echo '<pre>';
 		// print_r($data11);
 		// echo '</pre>';
-		if (isset($_FILES['file_upload_video']['name']) && $_FILES['file_upload_video']['name'] != '') {
+		$upload_source=$this->input->post('source');
+		if ((isset($_FILES['file_upload_video']['name']) && $_FILES['file_upload_video']['name'] != '')  &&(isset($upload_source) && $upload_source=='upload')) {
 			
 			unset($config);
 			$configVideo['upload_path'] = './uploads/videos/';
@@ -148,9 +149,12 @@ class Programs_Model extends CI_Model{
 				$videoDetails = $this->upload->data();
 				$video_name=$videoDetails['file_name'];
 			}
+		}elseif(isset($upload_source) && $upload_source=='youtube'){
+			$video_name=$this->input->post('video_youtube');
 		}else{
-			$video_name=$this->input->post('txtOldVideo');
+			$video_name=$this->input->post('txtOldVideo'); 
 		}
+		
 		
 		if (isset($_FILES['file_upload_logo']['name']) && $_FILES['file_upload_logo']['name'] != '') {
 			unset($config);
@@ -197,12 +201,12 @@ class Programs_Model extends CI_Model{
 
 	
 	public function addProgram($pid=0){
-		// $data11=$_POST;
+		$data11=$_POST;
 		// echo '<pre>';
 		// print_r($data11);
 		// echo '</pre>';
-		
-		if (isset($_FILES['file_upload_video']['name']) && $_FILES['file_upload_video']['name'] != '') {
+		$upload_source=$this->input->post('source');
+		if ((isset($_FILES['file_upload_video']['name']) && $_FILES['file_upload_video']['name'] != '') &&( isset($upload_source) && $upload_source=='upload')) {
 			// echo '<pre>';
 			// print_r($_FILES);
 			// echo '</pre>';die();
@@ -224,7 +228,7 @@ class Programs_Model extends CI_Model{
 				$video_name=$videoDetails['file_name'];
 			}
 		}else{
-			$video_name='';
+			$video_name=$this->input->post('video_youtube');
 		}
 		
 		if (isset($_FILES['file_upload_logo']['name']) && $_FILES['file_upload_logo']['name'] != '') {

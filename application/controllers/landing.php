@@ -40,16 +40,13 @@ class Landing extends CI_Controller {
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
 			redirect('clientadmin/programs', 'refresh');
+                        return;
 		}//*/
-		$affuser_id = $this->uri->segment(3);
-		// $this->data['affuserid'] = $this->uri->segment(3);
-		$this->session->set_userdata('affuserid', $affuser_id);
-		$this->data['title']='Invite User';
-		$this->data['stylelist'][]='css/style.css';
-		$this->data['stylelist'][]='css/landing.css';
-		$this->data['stylelist'][]='css/jsplayer_custom.css';
-		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-		$this->load->view('landing_view',$this->data);
+                if($this->user->check_for_valid_affliate_id($id)===0){
+                    redirect("landing",'refresh');
+                    return;
+                }
+		redirect("go/$id",'refresh');
 	 }
          public function termsofservice(){
 		$this->data['title']='Terms Of Service';

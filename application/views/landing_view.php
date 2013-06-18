@@ -65,9 +65,7 @@
  
 </div>
 
-<div id="footer"><br /><br /><div id="hyperlink"><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a> | <a href="url">Earnings Disclaimer</a></div>
-
-</div>
+    <?php $this->load->view('global/footerlinks.php'); ?>
 
 </body>
 </html>

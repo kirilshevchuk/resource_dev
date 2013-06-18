@@ -65,7 +65,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 						<div class="siteHeader">
 							<!-- logo -->
 							<div class="logo">
-								<h3><a href="<?php if (($session_data['login_state'] == 'active' && $session_data['role'] == 'user')){ echo base_url().'clientadmin/clientdashboard'; }else{ echo base_url(); } ?>">Logo</a></h3>
+								<h3><a href="<?php if (($session_data['login_state'] == 'active' && $session_data['role'] == 'user')){ echo base_url().'clientadmin/programs'; }else{ echo base_url(); } ?>">Logo</a></h3>
 							</div>
 							<!-- /logo -->
 							<!-- header right -->
@@ -82,7 +82,9 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 								<div class="sponsor">
 									<span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
 									<br/>
-									<span>Your Affliate Id : </span><span><?php echo base_url()?>landing/affuser/<?php echo $session_data['user_track_id'];?></span>
+									<span>Your Affiliate Id : </span><a href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>">
+                                                                            <?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
+                                                                        </a>
 								 </div>
 							</div>
 							<!-- /header right -->

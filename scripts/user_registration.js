@@ -22,7 +22,7 @@ function username_check(){
 
 		jQuery.ajax({
 		   type: "POST",
-		   url: base_url+"register/chkUserName",
+		   url: base_url+"createaccount/chkUserName",
 		   data: 'username='+ username,
 		   cache: false,
 		   success: function(response){

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	 
-	class Register extends CI_Controller {
+	class Createaccount extends CI_Controller {
 		 
 	 function __construct()
 	 {
@@ -16,7 +16,7 @@
 	 {
 		$this->load->helper(array('form'));
 		$this->data['query'] = $this->logo->GetInitData();
-		$this->data['title'] = 'Registration';
+		$this->data['title'] = 'Create Account';
 		$this->data['stylelist'][]='css/style.css';
 		// $this->data['stylelist'][]='css/jsplayer_custom.css';
 
@@ -39,7 +39,7 @@
              $this->data['scriptlist'][]='scripts/user_registration.js';
              $this->data['scriptlist'][]='jwplayer/jwplayer.js';
              $this->data['scriptlist'][]='scripts/program_video.js';
-             $this->data['title'] = 'Registration';
+             $this->data['title'] = 'Create Account';
              $this->load->view('register',$this->data);
          }
                  
@@ -133,7 +133,7 @@
 						$this->load->view('user_registration',$this->data);
                      }else{
 							// echo 'I m Not in error';
-							redirect('clientadmin/clientdashboard', 'refresh');
+							redirect('clientadmin/programs', 'refresh');
 					}
 	 }
 	 //this function is associated with insertion of the user data in the database
