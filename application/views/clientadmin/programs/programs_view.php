@@ -4,11 +4,17 @@
 // echo '</pre>';
 		$video_data=array();
 		foreach($video_query->result() as $singlevideo ){	
-			$video_data[$singlevideo->type]=$singlevideo;
-		} 
+			if($singlevideo->type=='next_video'){
+				$video_data[$singlevideo->type.'_'.$singlevideo->menu_id]=$singlevideo;
+			}else{
+				$video_data[$singlevideo->type]=$singlevideo; 
+			}
+		}
+		
 		// echo '<pre>';
 		// print_r($video_data);
 		// echo '</pre>';
+		
 		
 	if(isset($status) && $status=="gvo_success"){?>
 			<div class="infomessage"><?php echo "Gvo user name set successfully"?> </div>
@@ -229,7 +235,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 						<div class='idArea' id='myform_{$programs->id}' name='myform_{$programs->id}' >
 							<form method='post' action='clientadmin/programs/save/{$programs->id}'>
 									<div class='affiliateLink' id='link_{$programs->id}' >
-										<a href='{$programs->signup_link}'>Click URL To Join {$programs->program_title}</a>
+										<a target='_blank' href='{$programs->signup_link}'>Click URL To Join {$programs->program_title}</a>
 									</div>
 									<fieldset>
 										<legend>{$programs->program_title}</legend>
@@ -252,14 +258,15 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 				
 				} ?>
 					<!-- Next Tab Li code start here -->
+					<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
 					<li>
-						<a href="#" class="video_tabs" onclick="set_my_video(this,'<?php echo $video_data['next_video']->type; ?>');">
+						<a href="#" class="video_tabs" onclick="set_my_video(this,'<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>');">
 							<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
-							<span class="number"><?php echo ++$count; ?></span><?php echo $video_data['next_video']->tab_title; ?> 
+							<span class="number"><?php echo ++$count; ?></span><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title; ?> 
 						</a>
 					</li>
 					<!-- End of Next Tab Li code start here -->
-					
+					<?php } ?>
 				</ul>
 			</div>
 	</div>
@@ -288,14 +295,16 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 		
 		?>
 		<!-- next program button -->
-		<div class="idArea" id="myform_<?php echo $video_data['next_video']->type; ?>" name="myform_<?php echo $video_data['next_video']->type; ?>" >
-				 <a href="<?php echo $video_data['next_video']->custom_link; ?>" ><input type="button" class="claimbtn" value="Click Here To Go To The Next Step" style="cursor:pointer;" /></a>
+		<div class="idArea" id="myform_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>" name="myform_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>" >
+				 <a href="<?php echo $video_data['next_video_'.$tab_menu_id]->custom_link; ?>" ><input type="button" class="claimbtn" value="Click Here To Go To The Next Step" style="cursor:pointer;" /></a>
 		</div>
 		<!-- end of next program button -->
 	</div>
 	
-	<input type="hidden" id="txtVideo_<?php echo $video_data['next_video']->type; ?>"  name="txtVideo_<?php echo $video_data['next_video']->type; ?>" value="<?php echo $video_data['next_video']->file_name_in_folder; ?>">
-	<input type="hidden" id="txtTitle_<?php echo $video_data['next_video']->type; ?>"  name="txtTitle_<?php echo $video_data['next_video']->type; ?>" value="<?php echo $video_data['next_video']->file_name; ?>">
+	<input type="hidden" id="txtVideo_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>"  name="txtVideo_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>">
+	<input type="hidden" id="txtTitle_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>"  name="txtTitle_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>">
+	
+	
 	<input type="hidden" id="txtWelcome"  name="txtWelcome" value="<?php echo $video_data['welcome_video']->file_name_in_folder; ?>">
 	<input type="hidden" id="txtWelcomeTitle"  name="txtWelcomeTitle" value="<?php echo $video_data['welcome_video']->file_name; ?>">
 	

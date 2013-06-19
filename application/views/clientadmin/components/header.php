@@ -82,7 +82,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 								<div class="sponsor">
 									<span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
 									<br/>
-									<span>Your Affiliate Id : </span><a href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>">
+									<span>Your Affiliate Id : </span><a href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>" target="_blank">
                                                                             <?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
                                                                         </a>
 								 </div>

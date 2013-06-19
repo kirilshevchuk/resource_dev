@@ -32,6 +32,7 @@
     min-height: 100px;
     padding: 15px 7px 10px 14px;
     width: 97%;
+    overflow: hidden;
 }
 img.procees_img{
 	 margin: 5% 33%;

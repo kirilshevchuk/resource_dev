@@ -5,6 +5,7 @@
 	</div>
 	<!-- /logo -->
 	<!-- header right -->
+        <?php if(!isset($isgo)): ?>
 	<div class="siteHeaderRight">
             <?php 
             $session_data = $this->session->userdata('client_login');
@@ -36,6 +37,7 @@
             </nav>
             <?php endif; ?>
 	</div>
+        <?php endif; ?>
 	<!-- /header right -->
 </div>
  

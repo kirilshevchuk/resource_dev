@@ -35,6 +35,7 @@ class Programs extends CI_Controller {
 			// echo $this->db->last_query(); 
 			// $this->data['query'] = $this->video->GetAllVideoData();
 			$this->data['subview']=  'clientadmin/programs/programs_view';
+			$this->data['tab_menu_id'] =1 ;
 			$this->load->view('clientadmin/_layout_main.php', $this->data);
 		}
 		else

@@ -24,6 +24,7 @@ class Landing extends CI_Controller {
 		if (!empty($session_login_client)) {
 			redirect('clientadmin/programs', 'refresh');
 		}//*/
+                $this->data['islanding']=true;
 		$this->load->helper(array('form'));
 		// unset previous affuserid from session
 		$this->session->unset_userdata('affuserid');

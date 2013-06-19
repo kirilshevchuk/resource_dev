@@ -13,8 +13,15 @@
 				<script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
 	<?php 	}
         endif; ?>
+                                <style>
+                                    body{
+                                        /*background: url("<?php //echo base_url(); ?>images/bg-arrow.png") bottom center no-repeat;*/
+                                        background-color: #c7e1f2;
+                                    }
+                                </style>                                
 </head>
 <body>
+    <?php if(!isset($islanding)&&!isset($isgo)): ?>
 <div id="header">
 <!--<center><img src="<?php echo base_url();?>images/header.png" width="960" height="91"/></center></div>-->
 				<div class="wrapperMain">
@@ -22,9 +29,16 @@
 					<?php $this->load->view('global/header.php'); ?>
 					<!--/header-->
 				</div>
+    </div>
+    <?php endif; ?>
 <div id="wrapper">
 
-<img src="<?php echo base_url();?>images/steps-button.png" width="960" height="100" />
+<img src="<?php echo base_url(); ?>images/steps-button.png" width="960" height="100" style="
+    margin-left: -210px;
+"><img src="<?php echo base_url(); ?>images/logo.png" style="
+    margin: 0px 0px 10px -208px;
+">
+
 
 <div id="text-holder-top"></div>
 <div id="text-holder-side">
@@ -65,7 +79,7 @@
  
 </div>
 
-    <?php $this->load->view('global/footerlinks.php'); ?>
+    <?php if(!isset($islanding)&&!isset($isgo)) $this->load->view('global/footerlinks.php'); ?>
 
 </body>
 </html>

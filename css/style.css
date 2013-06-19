@@ -780,6 +780,7 @@ input[type="email"],input[type="password"],input[type="text"]{
     line-height: normal;
     margin-bottom: 8px;
     padding: 0;
+    text-align: center;
 }
 .leftnav2 ul li a {
 	background: none repeat scroll 0 0 #365E80;

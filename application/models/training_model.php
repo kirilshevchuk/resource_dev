@@ -43,6 +43,7 @@ class Training_model extends CI_Model{
 		// echo $this->db->last_query();
 		$trn_html='';		
 		$base_url=base_url();
+          //      $isfirst = TRUE;  ".($isfirst?"":"display: none;")."
 		foreach($query->result() as $training ){ 
 			$trn_html.="
 				<div class='main_tab' >
@@ -55,7 +56,7 @@ class Training_model extends CI_Model{
 						</p>
 						<input type='hidden' id='id_videopreview_{$training->id}' value='{$training->video}'>
 									
-						<div class='video_preveiw' style=''>
+						<div class='video_preveiw' style='".(empty($training->video)?(" display: none"):(""))."'>
 									<script type='text/javascript'>jwplayer.key='oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==';</script>
 									<div id='videopreview_{$training->id}'>Loading the player...</div>
 						</div>
@@ -64,6 +65,7 @@ class Training_model extends CI_Model{
 					</div>
 				</div>
 					";	
+          //                                                              $isfirst=FALSE;
 		}
 		return $trn_html;
 	}

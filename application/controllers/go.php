@@ -10,7 +10,7 @@ class Go extends CI_Controller {
 	   // $this->load->library('email');
 	    $this->load->model('logo','',TRUE);
 	    $this->load->model('user','',TRUE);
-	    //$this->load->model('video','',TRUE);
+	    /*/$this->load->model('video','',TRUE);
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
 			redirect('clientadmin/programs', 'refresh');
@@ -21,6 +21,7 @@ class Go extends CI_Controller {
 	public function index($id){
 		$affuser_id = $this->uri->segment(2);
 		// $this->data['affuserid'] = $this->uri->segment(3);
+                $this->data['isgo']=true;
 		$this->session->set_userdata('affuserid', $affuser_id);
 		$this->data['title']='Invite User';
 		$this->data['stylelist'][]='css/style.css';
