@@ -60,6 +60,9 @@ class Programs extends CI_Controller {
 			// die();
 			// echo $id;
 	 }
+	 function show_next_step($menu_id){
+		echo $next_step_html=$this->programs_model->get_next_step_by_menu_id($menu_id);
+	 }
 	 
 }
 	 

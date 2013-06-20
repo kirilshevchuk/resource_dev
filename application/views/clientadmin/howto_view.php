@@ -1,6 +1,25 @@
 <?php if (isset($status) && $status=="success"){?>
 			<div class="infomessage"><?php echo "Successfully"?> </div>
-<?php } ?>
+<?php } 
+
+/**************** code to fetch next step data **************/
+$video_data=array();
+
+foreach($video_query->result() as $singlevideo ){	
+	if($singlevideo->type=='next_video'){
+		$video_data[$singlevideo->type.'_'.$singlevideo->menu_id]=$singlevideo;
+	}else{
+		$video_data[$singlevideo->type]=$singlevideo; 
+	}
+}
+		// echo '<pre>';
+		// print_r($video_data);
+		// echo '</pre>';
+		
+/**************** End of code to fetch next step data **************/
+	
+
+?>
 		
 		<?php if(isset($stylelist)):
             foreach ($stylelist as $style):?>
@@ -13,6 +32,26 @@
         <?php endforeach;
         endif; ?>
 <style>
+.nextbtn{
+	cursor:pointer;
+	background: url("../images/btnBg.png") repeat-x scroll left top transparent;
+    border: medium none red;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 7px #696948;
+    color: #78A0B1;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 14px 80px;
+    padding: 6px 0;
+    text-align: center;
+    text-transform: capitalize;
+    width: 76%;
+}
+
+img#video_bg{
+	float:left;
+}
+
 .m_t_tab-close {
     background: none repeat scroll 0 0 #245679;
     color: #FFFFFF;
@@ -24,15 +63,16 @@
     margin-top: 15px;
 }
 .video_preveiw{
-	margin: 4% 12%;
+	margin: 27px 40px 30px 40px;
+	position: absolute;
+    text-align: center;
 }
 .show-tab-content {
     background: none repeat scroll 0 0 #FFFFFF;
     color: #000000;
-    min-height: 100px;
+    min-height: 360px;
     padding: 15px 7px 10px 14px;
     width: 97%;
-    overflow: hidden;
 }
 img.procees_img{
 	 margin: 5% 33%;
@@ -41,6 +81,66 @@ img.procees_img{
 
 </style>
 <script>
+function set_init(){
+
+		$("div#tab_child_1").show();
+		var previewfile=$("#first_video").val();
+		var videopreview=$("#first_video_index").val();
+		set_video(videopreview);
+		// alert(previewfile);
+		/* if(previewfile=="")
+		{
+			previewfile = "20051210-w50s.flv";
+		}
+		jwplayer(videopreview).setup({
+				file: baseurl+'uploads/training/video/'+previewfile,
+				height: 300,
+				width: 500,
+				stretching:"exactfit",
+				image: baseurl+'uploads/images/preview.jpg',
+			}).play(false); */
+}
+
+	function load_next_step(menu_id){
+		// alert(menu_id);
+		var title=$('#next_video_title').val();
+		$("div.video_title").text(title);
+		
+		$('.cat_tabs').removeClass('active');
+		$('#next_tab_title').addClass('active');
+		var base_url=$("#baseurl").val();
+		var dataString = 'menu_id=' +menu_id;  
+		var process_image='<img src="'+base_url+'images/loader.gif" class="procees_img" alt="wait...">';
+		$("div#ma").html(process_image);
+		$.ajax({  
+		  type: "POST",  
+		  url: base_url+"clientadmin/programs/show_next_step/"+menu_id,  
+		  data: dataString,  
+		  success: function(msg) {  
+				// alert(msg);
+				$("div#ma").html(msg);
+				play_next_video();
+		  }  
+		});  
+	}
+	
+	function play_next_video(){
+		var baseurl = $("#baseurl").val();
+
+		var previewfile = $("#next_video").val();
+		if(previewfile=="")
+		{
+			previewfile = "20051210-w50s.flv";
+		}
+		jwplayer("videopreview").setup({
+				file: baseurl+'uploads/videos/'+previewfile,
+				height: 320,
+				width: 580,
+				stretching:"exactfit",
+				image: baseurl+'uploads/images/preview.jpg',
+			}).play(true);
+	}
+	
 	function load_train_data(cat_id){
 		var title=$('#title_'+cat_id).val();
 		$("div.video_title").text(title);
@@ -59,9 +159,9 @@ img.procees_img{
 		  success: function(msg) {  
 				// alert(msg);
 				$("div#ma").html(msg);
+				set_init();
 		  }  
 		});  
-		
 	}
 	
 	function show_div(obj,index){
@@ -116,7 +216,15 @@ img.procees_img{
 							<input type="hidden" id="title_<?php echo $category->id; ?>" value="<?php echo $category->category_name; ?>" >
 						</li>
 					<?php } ?>
-					<!--<li><a href="#" class="active">System Training-2</a></li>-->
+					<!-- Next Tab Li code start here -->
+						<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
+						<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);">
+							<a id="next_tab_title" class="cat_tabs" href="#"><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?></a>
+							<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
+							<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
+						</li>
+					<!-- End of Next Tab Li code start here -->
+					<?php } ?>
 				</ul>
 			</div>
 	</div>
@@ -131,30 +239,7 @@ img.procees_img{
 			<input type="hidden" id="id_videopreview" value="default.mp4">
 				
 		<div id="ma">
-		<?php //for($i=1;$i<6;$i++){ ?>
-			<!--<div class="main_tab" >
-				<div class="m_t_tab-close tab_close tab_child_1" onclick="show_div(this,<?php echo $i; ?>);">Marketing 1-<?php echo $i; ?>
-					<img  src="<?php echo base_url();?>images/transparent.gif" class="open_close open_tab" width="36" height="29">
-				</div>
-				<div class="show-tab-content tab_child_2" style="display: none;">
-					<p>
-						Get On Our Daily .Think and Grow Rich. Call Every Monday-Friday
-						<br>They have hundreds of hours of Inner Circle audio trainings you can download to your phone or mp3 player and listen to while in the car, taking a shower or working out!
-						<br><br>
-						<br>It.s important to fill your mind with positive energy as much as you can throughout the day!
-					</p>
-					<input type="hidden" id="id_videopreview" value="default.mp4">
-					<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
-								
-					<div class="video_preveiw" style="">
-								<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
-								<div id="videopreview_<?php echo $i; ?>">Loading the player...</div>
-					</div>
-				
-					
-				</div>
-			</div>-->
-		<?php //} ?>
+		
 		</div>
 		<?php endif; ?>
 				

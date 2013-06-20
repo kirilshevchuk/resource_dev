@@ -260,7 +260,7 @@ text-align: right;
   
 </form>	
     <p class="register">No account? <a href="<?php echo base_url(); ?>createaccount">Create your account here!</a></p>
-    <p class="register">Forget password? <a href="<?php echo base_url(); ?>createaccount">Click here to contact support!</a></p>
+    <p class="register">Forgot password? <a href="<?php echo base_url(); ?>recovery">Click here to contact support!</a></p>
 
 </body>
 </html>

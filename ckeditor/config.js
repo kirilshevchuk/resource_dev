@@ -8,12 +8,12 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
         config.extraPlugins='iframe';
-        config.filebrowserBrowseUrl = '/ckfinder/ckfinder.html',
- 	config.filebrowserImageBrowseUrl = '/ckfinder/ckfinder.html?type=Images',
- 	config.filebrowserFlashBrowseUrl = '/ckfinder/ckfinder.html?type=Files',
- 	config.filebrowserUploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
- 	config.filebrowserImageUploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
- 	config.filebrowserFlashUploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
+        config.filebrowserBrowseUrl = '/resource_dev/ckfinder/ckfinder.html',
+ 	config.filebrowserImageBrowseUrl = '/resource_dev/ckfinder/ckfinder.html?type=Images',
+ 	config.filebrowserFlashBrowseUrl = '/resource_dev/ckfinder/ckfinder.html?type=Files',
+ 	config.filebrowserUploadUrl = '/resource_dev/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+ 	config.filebrowserImageUploadUrl = '/resource_dev/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+ 	config.filebrowserFlashUploadUrl = '/resource_dev/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
         //config.extraPlugins = 'mediaembed';
      config.toolbar=	[['Source','-','Save','NewPage','Preview','-','Templates'],
     ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print', 'SpellChecker', 'Scayt'],

@@ -18,6 +18,20 @@
                                         /*background: url("<?php //echo base_url(); ?>images/bg-arrow.png") bottom center no-repeat;*/
                                         background-color: #c7e1f2;
                                     }
+                                    select, input{
+                                        border: 2px solid #48697e;
+padding: 10px;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+background: #fff;
+color: #48697e;
+margin-top: 5px;
+font-size: 14px;
+                                    }
+                                    #wrapper{
+                                        height:550px;
+                                    }
                                 </style>                                
 </head>
 <body>
@@ -32,41 +46,44 @@
     </div>
     <?php endif; ?>
 <div id="wrapper">
-
-<img src="<?php echo base_url(); ?>images/steps-button.png" width="960" height="100" />
-
-
-<div id="text-holder-top"></div>
-<div id="text-holder-side">
-<br />
-  <img src="<?php echo base_url();?>images/main-text.png" width="960" height="465" />
-  
-  <br />
-  
-<div id="optinBox">  
-	<form accept-charset="utf-8" action="https://app.getresponse.com/add_contact_webform.html"
-    method="post">
-           	 <div class="textField">
-            <div id="form">
-			<input type="text" title="Email" alt="Email" class="textBox" name="email" value="Enter Your Email Here" onfocus="if(this.value=='Enter Your Email Here'){this.value=''};" onblur="if(this.value==''){this.value='Enter Your Email Here'};"></div>
-                <div class="btnBox">
-                    <input type="submit" name="submit" class="submit" value="" onclick="areYouReallySure=true;">
-                </div>
-            </div>
-            <input type="hidden" name="webform_id" value="435890" />
-           
-           	 	 </form>
-<script type="text/javascript" src="http://app.getresponse.com/view_webform.js?wid=435890&mg_param1=1"></script>
-<script type="text/javascript" src="http://app.getresponse.com/view_webform.js?wid=435890&mg_param1=1"></script>
-         
-</div>
-  
-  <img src="<?php echo base_url();?>images/seat-left.png" width="480" height="38" /><br/><br/>
-  
-</div>
-
-<div id="text-holder-bottom"></div><br/>
- 
+    <?php  if(isset($error)): ?>
+    <p><?php echo $error; ?></p>
+    <?php endif;//*/ ?>
+    <div id="reset_form">
+    <?php 
+    if(isset($msg)): ?>
+        <p><?php echo $msg; ?> </p>
+        <p>Go to <a href="<?php echo base_url(); ?>login">Login Page</a></p>
+    <?php else: //*/ ?>
+        <p>Username:<?php echo $username; ?></p>
+    <?php 
+    
+    echo form_open("recovery/reset/$recoveryid");
+    $password_info=array(
+        'size'=> '30',
+        'name'=>"password"
+    ); ?>
+        <p>
+        <?php
+    echo form_label('Password','password');
+    echo form_password($password_info);
+    $password_conf=array(
+        'size'=> '30',
+        'name'=>"confirm"
+    ); ?>
+            </p>
+        <p>
+        <?php
+    echo form_label('Confirm password','confirm');
+    echo form_password($password_conf);
+    ?>
+        </p>
+        <?php
+    echo form_submit('reset','Reset');
+    echo form_close();
+    endif;
+    ?>
+    </div>
 </div>
 
     <?php if(!isset($islanding)&&!isset($isgo)) $this->load->view('global/footerlinks.php'); ?>

@@ -163,7 +163,7 @@ img.step_done{
 		// echo '<pre>';
 		// print_r($video_data);
 		// echo '</pre>';
-		// echo $video_data['welcome_video']->description;
+		// echo $video_data['next_video']->custom_link;
 
 		/* foreach($video_data as $key=>$val){
 				// echo '<br/>'.$key->tab_title;

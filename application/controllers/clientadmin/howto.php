@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	//session_start(); //we need to call PHP's session object to access it through CI
-	class Howto extends CI_Controller {
+class Howto extends CI_Controller {
 	 
 	 function __construct()
 	 {
@@ -16,6 +16,7 @@
 		}
 		$this->load->model('training_model','',TRUE);
 		$this->load->model('client','',TRUE);
+		$this->load->model('video','',TRUE);
 		$this->load->library('form_validation');
 	 }
 	 
@@ -26,17 +27,21 @@
 	 
 	 function index()
 	 {
-             $this->data['account_detail'] = $this->client->get_current_login_client_detail();
-             $this->data['metatitle'] = 'EAP Training';
-             $this->data['scriptlist'][]='jwplayer/jwplayer.js';
-             $this->data['query']=$this->training_model->getCurrentCategories(3);
-             $this->data['subview']=  'clientadmin/howto_view';
-             $this->load->view('clientadmin/_layout_main', $this->data);
+		$this->data['account_detail'] = $this->client->get_current_login_client_detail();
+		$this->data['metatitle'] = 'EAP Training';
+		$this->data['scriptlist'][]='jwplayer/jwplayer.js';
+		$this->data['video_query'] = $this->video->GetAllVideoData();
+		$this->data['tab_menu_id'] =4 ;
+
+		$this->data['query']=$this->training_model->getCurrentCategories(3);
+		$this->data['subview']=  'clientadmin/howto_view';
+		$this->load->view('clientadmin/_layout_main', $this->data);
 	 }
-	   function showdata($category){
-			// echo 'i mmmmmmm';
-			echo $html=$this->training_model->get_traing_data_by_category($category,3);
-		}
+	 
+	function showdata($category){
+		// echo 'i mmmmmmm';
+		echo $html=$this->training_model->get_traing_data_by_category($category,3);
+	}
 	
 }
 	 

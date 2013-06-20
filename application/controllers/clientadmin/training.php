@@ -17,6 +17,7 @@
 		
 		$this->load->model('training_model','',TRUE);
 		$this->load->model('client','',TRUE);
+		$this->load->model('video','',TRUE);
 		$this->load->library('form_validation');
 	 }
 	 
@@ -32,6 +33,8 @@
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
 			$this->data['metatitle'] = 'EAP Training';
 			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
+			$this->data['video_query'] = $this->video->GetAllVideoData();
+			$this->data['tab_menu_id'] =3;
 			 // $this->data['query']=$this->training_model->getCategories();
 			 $this->data['query']=$this->training_model->getCurrentCategories(1);
              
