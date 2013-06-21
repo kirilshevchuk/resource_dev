@@ -97,7 +97,7 @@
 				
 				// $msg="<p>Hello<b> ".$insert_data['fname']." ".$insert_data['lname']."</b></p>";
 				// $msg.="<p><b>".$t2['first_name']." ".$t2['last_name']."</b> invite you to join resorce bay to promote website.To sign up the account click on the following link or copy-paste it in your browser: </p>";
-				$strLink=base_url()."landing/affuser/".$t2['user_track_id'];
+				$strLink=base_url()."go/".$t2['user_name'];
 				$receiver_name=$insert_data['fname'].' '.$insert_data['lname'];
 				$sender_name=$t2['first_name'].' '.$t2['last_name'];
 				$mail_template=str_replace("{{receiver_name}}",$receiver_name,$mail_template); 

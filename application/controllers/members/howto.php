@@ -21,8 +21,8 @@ class Howto extends CI_Controller {
 	 }
 	 
 	 function tabs(){
-			$this->data['subview']=  'clientadmin/site_dashboard';
-			$this->load->view('clientadmin/_layout_main', $this->data);
+			$this->data['subview']=  'members/site_dashboard';
+			$this->load->view('members/_layout_main', $this->data);
 	 }
 	 
 	 function index()
@@ -32,10 +32,11 @@ class Howto extends CI_Controller {
 		$this->data['scriptlist'][]='jwplayer/jwplayer.js';
 		$this->data['video_query'] = $this->video->GetAllVideoData();
 		$this->data['tab_menu_id'] =4 ;
+                $this->data['stylelist'][]='css/training_display.css';
 
 		$this->data['query']=$this->training_model->getCurrentCategories(3);
-		$this->data['subview']=  'clientadmin/howto_view';
-		$this->load->view('clientadmin/_layout_main', $this->data);
+		$this->data['subview']=  'members/howto_view';
+		$this->load->view('members/_layout_main', $this->data);
 	 }
 	 
 	function showdata($category){

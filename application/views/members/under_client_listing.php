@@ -18,7 +18,7 @@
 	<script src="<?php echo base_url(); ?>scripts/clientlisting.js" type="text/javascript"></script>
     <!-- promoteArea -->
 
-	<?php $this->load->view('clientadmin/components/submenu'); ?>
+	<?php $this->load->view('members/components/submenu'); ?>
 
 	<div class="promoteArea">
 	<table id="rounded-corner" class="list" align="center">
@@ -61,5 +61,5 @@ foreach($query->result() as $client ){
  </div>
 <!-- /promoteArea -->
 <?php if($display): ?>
-<a class="btn" href="<?php echo base_url(); ?>clientadmin/promotesite/download_downline" target="_blank" >Download</a>
+<a class="btn" href="<?php echo base_url(); ?>members/promotesite/download_downline" target="_blank" >Download</a>
 <?php endif; ?>

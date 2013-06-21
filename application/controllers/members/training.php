@@ -22,8 +22,8 @@
 	 }
 	 
 	 function tabs(){
-			$this->data['subview']=  'clientadmin/site_dashboard';
-			$this->load->view('clientadmin/_layout_main', $this->data);
+			$this->data['subview']=  'members/site_dashboard';
+			$this->load->view('members/_layout_main', $this->data);
 	 }
 	 
 	 function index()
@@ -35,11 +35,12 @@
 			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
 			$this->data['video_query'] = $this->video->GetAllVideoData();
 			$this->data['tab_menu_id'] =3;
+                        $this->data['stylelist'][]='css/training_display.css';
 			 // $this->data['query']=$this->training_model->getCategories();
 			 $this->data['query']=$this->training_model->getCurrentCategories(1);
              
-			$this->data['subview']=  'clientadmin/training_view';
-			$this->load->view('clientadmin/_layout_main', $this->data);
+			$this->data['subview']=  'members/training_view';
+			$this->load->view('members/_layout_main', $this->data);
 		}
 		else
 		{

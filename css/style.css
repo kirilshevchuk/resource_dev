@@ -781,6 +781,7 @@ input[type="email"],input[type="password"],input[type="text"]{
     margin-bottom: 8px;
     padding: 0;
     text-align: center;
+    position: relative;
 }
 .leftnav2 ul li a {
 	background: none repeat scroll 0 0 #365E80;
@@ -792,21 +793,14 @@ input[type="email"],input[type="password"],input[type="text"]{
     font-weight: bold;
     height: 54px;
     margin: 0;
-    padding: 12px 9px 10px 5px;
+    padding: 12px 25px 10px 5px;
     text-decoration: none;
 }
 .leftnav2 a:hover,.leftnav2 a.active{
 	 background: none repeat scroll 0 0 #FFB618 !important;
     border: medium none;
-    border-radius: 5px 5px 5px 5px;
     box-shadow: 0 -4px 4px #3E545C inset;
     color: #48697E;
-    display: block;
-    font-size: 16px;
-    font-weight: bold;
-    height: 54px;
-    margin: 0;
-    padding: 12px 9px 10px 5px;
     text-decoration: underline;
 }  
 

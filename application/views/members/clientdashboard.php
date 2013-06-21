@@ -320,7 +320,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 <!--/**********************************************************/-->
 		
 		<div class="idArea" id="gvo">
-			<form method="post" action="<?php echo base_url();?>clientadmin/clientdashboard/savegvo">
+			<form method="post" action="<?php echo base_url();?>members/clientdashboard/savegvo">
 				<div class="affiliateLink">
 					<a href="#">Click URL To Join HostThenProfit</a>
 				</div>
@@ -347,7 +347,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 			</form>
 		</div>
 		<div class="idArea" id="pure">
-			<form method="post" action="<?php echo base_url();?>clientadmin/clientdashboard/savepure">
+			<form method="post" action="<?php echo base_url();?>members/clientdashboard/savepure">
 				<div class="affiliateLink">
 					<a href="#">Click URL To Join HostThenProfit</a>
 				</div>
@@ -373,7 +373,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 		</div>
 		
 		<div class="idArea" id="emp">
-			<form method="post" action="<?php echo base_url();?>clientadmin/clientdashboard/saveemp">
+			<form method="post" action="<?php echo base_url();?>members/clientdashboard/saveemp">
 				<div class="affiliateLink">
 						<a href="#">Click URL To Join HostThenProfit</a>
 				</div>

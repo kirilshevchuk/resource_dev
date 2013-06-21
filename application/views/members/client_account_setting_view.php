@@ -4,7 +4,7 @@
 			<div class="infomessage"><?php echo "Opps ! Error in Account updated !!"?> </div>
 <?php } ?>
 
-<?php $this->load->view('clientadmin/components/submenu'); ?>
+<?php $this->load->view('members/components/submenu'); ?>
 
 
 
@@ -19,10 +19,10 @@
 	<tfoot>
     	<tr>
         	<td class="rounded-foot-left">
-			<a  class="btnlink" href="<?php echo base_url();?>clientadmin/setting/changepassword">Change Password </a>
+			<a  class="btnlink" href="<?php echo base_url();?>members/setting/changepassword">Change Password </a>
 			</td>
 			<td class="rounded-foot-right">
-				<a href="<?php echo base_url();?>clientadmin/setting/editdetail" class="btnlink">Edit Detail</a>
+				<a href="<?php echo base_url();?>members/setting/editdetail" class="btnlink">Edit Detail</a>
 			</td>
         </tr>
     </tfoot>

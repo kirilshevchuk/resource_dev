@@ -32,8 +32,8 @@
 			// $this->data['scriptlist'][]='scripts/previewplayer.js';
 			$this->data['query'] = $this->video->GetAllVideoData();
 			
-			$this->data['subview']=  'clientadmin/clientdashboard';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/clientdashboard';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}
 		else
 		{
@@ -94,8 +94,8 @@
 			$this->data['query'] = $this->video->GetAllVideoData();
 			$this->data['status'] = $state;
 			
-			$this->data['subview']=  'clientadmin/clientdashboard';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/clientdashboard';
+			$this->load->view('members/_layout_main.php', $this->data);
 	 }
 	 
 	 function logout()

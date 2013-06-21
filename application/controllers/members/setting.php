@@ -29,8 +29,8 @@
 			$this->data['program_detail'] = $this->programs_model->getProgram_for_clentdashboard();
 			
 			$this->data['metatitle'] = 'Account Setting';
-			$this->data['subview']=  'clientadmin/client_account_setting_view';
-			$this->load->view('clientadmin/_layout_main', $this->data);
+			$this->data['subview']=  'members/client_account_setting_view';
+			$this->load->view('members/_layout_main', $this->data);
 		}
 		else
 		{
@@ -55,25 +55,25 @@
 		$this->data['metatitle'] = 'Change Password';
 		if($this->form_validation->run() == FALSE)
 		{
-			$this->data['subview']=  'clientadmin/change_password_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/change_password_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}else{
 			$statusupdate = $this->client->set_password();  
 			if($statusupdate=='success'){
 				$this->data['status']="updatesuccess";
-				$this->data['subview']=  'clientadmin/change_password_view';
-				$this->load->view('clientadmin/_layout_main.php', $this->data);
+				$this->data['subview']=  'members/change_password_view';
+				$this->load->view('members/_layout_main.php', $this->data);
 			}else{
 				$this->data['status']=$statusupdate;
-				$this->data['subview']=  'clientadmin/change_password_view';
-				$this->load->view('clientadmin/_layout_main.php', $this->data);
+				$this->data['subview']=  'members/change_password_view';
+				$this->load->view('members/_layout_main.php', $this->data);
 			}	
 		}
 	}
 	function changepassword(){
 			$this->data['metatitle'] = 'Change Password';
-			$this->data['subview']=  'clientadmin/change_password_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/change_password_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 	}
 	
 	function updatesetting(){
@@ -89,8 +89,8 @@
 		{
 			//redirected when validation failed.
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
-			$this->data['subview']=  'clientadmin/edit_account_setting_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/edit_account_setting_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}
 		else
 		{
@@ -110,8 +110,8 @@
 	function editdetail(){
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
 			$this->data['program_detail'] = $this->programs_model->getProgram_for_clentdashboard();
-			$this->data['subview']=  'clientadmin/edit_account_setting_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/edit_account_setting_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 	}
 
 	 function logout()

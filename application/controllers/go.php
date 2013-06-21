@@ -13,7 +13,7 @@ class Go extends CI_Controller {
 	    /*/$this->load->model('video','',TRUE);
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
-			redirect('clientadmin/programs', 'refresh');
+			redirect('members/programs', 'refresh');
 		}//*/
             
 	 }

@@ -1,7 +1,6 @@
 <?php if (isset($status) && $status=="success"){?>
 			<div class="infomessage"><?php echo "Successfully"?> </div>
 <?php } 
-
 /**************** code to fetch next step data **************/
 $video_data=array();
 
@@ -17,21 +16,12 @@ foreach($video_query->result() as $singlevideo ){
 		// echo '</pre>';
 		
 /**************** End of code to fetch next step data **************/
-	
+		
 
 ?>
 		
-		<?php if(isset($stylelist)):
-            foreach ($stylelist as $style):?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
-        <?php endforeach;
-        endif; 
-        if(isset($scriptlist)): 
-            foreach ($scriptlist as $script):?>
-        <script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
-        <?php endforeach;
-        endif; ?>
 <style>
+    /*
 .nextbtn{
 	cursor:pointer;
 	background: url("../images/btnBg.png") repeat-x scroll left top transparent;
@@ -79,8 +69,30 @@ img.procees_img{
 	 font-size: 55px;
 }
 
+*/
 </style>
 <script>
+function set_init(){
+
+		$("div#tab_child_1").show();
+		var previewfile=$("#first_video").val();
+		var videopreview=$("#first_video_index").val();
+		set_video(videopreview);
+		// alert(videopreview);
+		// alert(previewfile);
+		/* if(previewfile=="")
+		{
+			previewfile = "20051210-w50s.flv";
+		}
+		jwplayer(videopreview).setup({
+				file: baseurl+'uploads/training/video/'+previewfile,
+				height: 300,
+				width: 500,
+				stretching:"exactfit",
+				image: baseurl+'uploads/images/preview.jpg',
+			}).play(false); */
+}
+
 	function load_next_step(menu_id){
 		// alert(menu_id);
 		var title=$('#next_video_title').val();
@@ -94,7 +106,7 @@ img.procees_img{
 		$("div#ma").html(process_image);
 		$.ajax({  
 		  type: "POST",  
-		  url: base_url+"clientadmin/programs/show_next_step/"+menu_id,  
+		  url: base_url+"members/programs/show_next_step/"+menu_id,  
 		  data: dataString,  
 		  success: function(msg) {  
 				// alert(msg);
@@ -121,49 +133,25 @@ img.procees_img{
 			}).play(true);
 	}
 	
-	function set_init(){
-		var base_url=$("#baseurl").val();
-		// alert(base_url);
-		$("div#tab_child_1").show();
-		var previewfile=$("#first_video").val();
-		var videopreview=$("#first_video_index").val();
-		// alert(videopreview);
-		set_video(videopreview);
-	/* 	// alert(videopreview);
-		// alert(previewfile);
-		if(previewfile=="")
-		{
-			previewfile = "20051210-w50s.flv";
-		}
-		jwplayer(videopreview).setup({
-				file:baseurl+'uploads/training/video/'+previewfile,
-				height: 300,
-				width: 500,
-				stretching:"exactfit",
-				image: baseurl+'uploads/images/preview.jpg',
-			}).play(false); */
-	}
-	
 	function load_train_data(cat_id){
 		// alert(cat_id);
-		$('.cat_tabs').removeClass('active');
-		$('#ctab_'+cat_id).addClass('active');
 		var title=$('#title_'+cat_id).val();
 		$("div.video_title").text(title);
+		
+		$('.cat_tabs').removeClass('active');
+		$('#ctab_'+cat_id).addClass('active');
 		var base_url=$("#baseurl").val();
 		var dataString = 'cat_id=' +cat_id;  
 		var process_image='<img src="'+base_url+'images/loader.gif" class="procees_img" alt="wait...">';
 		$("div#ma").html(process_image);
 		$.ajax({  
 		  type: "POST",  
-		  url: base_url+"clientadmin/training/showdata/"+cat_id,  
+		  url: base_url+"members/commisions/showdata/"+cat_id,  
 		  data: dataString,  
 		  success: function(msg) {  
 				// alert(msg);
-				 // var obj = $.parseJSON(msg);
 				$("div#ma").html(msg);
 				set_init();
-				
 		  }  
 		});  
 		
@@ -182,6 +170,7 @@ img.procees_img{
 		set_video(index);
 	}
 	
+	
 	function set_video(index){
 		var baseurl = $("#baseurl").val();
 
@@ -192,17 +181,16 @@ img.procees_img{
 		if(previewfile=="")
 		{
 			previewfile = "20051210-w50s.flv";
+		}else{
+			jwplayer("videopreview_"+index).setup({
+					file: baseurl+'uploads/training/video/'+previewfile,
+					height: 300,
+					width: 500,
+					stretching:"exactfit",
+					image: baseurl+'uploads/images/preview.jpg',
+				}).play(false);
 		}
-		jwplayer("videopreview_"+index).setup({
-				file: baseurl+'uploads/training/video/'+previewfile,
-				height: 300,
-				width: 500,
-				stretching:"exactfit",
-				image: baseurl+'uploads/images/preview.jpg',
-			}).play(false);
-		
 	} 
-	
 	$(document).ready(function(){
 		var firstCategory = $("#firstCategory").val();
 		load_train_data(firstCategory);
@@ -216,11 +204,12 @@ img.procees_img{
 			<div class="leftnav">
 				<ul>
 					<?php foreach($query->result() as $category ){ ?>
-						<li onclick="load_train_data(<?php echo $category->id; ?>);">
-							<a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" value="<?php echo $category->category_name; ?>" href="#" ><?php echo $category->category_name; ?></a>
+						<li onclick="load_train_data(<?php echo $category->id; ?>);" >
+							<a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#"><?php echo $category->category_name; ?></a>
 							<input type="hidden" id="title_<?php echo $category->id; ?>" value="<?php echo $category->category_name; ?>" >
 						</li>
 					<?php } ?>
+					
 					<!-- Next Tab Li code start here -->
 						<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
 						<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);">
@@ -234,17 +223,17 @@ img.procees_img{
 			</div>
 	</div>
 	<div class="webright">
-		<?php 
-                if($query->num_rows>0):
-			$first_cat = $query->row();
-		?>
+			<?php 
+				 if($query->num_rows>0):
+				$first_cat = $query->row();
+			?>
 
 			<input type="hidden" id="firstCategory" value="<?php echo $first_cat->id;?>">
 			<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
 			<input type="hidden" id="id_videopreview" value="default.mp4">
 				
 		<div id="ma">
-		
+			
 		
 		</div>
 		<?php endif; ?>

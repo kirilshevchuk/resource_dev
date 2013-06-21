@@ -30,8 +30,8 @@
             <nav class="headertop">
                 <div><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></div>
                 <ul>
-                   <li><a href="<?php echo base_url()?>clientadmin/setting">Edit Profile</a></li>
-                    <li><a href="<?php echo base_url()?>clientadmin/clientdashboard/logout">Logout</a></li>
+                   <li><a href="<?php echo base_url()?>members/setting">Edit Profile</a></li>
+                    <li><a href="<?php echo base_url()?>members/clientdashboard/logout">Logout</a></li>
                     <li><a  class="last modalbox" href="#inline">Contact Support</a></li>
                 </ul>
             </nav>

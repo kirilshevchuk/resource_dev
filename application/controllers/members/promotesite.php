@@ -27,8 +27,8 @@ class Promotesite extends CI_Controller {
 		{
 			$session_data = $this->session->userdata('client_login');
 			$this->data['username'] = $session_data['username'];
-			$this->data['subview']=  'clientadmin/promote_site_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/promote_site_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}
 		else
 		{
@@ -43,13 +43,13 @@ class Promotesite extends CI_Controller {
 	{
 		// $session_data = $this->session->userdata('client_login');
 		$this->data['query'] = $this->client->GetUnderClient();
-		$this->data['subview']=  'clientadmin/under_client_listing';
-		$this->load->view('clientadmin/_layout_main.php', $this->data);
+		$this->data['subview']=  'members/under_client_listing';
+		$this->load->view('members/_layout_main.php', $this->data);
 	}
         function download_downline(){
             $query = $this->client->GetUnderClient();
             if($query->num_rows===0){
-                redirect('clientadmin/promotesite/downclient');
+                redirect('members/promotesite/downclient');
                 return;
             }
             $datalist=array();
@@ -81,8 +81,8 @@ class Promotesite extends CI_Controller {
 		{
 			// echo 'i m in error';
 			//Field validation failed.  User redirected to login page
-			$this->data['subview']=  'clientadmin/promote_site_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/promote_site_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}
 		else
 		{

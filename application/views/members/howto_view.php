@@ -21,7 +21,7 @@ foreach($video_query->result() as $singlevideo ){
 
 ?>
 		
-		<?php if(isset($stylelist)):
+		<?php /* if(isset($stylelist)):
             foreach ($stylelist as $style):?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
         <?php endforeach;
@@ -30,8 +30,9 @@ foreach($video_query->result() as $singlevideo ){
             foreach ($scriptlist as $script):?>
         <script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
         <?php endforeach;
-        endif; ?>
+        endif; */ ?>
 <style>
+    /*
 .nextbtn{
 	cursor:pointer;
 	background: url("../images/btnBg.png") repeat-x scroll left top transparent;
@@ -78,7 +79,7 @@ img.procees_img{
 	 margin: 5% 33%;
 	 font-size: 55px;
 }
-
+*/
 </style>
 <script>
 function set_init(){
@@ -114,7 +115,7 @@ function set_init(){
 		$("div#ma").html(process_image);
 		$.ajax({  
 		  type: "POST",  
-		  url: base_url+"clientadmin/programs/show_next_step/"+menu_id,  
+		  url: base_url+"members/programs/show_next_step/"+menu_id,  
 		  data: dataString,  
 		  success: function(msg) {  
 				// alert(msg);
@@ -154,7 +155,7 @@ function set_init(){
 		$("div#ma").html(process_image);
 		$.ajax({  
 		  type: "POST",  
-		  url: base_url+"clientadmin/howto/showdata/"+cat_id,  
+		  url: base_url+"members/howto/showdata/"+cat_id,  
 		  data: dataString,  
 		  success: function(msg) {  
 				// alert(msg);
@@ -187,15 +188,15 @@ function set_init(){
 		if(previewfile=="")
 		{
 			previewfile = "20051210-w50s.flv";
-		}
-		jwplayer("videopreview_"+index).setup({
-				file: baseurl+'uploads/training/video/'+previewfile,
-				height: 300,
-				width: 500,
-				stretching:"exactfit",
-				image: baseurl+'uploads/images/preview.jpg',
+		}else{
+			jwplayer("videopreview_"+index).setup({
+					file: baseurl+'uploads/training/video/'+previewfile,
+					height: 300,
+					width: 500,
+					stretching:"exactfit",
+					image: baseurl+'uploads/images/preview.jpg',
 			}).play(false);
-		
+		}
 	} 
 	$(document).ready(function(){
 		var firstCategory = $("#firstCategory").val();

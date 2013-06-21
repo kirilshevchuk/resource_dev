@@ -55,13 +55,13 @@ img#videobg{
             <div id="container">
                 <nav class="maniNav">
                     <ul>
-                        <li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Home</a></li>
+                        <li><a href="<?php echo base_url(); ?>members/clientdashboard">Home</a></li>
                         <li><a href="#">E.A.P Training</a></li>
-                        <li><a href="<?php echo base_url(); ?>clientadmin/promotesite" >Promote Web</a></li>
+                        <li><a href="<?php echo base_url(); ?>members/promotesite" >Promote Web</a></li>
                         <li><a href="<?php echo base_url(); ?>home/programs">Programs Joined</a></li>
-                        <li><a href="<?php echo base_url(); ?>clientadmin/promotesite/downclient">Tools</a>	</li>
-                        <li><a href="<?php echo base_url(); ?>clientadmin/email">Bonuses</a></li>
-                        <li><a class="last" href="<?php echo base_url(); ?>clientadmin/email/femail">Contact Support</a></li>
+                        <li><a href="<?php echo base_url(); ?>members/promotesite/downclient">Tools</a>	</li>
+                        <li><a href="<?php echo base_url(); ?>members/email">Bonuses</a></li>
+                        <li><a class="last" href="<?php echo base_url(); ?>members/email/femail">Contact Support</a></li>
                     </ul>
                 </nav>
                 

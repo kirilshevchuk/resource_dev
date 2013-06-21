@@ -31,11 +31,11 @@
 	}
 </style>
 
-<?php $this->load->view('clientadmin/components/submenu'); ?>
+<?php $this->load->view('members/components/submenu'); ?>
 
 <!-- promoteArea -->
 <div class="promoteArea">
-<form method="post" action="<?php echo base_url()?>clientadmin/email/setfollowrule">
+<form method="post" action="<?php echo base_url()?>members/email/setfollowrule">
 <fieldset>
 	<legend>Follow Up Email Rules</legend>
 		<table id="rounded-corner-email" align="center">
@@ -84,7 +84,7 @@
 				<tr>
 					<td align="center">
 						<input type="submit" class="btn" value="set rule" >
-						<a href="<?php echo base_url()?>clientadmin/setting"> <input type="button" class="btn" value="cancel"></a>
+						<a href="<?php echo base_url()?>members/setting"> <input type="button" class="btn" value="cancel"></a>
 					</td>
 				</tr>
 				

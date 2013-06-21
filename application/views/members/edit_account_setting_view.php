@@ -1,6 +1,6 @@
 <!-- promoteArea -->
 <div class="promoteArea">
-<form method="post" action="<?php echo base_url()?>clientadmin/setting/updatesetting">
+<form method="post" action="<?php echo base_url()?>members/setting/updatesetting">
 	<table id="rounded-corner" align="center">
 		<thead>
 			<tr>
@@ -94,7 +94,7 @@
 			<tr>
 				<td colspan="2" align="center">
 					<input type="submit" class="btn" value="update" >
-					<a href="<?php echo base_url()?>clientadmin/setting"> <input type="button" class="btn" value="cancel"></a>
+					<a href="<?php echo base_url()?>members/setting"> <input type="button" class="btn" value="cancel"></a>
 				</td>
 			</tr>
 	  </tbody>

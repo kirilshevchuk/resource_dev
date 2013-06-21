@@ -22,7 +22,7 @@ class Email extends CI_Controller {
 	function show_error_view(){
 		$this->data['error_message']='Please First Login to access this page';
 		$this->data['error_redirect']=base_url().'login';
-		$this->load->view('clientadmin/error_view.php',$this->data);
+		$this->load->view('members/error_view.php',$this->data);
 	}
 	 
 	function index()
@@ -31,8 +31,8 @@ class Email extends CI_Controller {
 		$session_login_client=$this->session->userdata('client_login');
 		if (($session_login_client['login_state'] == 'active' && $session_login_client['role'] == 'user')) {
 			$this->data['welcome_mail_data']= $this->client->get_welcome_email_data();  
-			$this->data['subview']=  'clientadmin/email/welcome_email_rule_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/email/welcome_email_rule_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}	
 	}
 
@@ -41,8 +41,8 @@ class Email extends CI_Controller {
 		if (($session_login_client['login_state'] == 'active' && $session_login_client['role'] == 'user'))
 		{
 			$this->data['followup_mail_data']= $this->client->get_followup_email_data();  
-			$this->data['subview']=  'clientadmin/email/followup_email_rule_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/email/followup_email_rule_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}
 	}
 	
@@ -53,19 +53,19 @@ class Email extends CI_Controller {
 		if($this->form_validation->run() == FALSE)
 		{	
 			$this->data['followup_mail_data']= $this->client->get_followup_email_data(); 
-			$this->data['subview']=  'clientadmin/email/followup_email_rule_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/email/followup_email_rule_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}else{
 			$statusupdate = $this->client->set_followup_email_rule();  
 			if($statusupdate){
 				$this->data['status']="success";
 				$this->data['followup_mail_data']= $this->client->get_followup_email_data(); 
-				$this->data['subview']= 'clientadmin/email/followup_email_rule_view';
-				$this->load->view('clientadmin/_layout_main.php', $this->data);
+				$this->data['subview']= 'members/email/followup_email_rule_view';
+				$this->load->view('members/_layout_main.php', $this->data);
 			}else{
 				$this->data['status']="failure";
-				$this->data['subview']= 'clientadmin/email/followup_email_rule_view';
-				$this->load->view('clientadmin/_layout_main.php', $this->data);
+				$this->data['subview']= 'members/email/followup_email_rule_view';
+				$this->load->view('members/_layout_main.php', $this->data);
 			}	
 		}
 	
@@ -77,19 +77,19 @@ class Email extends CI_Controller {
 		if($this->form_validation->run() == FALSE)
 		{	
 			$this->data['welcome_mail_data']= $this->client->get_welcome_email_data(); 
-			$this->data['subview']=  'clientadmin/email/welcome_email_rule_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->data['subview']=  'members/email/welcome_email_rule_view';
+			$this->load->view('members/_layout_main.php', $this->data);
 		}else{
 			$statusupdate = $this->client->set_welcome_email_rule();  
 			if($statusupdate){
 				$this->data['status']="success";
 				$this->data['welcome_mail_data']= $this->client->get_welcome_email_data(); 
-				$this->data['subview']= 'clientadmin/email/welcome_email_rule_view';
-				$this->load->view('clientadmin/_layout_main.php', $this->data);
+				$this->data['subview']= 'members/email/welcome_email_rule_view';
+				$this->load->view('members/_layout_main.php', $this->data);
 			}else{
 				$this->data['status']="failure";
-				$this->data['subview']= 'clientadmin/email/welcome_email_rule_view';
-				$this->load->view('clientadmin/_layout_main.php', $this->data);
+				$this->data['subview']= 'members/email/welcome_email_rule_view';
+				$this->load->view('members/_layout_main.php', $this->data);
 			}	
 		}
 	}

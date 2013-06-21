@@ -34,9 +34,9 @@ class Programs extends CI_Controller {
 			$this->data['video_query'] = $this->video->GetAllVideoData();
 			// echo $this->db->last_query(); 
 			// $this->data['query'] = $this->video->GetAllVideoData();
-			$this->data['subview']=  'clientadmin/programs/programs_view';
+			$this->data['subview']=  'members/programs/programs_view';
 			$this->data['tab_menu_id'] =1 ;
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->load->view('members/_layout_main.php', $this->data);
 		}
 		else
 		{
@@ -63,6 +63,7 @@ class Programs extends CI_Controller {
 	 function show_next_step($menu_id){
 		echo $next_step_html=$this->programs_model->get_next_step_by_menu_id($menu_id);
 	 }
+	 
 	 
 }
 	 

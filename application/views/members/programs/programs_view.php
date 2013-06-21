@@ -94,7 +94,7 @@
 		
 		$.ajax({  
 		  type: "POST",  
-		  url: base_url+"clientadmin/programs/save/"+prog_id,  
+		  url: base_url+"members/programs/save/"+prog_id,  
 		  data: dataString,  
 		  success: function(msg) {  
 			$("div#response").html('<div class="infomessage">Username save successfully</div>');
@@ -113,7 +113,9 @@
 	
 </script>
 <style>
-
+span.tab_title{
+	margin:0px;
+}
 .infomessage{
 	background: none repeat scroll 0 0 #00ADEB;
     border: 1px solid black;
@@ -139,12 +141,13 @@ img#video_bg{
 	float:left;
 }
 img.step_done{
-	height: 80%;
-    margin: -14% 7% -1% -31%;
-    position: relative;
-    width: 25%;
-	z-index: 1;
-	display:none;
+    height: 43px;
+    width: 43px;
+    display: none;
+    position: absolute;
+    top: -12;
+    z-index: 1;
+    left: -13;
 }
 span.number {
     background: none repeat scroll 0 0 #78A0B1; 
@@ -221,7 +224,9 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 							<li>
 								<a href="#" class="video_tabs" onclick="set_my_video(this,<?php echo $programs->id;?>);">
 									<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
-									<span class="number"><?php echo ++$count; ?></span><?php echo $programs->leftnav_title;?> 
+									<span class="number"><?php echo ++$count; ?></span>
+									<span class="tab_title"><?php echo $programs->leftnav_title;?></span>
+									 
 								</a>
 							</li>
 							
@@ -233,7 +238,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 					/****====== Code of custom form =====**/
 				$html['link_'.$programs->id]="
 						<div class='idArea' id='myform_{$programs->id}' name='myform_{$programs->id}' >
-							<form method='post' action='clientadmin/programs/save/{$programs->id}'>
+							<form method='post' action='members/programs/save/{$programs->id}'>
 									<div class='affiliateLink' id='link_{$programs->id}' >
 										<a target='_blank' href='{$programs->signup_link}'>Click URL To Join {$programs->program_title}</a>
 									</div>

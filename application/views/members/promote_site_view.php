@@ -3,11 +3,11 @@
 <?php } ?>
 <!-- promoteArea -->
 
-<?php $this->load->view('clientadmin/components/submenu'); ?>
+<?php $this->load->view('members/components/submenu'); ?>
 
 	
 <div class="promoteArea">
-<form method="post" action="<?php echo base_url()?>clientadmin/promotesite/invite" novalidate>
+<form method="post" action="<?php echo base_url()?>members/promotesite/invite" novalidate>
 	<table id="rounded-corner" align="center" style="back">
 		<thead>
 			<tr>
@@ -48,7 +48,7 @@
 			<tr>
 				<td colspan="2" align="center">
 				<input type="submit" class="btn" value="Invite" >
-					<a href="<?php echo base_url()?>clientadmin/clientdashboard"> 
+					<a href="<?php echo base_url()?>members/clientdashboard"> 
 						<input type="button" class="btn" value="cancel">
 					</a>
 				</td>

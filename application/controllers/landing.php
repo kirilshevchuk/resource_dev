@@ -13,7 +13,7 @@ class Landing extends CI_Controller {
 	    //$this->load->model('video','',TRUE);
 		/*$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
-			redirect('clientadmin/programs', 'refresh');
+			redirect('members/programs', 'refresh');
 		}//*/
             
 	 }
@@ -22,7 +22,7 @@ class Landing extends CI_Controller {
 	 {
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
-			redirect('clientadmin/programs', 'refresh');
+			redirect('members/programs', 'refresh');
 		}//*/
                 $this->data['islanding']=true;
 		$this->load->helper(array('form'));
@@ -40,7 +40,7 @@ class Landing extends CI_Controller {
 	public function affuser($id=false){
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
-			redirect('clientadmin/programs', 'refresh');
+			redirect('members/programs', 'refresh');
                         return;
 		}//*/
                 if($this->user->check_for_valid_affliate_id($id)===0){
