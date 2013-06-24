@@ -131,17 +131,33 @@ class Programs_Model extends CI_Model{
         $query = $this->db->get(); */
 		
 		$session_login_client=$this->session->userdata('client_login');
-		
+		$sponsorid = $this->getSponsorID();
 		// echo '<pre>';
 		// print_r($session_login_client);
 		// echo '</pre>';
-
-		$this->db->select('p.*,m.user_name');
+                /*
+                $this->db->select('p.*,m.user_name');
 		$this->db->from('programs as p');
 		$this->db->join('programs_meta as m', "p.id = m.programid and m.userid={$session_login_client['id']}", 'left');
 		$this->db->order_by("p.nav_position", "asc");
 		$this->db->limit('3');
-		$query = $this->db->get();
+		$query = $this->db->get();//*/
+                
+                if(!empty($sponsorid)){
+                $qstring = "select p.id as id, p.program_title as program_title, video_name_in_folder, logo, leftnav_title, nav_position,
+                    p.video_title as video_title, m.user_name as user_name,
+                    if(pm.user_name is not null, replace(p.signup_link,p.affiliate_id,pm.user_name),p.signup_link) as signup_link
+                    from (programs as p left join (select * from programs_meta where userid=$sponsorid) as pm on p.id = pm.programid) 
+                    left join (select * from programs_meta where userid=$session_login_client[id]) as m on p.id = m.programid
+                    order by p.nav_position asc";
+                }
+                else{
+                $qstring = "select p.id as id, p.program_title as program_title, video_name_in_folder, logo, leftnav_title, nav_position,
+                    p.video_title as video_title, m.user_name as user_name, p.signup_link as signup_link
+                    from programs as p left join (select * from programs_meta where userid=$session_login_client[id]) as m on p.id = m.programid
+                    order by p.nav_position asc";
+                }
+                $query = $this->db->query($qstring);//*/
 		// echo $this->db->last_query();
 		return $query;
 	}
@@ -216,14 +232,16 @@ class Programs_Model extends CI_Model{
         $link = $this->input->post('txtSignup_Link');
         $video_title = $this->input->post('txtVideo_Title');
         $program_title = $this->input->post('txtProgram_Title');
-		$datatoupdate = array(
+        $affiliate_id = $this->input->post('affiliate_id');
+	$datatoupdate = array(
             'program_title'=>$program_title,
             'video_title'=>$video_title,
             'video_name_in_folder'=>$video_name,
             'signup_link'=>$link,
             'nav_position'=>$nav_position,
             'leftnav_title'=>$nav_title,
-            'logo'=>$logo_name
+            'logo'=>$logo_name,
+            'affiliate_id'=>$affiliate_id
         );
 		$this->db->where('id', $pid);
 		$this->db->trans_start();
@@ -232,7 +250,19 @@ class Programs_Model extends CI_Model{
 		return $status;
 	}
 
-	
+	public function getSponsorID(){
+            $session_login_client=$this->session->userdata('client_login');
+            $this->db->select('s.id');
+            $this->db->from("users as u");
+            $this->db->join("users as s",'u.affiliate_user_id=s.user_track_id',"LEFT");
+            $this->db->where('u.id',$session_login_client['id']);
+            $query = $this->db->get();
+            if($query->num_rows===0){
+                return 0;
+            }
+            $row = $query->first_row();
+            return $row->id;
+        }
 	public function addProgram($pid=0){
 		$data11=$_POST;
 		// echo '<pre>';
@@ -292,6 +322,7 @@ class Programs_Model extends CI_Model{
         $link = $this->input->post('txtSignup_Link');
         $video_title = $this->input->post('txtVideo_Title');
         $program_title = $this->input->post('txtProgram_Title');
+        $affiliate_id = $this->input->post('affiliate_id');
         $errors=FALSE;
         $data = array(
             'program_title'=>$program_title,
@@ -300,7 +331,8 @@ class Programs_Model extends CI_Model{
             'signup_link'=>$link,
             'nav_position'=>$nav_position,
             'leftnav_title'=>$nav_title,
-            'logo'=>$logo_name
+            'logo'=>$logo_name,
+            'affiliate_id'=>$affiliate_id
         );
 		
 		$this->db->insert('programs',$data);

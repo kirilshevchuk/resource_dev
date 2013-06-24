@@ -24,7 +24,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 		<?php if(isset($stylelist)):
             foreach ($stylelist as $style):?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
-        <?php endforeach;
+			<?php endforeach;
         endif; 
         if(isset($scriptlist)): 
             foreach ($scriptlist as $script):?>
@@ -83,7 +83,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 								 <nav class="headertop">
                                                                      <div><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></div>
 									<ul>
-										<li><a href="<?php echo base_url()?>members/setting">Edit Profile</a></li>
+										<li><a href="<?php echo base_url()?>members/setting">Tools</a></li>
 										<li><a href="<?php echo base_url()?>members/clientdashboard/logout">Logout</a></li>
 										<li><a  class="last modalbox" href="#inline">Contact Support</a></li>
 									</ul>
@@ -91,8 +91,8 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 								<div class="sponsor">
 									<span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
 									<br/>
-                                                                        <span>Your Affiliate Id : </span><a href="<?php echo base_url()?>go/<?php echo $session_data['username'];?>" target="_blank">
-                                                                            <?php echo base_url()?>go/<?php echo $session_data['username'];?>
+									<span>Your Affiliate Id : </span><a href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>" target="_blank">
+                                                                            <?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
                                                                         </a>
 								 </div>
 							</div>

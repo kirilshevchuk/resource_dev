@@ -43,12 +43,13 @@
 		$(obj).find('span.number').css({
 											'color':'#386886',
 											'background-color':'#FFFFFF',
+											'top':'-12px',
 										});
 		$(".idArea").hide();
 		$('#myform_'+id).show();
 		var baseurl = $("#baseurl").val();
 		$('.video_tabs').removeClass('active');
-		$(obj).addClass('active');
+		$(obj).find('li').addClass('active');
 		// frm_obj=document.frmVideo;
 		var previewfile = document.getElementById("txtVideo_"+id).value;
 		var video_title = document.getElementById("txtTitle_"+id).value;
@@ -113,9 +114,26 @@
 	
 </script>
 <style>
-span.tab_title{
-	margin:0px;
+div.tab_title{
+	height: 40px;
+    margin: 6px 0;
+    padding-left: 28px;
+    width: 80%;
 }
+div.tab_title2{
+	height: 40px;
+    margin: 5px 0;
+    padding-left: 28px;
+    width: 80%;
+}
+div.tab_title1{
+	float: left;
+	height: 100%;
+	width: 26%;
+	margin-left: -27px;
+	margin-top: -8px;
+}
+
 .infomessage{
 	background: none repeat scroll 0 0 #00ADEB;
     border: 1px solid black;
@@ -141,13 +159,12 @@ img#video_bg{
 	float:left;
 }
 img.step_done{
-    height: 43px;
-    width: 43px;
-    display: none;
-    position: absolute;
-    top: -12;
-    z-index: 1;
-    left: -13;
+	height: 80%;
+    margin: -38% 7% -2% 2%;
+    position: relative;
+    width: 100%;
+	z-index: 1;
+	display:none;
 }
 span.number {
     background: none repeat scroll 0 0 #78A0B1; 
@@ -157,11 +174,11 @@ span.number {
     float: left;
     font-size: 20px;
     font-weight: bold;
-    padding: 2px 12px;
+    padding: 3px 12px;
     position: relative;
-    right: 26px;
+   /*  right: 26px; */
     text-decoration: none !important;
-    top: 8px;
+    top:12px;
 }
 
 .idArea{
@@ -221,14 +238,28 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 						// echo '</pre>';die();
 
 					?>
-							<li>
-								<a href="#" class="video_tabs" onclick="set_my_video(this,<?php echo $programs->id;?>);">
-									<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
-									<span class="number"><?php echo ++$count; ?></span>
-									<span class="tab_title"><?php echo $programs->leftnav_title;?></span>
+					
+					<a href="#"  onclick="set_my_video(this,<?php echo $programs->id;?>);">
+						<li class="video_tabs">
+							<div class="tab_title1">
+								<img src="<?php echo base_url();?>images/check.png" class="step_done" />
+								<span class="number"><?php echo ++$count; ?></span>
+							</div>
+							<div class="<?php  if(strlen($programs->leftnav_title)<=16){ echo 'tab_title'; }else{ echo 'tab_title2'; } ?>"><?php echo $programs->leftnav_title;?></div>
+						</li>
+					</a>
+							<!--<li>
+								<a href="#" class="video_tabs" onclick="set_my_video(this,<?php //echo $programs->id;?>);">
+								<div>	
+									<div class="tab_title1">		
+									<img src="<?php //echo base_url();?>images/check.png" class="step_done" />		
+									<span class="number"><?php //echo ++$count; ?></span>
+									</div>
+									<div class="tab_title"><?php //echo $programs->leftnav_title;?></div>
 									 
+								</div>
 								</a>
-							</li>
+							</li>-->
 							
 							<input type="hidden" id="txtVideo_<?php echo $programs->id;?>"  name="txtVideo_<?php echo $programs->id;?>" value="<?php echo $programs->video_name_in_folder; ?>">
 							<input type="hidden" id="txtTitle_<?php echo $programs->id;?>"  name="txtTitle_<?php echo $programs->id;?>" value="<?php echo $programs->video_title; ?>">
@@ -264,12 +295,21 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 				} ?>
 					<!-- Next Tab Li code start here -->
 					<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
-					<li>
+						<a href="#" class="video_tabs" onclick="set_my_video(this,'<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>');">
+							<li>
+								<div class="tab_title1">
+									<img src="<?php echo base_url();?>images/check.png" class="step_done" />
+									<span class="number"><?php echo ++$count; ?></span>
+								</div>
+								<div class="<?php  if(strlen($video_data['next_video_'.$tab_menu_id]->tab_title)<=16){ echo 'tab_title'; }else{ echo 'tab_title2'; } ?>"><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title; ?></div>
+							</li>
+						</a>
+					<!-- <li>
 						<a href="#" class="video_tabs" onclick="set_my_video(this,'<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>');">
 							<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
 							<span class="number"><?php echo ++$count; ?></span><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title; ?> 
 						</a>
-					</li>
+					</li>-->
 					<!-- End of Next Tab Li code start here -->
 					<?php } ?>
 				</ul>

@@ -1,0 +1,2 @@
+[30-May-2013 03:29:46 UTC] WordPress database error Incorrect table name '' for query SELECT `option_name`,`option_value` FROM `` WHERE `user_id`=1 made by activate_plugin, do_action('activate_wishlist-member/wpm.php'), call_user_func_array, WishListMember->Activate, WishListMemberPluginMethods->Get_UserData
+[30-May-2013 03:30:59 UTC] rechecking

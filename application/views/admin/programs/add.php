@@ -91,8 +91,10 @@ $(document).ready(function(){
 			<label>Program Title: </label>
 			<input type="text" required name="txtProgram_Title"  id="txtProgram_Title" class="input-xlarge val_dis_enb" value="" />
 
-			<label>Signup Link: </label>
+			<label>General Link: </label>
 			<input  name="txtSignup_Link" id="txtSignup_Link" type="text"  class="input-xlarge val_dis_enb">
+			<label>Default affiliate ID: </label>
+			<input  name="affiliate_id" id="affiliate_id" type="text"  class="input-xlarge val_dis_enb">
 			
 			<label>Upload Program Logo: </label>
 			<input id="video_upload" name="file_upload_logo" type="file" >
