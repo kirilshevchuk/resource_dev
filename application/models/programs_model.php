@@ -145,7 +145,8 @@ class Programs_Model extends CI_Model{
                 
                 if(!empty($sponsorid)){
                 $qstring = "select p.id as id, p.program_title as program_title, video_name_in_folder, logo, leftnav_title, nav_position,
-                    p.video_title as video_title, m.user_name as user_name,
+                    p.video_title as video_title, m.user_name as user_name, 
+                    if(pm.user_name is not null, pm.user_name, p.affiliate_id) as default_id,
                     if(pm.user_name is not null, replace(p.signup_link,p.affiliate_id,pm.user_name),p.signup_link) as signup_link
                     from (programs as p left join (select * from programs_meta where userid=$sponsorid) as pm on p.id = pm.programid) 
                     left join (select * from programs_meta where userid=$session_login_client[id]) as m on p.id = m.programid
@@ -153,7 +154,7 @@ class Programs_Model extends CI_Model{
                 }
                 else{
                 $qstring = "select p.id as id, p.program_title as program_title, video_name_in_folder, logo, leftnav_title, nav_position,
-                    p.video_title as video_title, m.user_name as user_name, p.signup_link as signup_link
+                    p.video_title as video_title, m.user_name as user_name, p.signup_link as signup_link, p.affiliate_id as default_id
                     from programs as p left join (select * from programs_meta where userid=$session_login_client[id]) as m on p.id = m.programid
                     order by p.nav_position asc";
                 }

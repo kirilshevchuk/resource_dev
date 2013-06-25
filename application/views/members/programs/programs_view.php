@@ -92,7 +92,11 @@
 	   // alert(base_url);
 		var dataString = 'prog_id=' +prog_id+ '&aff_id='+aff_id;  
 		//alert (dataString);return false;  
-		
+		/*if(!idExists(prog_id)){
+                    alert("Link with your affiliate id does not exists. \n Please check it again.")
+                    return;
+                }//*/
+                
 		$.ajax({  
 		  type: "POST",  
 		  url: base_url+"members/programs/save/"+prog_id,  
@@ -104,6 +108,38 @@
 		});  
 		
 	}
+        function idExists(id){
+        var base_url=$("#baseurl").val();
+            var link = $("#link_"+id).children( ":first" ).attr('href');//.attr("href");//
+            var aff_id=$("#txtdata_"+id).val();
+            var defid=$("#default_id_"+id).val();
+            var new_link=link.replace(defid,aff_id);
+            var urlexists=false;
+            $.ajax({
+                type:"POST",
+                url: base_url+"members/programs/checkurl",
+                data:'url='+new_link,
+                success: function(data){
+                    if(data!=='1'){
+                        urlexists=false;
+                        //alert("page not found.");
+                    }
+                    else{
+                        urlexists=true;
+                        //alert("page found.");
+                    }
+                    
+                }
+            });
+            return urlexists;
+            //alert(new_link);
+        }
+function UrlExists(url) {
+  var http = new XMLHttpRequest();
+  http.open('HEAD', url, false);
+  http.send();
+  return http.status!=404;
+}        
 	function show_message_div(){
 		setTimeout(function() { 
 			$('.infomessage').fadeOut('fast');
@@ -271,7 +307,9 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 						<div class='idArea' id='myform_{$programs->id}' name='myform_{$programs->id}' >
 							<form method='post' action='members/programs/save/{$programs->id}'>
 									<div class='affiliateLink' id='link_{$programs->id}' >
-										<a target='_blank' href='{$programs->signup_link}'>Click URL To Join {$programs->program_title}</a>
+                                                                            <a target='_blank' href='{$programs->signup_link}'>Click URL To Join {$programs->program_title}</a>
+                                                                            <input type='hidden' id='default_id_{$programs->id}' value='{$programs->default_id}' />
+                                                                                
 									</div>
 									<fieldset>
 										<legend>{$programs->program_title}</legend>

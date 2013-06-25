@@ -20,10 +20,10 @@ class Go extends CI_Controller {
 	 	 
 	public function index($id){
 		$affuser_id = $this->uri->segment(2);
-                if($this->user->check_username_exists($affuser_id)===0){
+                /*if($this->user->check_username_exists($affuser_id)===0){
                     redirect('/');
                     return;
-                }
+                }//*/
 		// $this->data['affuserid'] = $this->uri->segment(3);
                 $this->data['isgo']=true;
 		$this->session->set_userdata('affuserid', $affuser_id);
