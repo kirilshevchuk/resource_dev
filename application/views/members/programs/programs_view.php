@@ -57,8 +57,8 @@
 		$("div.video_title").text(video_title);
 		jwplayer("videopreview").setup({
 				file: baseurl+'uploads/videos/'+previewfile,
-				height: 325,
-				width: 580,
+				height: 400,
+				width: 685,
 				image: baseurl+'uploads/images/preview.jpg',
 		}).play();
 		
@@ -77,8 +77,8 @@
 		}
 		jwplayer("videopreview").setup({
 				file: baseurl+'uploads/videos/'+previewfile,
-				height: 325,
-				width: 580,
+				height: 400,
+				width: 685,
 				image: baseurl+'uploads/images/preview.jpg',
 			}).play();
 		
@@ -187,7 +187,7 @@ div.tab_title1{
 
 .video_preveiw {
   /*  margin: 51px 5px 4px 82px; */
-   margin: 25px 5px 4px 40px;
+   margin: 25px 5px 4px 58px;
     position: absolute;
     text-align: center;
 }

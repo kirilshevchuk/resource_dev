@@ -81,12 +81,12 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 							<div class="siteHeaderRight">
 								
 								 <nav class="headertop">
-                                                                     <div><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></div>
-									<ul>
+                                                                     <div class="links"><ul><li><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></li>
+									
 										<li><a href="<?php echo base_url()?>members/setting">Tools</a></li>
 										<li><a href="<?php echo base_url()?>members/clientdashboard/logout">Logout</a></li>
 										<li><a  class="last modalbox" href="#inline">Contact Support</a></li>
-									</ul>
+									</ul></div>
 								 </nav>
 								<div class="sponsor">
 									<span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
@@ -131,7 +131,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 
 						</ul>
 					</nav>-->
-					
+					<div id="navigation">
 					<nav class="maniNav">
 						<ul>
 							<?php
@@ -164,5 +164,5 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 							
 							
 						</ul>
-					</nav>
+					</nav></div>
 					

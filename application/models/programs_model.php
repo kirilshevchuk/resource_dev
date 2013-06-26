@@ -179,6 +179,15 @@ class Programs_Model extends CI_Model{
 		// echo '<pre>';
 		// print_r($data11);
 		// echo '</pre>';
+            $nav_title = $this->input->post('txtNavigation');
+            $nav_position = $this->input->post('txtposition');
+            $link = $this->input->post('txtSignup_Link');
+            $video_title = $this->input->post('txtVideo_Title');
+            $program_title = $this->input->post('txtProgram_Title');
+            $affiliate_id = $this->input->post('affiliate_id');
+            if(strpos($link,$affiliate_id)==false){
+                return "General link sould contain defauld affiliate id!";
+            }
 		$upload_source=$this->input->post('source');
 		if ((isset($_FILES['file_upload_video']['name']) && $_FILES['file_upload_video']['name'] != '')  &&(isset($upload_source) && $upload_source=='upload')) {
 			
@@ -228,12 +237,6 @@ class Programs_Model extends CI_Model{
 			$logo_name=$this->input->post('txtOldLogo');
 		}
         
-        $nav_title = $this->input->post('txtNavigation');
-        $nav_position = $this->input->post('txtposition');
-        $link = $this->input->post('txtSignup_Link');
-        $video_title = $this->input->post('txtVideo_Title');
-        $program_title = $this->input->post('txtProgram_Title');
-        $affiliate_id = $this->input->post('affiliate_id');
 	$datatoupdate = array(
             'program_title'=>$program_title,
             'video_title'=>$video_title,
@@ -269,6 +272,16 @@ class Programs_Model extends CI_Model{
 		// echo '<pre>';
 		// print_r($data11);
 		// echo '</pre>';
+        $nav_title = $this->input->post('txtNavigation');
+        $nav_position = $this->input->post('txtposition');
+        $link = $this->input->post('txtSignup_Link');
+        $video_title = $this->input->post('txtVideo_Title');
+        $program_title = $this->input->post('txtProgram_Title');
+        $affiliate_id = $this->input->post('affiliate_id');
+            if(strpos($link,$affiliate_id)==false){
+                return "General link sould contain defauld affiliate id!";
+            }
+        
 		$upload_source=$this->input->post('source');
 		if ((isset($_FILES['file_upload_video']['name']) && $_FILES['file_upload_video']['name'] != '') &&( isset($upload_source) && $upload_source=='upload')) {
 			// echo '<pre>';
@@ -318,12 +331,6 @@ class Programs_Model extends CI_Model{
 		}
 		// die("dsddddddddd");
         
-        $nav_title = $this->input->post('txtNavigation');
-        $nav_position = $this->input->post('txtposition');
-        $link = $this->input->post('txtSignup_Link');
-        $video_title = $this->input->post('txtVideo_Title');
-        $program_title = $this->input->post('txtProgram_Title');
-        $affiliate_id = $this->input->post('affiliate_id');
         $errors=FALSE;
         $data = array(
             'program_title'=>$program_title,

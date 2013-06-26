@@ -31,7 +31,7 @@
     color:crimson;
 }
 img#videobg{
-    width: 90%;
+    width: 93%;
 }
 .formArea{
    background: url('<?php echo base_url(); ?>images/bottom-form.png');

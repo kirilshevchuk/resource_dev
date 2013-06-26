@@ -52,6 +52,9 @@ $(document).ready(function(){
     <ul class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab">Details</a></li>
     </ul>
+    <?php if(isset($message)): ?>
+    <p style="color: red;"><?php echo $message; ?></p>
+    <?php    endif; ?>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home" style="width:50%;float: left;">
 		

@@ -135,8 +135,8 @@ function set_init(){
 		}
 		jwplayer("videopreview").setup({
 				file: baseurl+'uploads/videos/'+previewfile,
-				height: 320,
-				width: 580,
+				height: 400,
+				width: 685,
 				stretching:"exactfit",
 				image: baseurl+'uploads/images/preview.jpg',
 			}).play(true);

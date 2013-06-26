@@ -13,12 +13,6 @@
 				<script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
 	<?php 	}
         endif; ?>
-                                <style>
-                                    body{
-                                        /*background: url("<?php //echo base_url(); ?>images/bg-arrow.png") bottom center no-repeat;*/
-                                        background-color: #c7e1f2;
-                                    }
-                                </style>                                
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -29,36 +23,64 @@
   ga('send', 'pageview');
 
 </script>
+                                
+    <style>
+        #text-holder-side-temp{
+            background: url(<?php echo base_url(); ?>images/new_index.png) bottom center no-repeat;
+            height: 666px;
+            width: 800px;
+            margin: auto;
+        }
+#optinBox .textBox {
+    background-color: #fff;
+color: #48697e;
+border-color: transparent;
+font: bold 30px Arial,Helvetica,sans-serif;
+letter-spacing: 0;
+width: 517px;
+height: 20px;
+margin-top: 7px;
+margin-left: 9px;
+margin-right: auto;
+}
+#optinBox .submit {
+    background: none;
+width: 554px;
+height: 86px;
+border: none;
+background-color: transparent;
+cursor: pointer;
+margin: 27px 0px 0px 0px;
+}
+#optinBox {
+background-repeat: no-repeat;
+width: 480px;
+margin: 396px 0px 0px 90px;
+position: absolute;
+}
+#wrapper {
+width: 960px;
+text-align: center;
+margin: 50px auto;
+}
+    </style>                                
 </head>
 <body>
-    <?php if(!isset($islanding)&&!isset($isgo)): ?>
-<div id="header">
-<!--<center><img src="<?php echo base_url();?>images/header.png" width="960" height="91"/></center></div>-->
-				<div class="wrapperMain">
-					<!--header-->
-					<?php $this->load->view('global/header.php'); ?>
-					<!--/header-->
-				</div>
-    </div>
-    <?php endif; ?>
 <div id="wrapper">
 
-<img src="<?php echo base_url(); ?>images/steps-button.png" width="960" height="100" />
 
 
-<div id="text-holder-top"></div>
-<div id="text-holder-side">
-<br />
-  <img src="<?php echo base_url();?>images/main-text.png" width="960" height="465" />
-  
-  <br />
+
+
+<div id="text-holder-side-temp">
+
   
 <div id="optinBox">  
 	<form accept-charset="utf-8" action="https://app.getresponse.com/add_contact_webform.html"
     method="post">
            	 <div class="textField">
             <div id="form">
-			<input type="text" title="Email" alt="Email" class="textBox" name="email" value="Enter Your Email Here" onfocus="if(this.value=='Enter Your Email Here'){this.value=''};" onblur="if(this.value==''){this.value='Enter Your Email Here'};"></div>
+			<input type="text" title="Email" alt="Email" class="textBox" name="email" value="Enter Your Best Email Address..." onfocus="if(this.value=='Enter Your Best Email Address...'){this.value=''};" onblur="if(this.value==''){this.value='Enter Your Best Email Address...'};"></div>
                 <div class="btnBox">
                     <input type="submit" name="submit" class="submit" value="" onclick="areYouReallySure=true;">
                 </div>
@@ -69,15 +91,13 @@
 <script type="text/javascript" src="http://app.getresponse.com/view_webform.js?wid=457754&mg_param1=1"></script>
 </div>
   
-  <img src="<?php echo base_url();?>images/seat-left.png" width="480" height="38" /><br/><br/>
   
 </div>
 
-<div id="text-holder-bottom"></div><br/>
+
  
 </div>
 
-    <?php if(!isset($islanding)&&!isset($isgo)) $this->load->view('global/footerlinks.php'); ?>
 
 </body>
 </html>
