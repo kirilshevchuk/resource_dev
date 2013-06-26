@@ -18,7 +18,7 @@ img { text-align:center;}
 #optinBox .submit {background-image:url(../images/button.png);width:418px;height:62px;border:none;background-color:transparent;cursor:pointer;}
 
 #wrapper {
-	background:url(../images/bg-arrow.png) bottom center no-repeat;
+	/*background:url(../images/bg-arrow.png) bottom center no-repeat;*/
 	width:960px;
 	margin-left:auto;
 	margin-right:auto;
@@ -26,8 +26,8 @@ img { text-align:center;}
 }
 
 body {
-	background:url(../images/bg-arrow.png) bottom center no repeat;
-	background-repeat:repeat-x;
+	background: url(../images/bg-arrow.png) bottom center no-repeat;
+	/*background-repeat:repeat-x;*/
 	background-color:#c7e1f2;
 	}
 

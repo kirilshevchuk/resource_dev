@@ -301,14 +301,9 @@ address{
 	overflow:hidden;
 	margin:auto;
 }
-.wrapperOuter{
-	width:960px;
-	height:auto;
-	overflow:hidden;
-	margin:auto;
-}
+
 .wrapperMain{
-	width:860px;
+	width:980px;
 	height:auto;
 	overflow:hidden;
 	margin:auto;
@@ -325,7 +320,7 @@ address{
 	margin-bottom:22px;
 }
 .logo{
-	width:171px;
+	width:18%;
 	height:61px;
 	margin:auto;
 	padding:0px;
@@ -339,19 +334,45 @@ address{
 	text-indent:-999em;
 }
 .siteHeaderRight{
-	float:right;
-	padding:28px 20px 0px 0px;
+	float:left;
 	height:auto;
 	overflow:hidden;
+	width:80%;
+padding-top:8px;	
 }
 .sponsor{
-	padding-right:10px;
+	padding-left:15px;
 	color:#fff;
 	float:left;
 	margin-top: -20px;
         width: 380px;
 }
-
+.links
+{
+	width:380px;
+	height:50px;
+	float:left;
+}
+.links ul
+{
+	float:left;
+	text-decoration:none;
+}
+.links ul li
+{
+	float:left;
+	list-style:none;
+}
+.links ul li a
+{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+.links ul li a:hover
+{
+	color:#FFFFFF;
+	text-decoration:underline;
+}
 span.downline{
 	padding:7px 2px 35px 0px;
 	
@@ -369,12 +390,15 @@ nav.headertop {
     margin: 0;
     padding: 0;
     text-align: right;
+	width:400px;
+	height:20px;
 }
 nav.headertop ul li {
     display: inline;
     line-height: normal;
     margin: 0;
     padding: 0;
+	float:left;
 }
 nav.headertop ul li a {
     border-right: 1px solid #fff;
@@ -397,7 +421,13 @@ nav.headertop ul li a.last {
 	margin:auto;
 	padding-bottom:15px;
 }
-
+#navigation
+{
+	float:left;
+	width:90%;
+	height:40px;
+	margin-left:5%;
+}
 nav.maniNav{
 	/* background:url(../images/navBg.png) repeat-x left top; */
 	/* padding:4px 0px 6px 2px; */
@@ -545,7 +575,7 @@ nav.maniNav ul li a.last {
 .footerLink ul li a.last {
     border-right: medium none;
 }
-.profitsContainer{width:900px;height:auto;overflow:hidden;}
+.profitsContainer{width:900px;height:auto;overflow:hidden;margin: 0 auto;}
 .profitsLeft{width:650px;float:left;}
 .profitsRight{width:250px;float:left;}
 .profitsLeft .formArea{
@@ -710,8 +740,20 @@ input[type="email"],input[type="password"],input[type="text"]{
 	text-align:center;
 	display:block;
 }
-.webright{width:660px;float:left;margin-left:15px;}
-.webleft{width:185px;float:left;margin-top:15px;}
+.webright{width: 770px;
+height: auto;
+float: left;
+margin-left: 0px;
+/* margin-bottom: 300px; */
+}
+.webleft{width:185px;float:left;margin-top:25px;margin-right:20px;
+}
+.webright1{
+width: 770px;
+height: 448px;
+float: left;
+margin-left: 0px;
+}
 .leftnav {
     font: 12px Arial,Helvetica,sans-serif;
     margin: 0;
@@ -742,7 +784,7 @@ input[type="email"],input[type="password"],input[type="text"]{
 	/* background: none repeat scroll 0 0 #FFB618; */
     display: block;
     line-height: normal;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     padding: 0;
 }
 .leftnav ul li a {
@@ -778,7 +820,7 @@ input[type="email"],input[type="password"],input[type="text"]{
 	/* background: none repeat scroll 0 0 #FFB618; */
     display: block;
     line-height: normal;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     padding: 0;
     /*text-align: center;*/
 }
@@ -1048,8 +1090,7 @@ input[type="email"],input[type="password"],input[type="text"]{
 		background: none repeat scroll 0 0 #386485;
 		font-weight: bold;
 		margin-bottom: 25px;
-		margin-top: 0px;
-		padding: 6px 0 3px 9px;
+margin-top: 60px;		padding: 6px 0 3px 9px;
 		text-align: left;
 		width:-moz-fit-content;
 	}
@@ -1073,7 +1114,17 @@ input[type="email"],input[type="password"],input[type="text"]{
     font-size: 18px;
     line-height: normal;
     margin-left: 34%;
+	margin-top:80px;
     padding: 20px 20px 20px 50px;
     text-align: center;
     width: 347px;
+	margin-bottom:30px;
+}
+#videopreview_wrapper
+{
+	{
+position: relative !important;
+width: 680px !important;
+height: 400px !important;
+margin-left: 20px !important;
 }

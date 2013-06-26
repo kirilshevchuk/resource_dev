@@ -29,7 +29,7 @@ img#video_bg{
     margin-top: 15px;
 }
 .video_preveiw{
-	margin: 27px 40px 30px 40px;
+	margin: 19px 40px 31px 59px;
 	position: absolute;
     text-align: center;
 }
@@ -37,9 +37,8 @@ img#video_bg{
     background: none repeat scroll 0 0 #FFFFFF;
     color: #000000;
     min-height: 360px;
-    padding: 15px 7px 10px 14px;
-    width: 97%;
-    overflow: hidden;
+    padding: 15px 7px 10px 9px;
+    width: 98%;
 }
 img.procees_img{
 	 margin: 5% 33%;
