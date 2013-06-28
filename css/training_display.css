@@ -1,3 +1,8 @@
+.you_tube_next{
+	  height: 383px;
+    margin: 7px 0;
+    width: 683px;
+}
 .nextbtn{
 	cursor:pointer;
 	background: url("../images/btnBg.png") repeat-x scroll left top transparent;
@@ -13,7 +18,9 @@
     text-transform: capitalize;
     width: 76%;
 }
-
+.main_tab a {
+color: blue;
+}
 img#video_bg{
 	float:left;
 }

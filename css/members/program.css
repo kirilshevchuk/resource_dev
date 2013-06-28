@@ -1,0 +1,111 @@
+.you_tube{
+	height: 383px;
+    margin: 1px;
+    width: 683px;
+}
+div.tab_title{
+	height: 40px;
+    margin: 6px 0;
+    padding-left: 28px;
+    width: 80%;
+}
+div.tab_title2{
+	height: 40px;
+    margin: 5px 0;
+    padding-left: 28px;
+    width: 80%;
+}
+div.tab_title1{
+	float: left;
+	height: 100%;
+	width: 26%;
+	margin-left: -27px;
+	margin-top: -8px;
+}
+
+.infomessage{
+	background: none repeat scroll 0 0 #00ADEB;
+    border: 1px solid black;
+    color: #FFFFFF;
+    font-size: 25px;
+    height: 45px;
+    margin-top: -200px;
+    padding-top: 25px;
+    position: fixed;
+    text-align: center;
+    top: 60%;
+    width: 98%;
+    z-index: 100;
+}
+
+.video_preveiw {
+  /*  margin: 51px 5px 4px 82px; */
+   margin: 25px 5px 4px 58px;
+    position: absolute;
+    text-align: center;
+}
+img#video_bg{
+	float:left;
+}
+img.step_done{
+	height: 80%;
+    margin: -38% 7% -2% 2%;
+    position: relative;
+    width: 100%;
+	z-index: 1;
+	display:none;
+}
+span.number {
+    background: none repeat scroll 0 0 #78A0B1; 
+   /*  background:url("<?php echo base_url(); ?>/images/check.png"); */
+    border-radius: 10px 10px 10px 10px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 3px 12px;
+    position: relative;
+   /*  right: 26px; */
+    text-decoration: none !important;
+    top:12px;
+}
+
+.idArea{
+	float: left;
+    margin: 4% 2% 1% 8%;
+    padding: 1% 1% 0 3%;
+    text-align: center;
+    width: 77%;
+	display:none;
+}
+.id_control{
+	float: left;
+    padding: 4px 3px 2px 6px;
+    width: 65%;
+}
+.sign_up_acc{
+
+}
+.lable_txt{
+	color: #000000;
+    font-weight: bold;
+    padding: 4px 2px 2px 9px;
+}
+.save_btn{
+	background: url("<?php echo base_url();?>images/btnBg.png") repeat-x scroll left top transparent;
+     border: medium none red;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 7px #696948;
+    color: #78A0B1;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 13px 4px 3px 3px;
+    padding: 6px 0;
+    text-align: center;
+    text-transform: capitalize;
+    width: 40%;
+}
+
+fieldset { margin: 10px 0 22px 0; border: 1px solid #095D92; padding: 12px 17px; background-color: #DFF3FF; }
+legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #FFFFFF; font-weight: bold; padding: 4px 8px; }
+
