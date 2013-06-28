@@ -128,19 +128,23 @@ background: none !important;
                                        >
                                     <source src="<?php //echo base_url(); ?>uploads/videos/<?php //echo $login_video; ?>" type='video/mp4' />
                                 </video>-->
+        <?php if(preg_match("/youtube\.com/", $login_video)): 
+            $video_str = substr($login_video,-11);
+        ?>
+            <iframe width="744" height="417" style='margin:29px 0px 0px 45px; position: absolute;'
+                    src="http://www.youtube.com/embed/<?php echo $video_str; ?>?modestbranding=1" 
+                    frameborder="0" allowfullscreen>
+            </iframe>
+        <?php else: ?>
         <div class="video_preveiw" style="">
             <script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
             <div id="videopreview">Loading the player...</div>
         </div>
-        <?php if(preg_match("/youtube\.com/", $login_video)): ?>
-        <input type="hidden" id="baseurl" value="">
-        <input type="hidden" id="video_file_path" value="">
-        <?php else: ?>
         <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
         <input type="hidden" id="video_file_path" value="uploads/videos/">
         <?php endif; ?>
         <input type="hidden" id="id_videopreview" value="<?php echo $login_video; ?>">
-                                <img src="<?php echo base_url(); ?>images/webBg2.png" id="videobg"/>
+        <img src="<?php echo base_url(); ?>images/webBg2.png" id="videobg"/>
                         </div>
                      <p class="get_started"><?php if(isset($title_text) && ($title_text!='')){ echo $title_text; }else{ echo 'Get Started Right Now!'; } ?> </p>
                         <div class="formArea">

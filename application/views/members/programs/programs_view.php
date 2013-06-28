@@ -50,18 +50,26 @@
 		var baseurl = $("#baseurl").val();
 		$('.video_tabs').removeClass('active');
 		$(obj).find('li').addClass('active');
-		// frm_obj=document.frmVideo;
 		var previewfile = document.getElementById("txtVideo_"+id).value;
 		var video_title = document.getElementById("txtTitle_"+id).value;
-		// alert(previewfile);
 		$("div.video_title").text(video_title);
-		jwplayer("videopreview").setup({
+		
+		var regExp = /youtube\.com/;
+		var match = previewfile.match(regExp);
+		if(match=='youtube.com'){
+			var previewfile = previewfile.substr(previewfile.length - 11);
+			$('#videopreview').html();
+			$('#videopreview').html('<iframe width="500" height="300" src="http://www.youtube.com/embed/'+previewfile+'?modestbranding=1&autoplay=1&rel=0&showsearch=0&controls=0" frameborder="0" class="you_tube"></iframe>');
+			// alert("yyy");
+		}else{
+			// alert("nnn");
+			jwplayer("videopreview").setup({
 				file: baseurl+'uploads/videos/'+previewfile,
 				height: 400,
 				width: 685,
 				image: baseurl+'uploads/images/preview.jpg',
-		}).play();
-		
+			}).play(); 
+		}
 	} 
 	
 	$(document).ready(function() { 
@@ -70,17 +78,20 @@
 		var video_title = $("#txtWelcomeTitle").val();
 		// alert(previewfile);
 		$("div.video_title").text(video_title);
-		// alert(previewfile);
-		if(previewfile=="")
-		{
-			previewfile = "20051210-w50s.flv";
-		}
-		jwplayer("videopreview").setup({
+		var regExp = /youtube\.com/;
+		var match = previewfile.match(regExp);
+		if(match=='youtube.com'){
+			previewfile = previewfile.substr(previewfile.length - 11);
+			$('#videopreview').html();
+			$('#videopreview').html('<iframe width="500" height="300" src="http://www.youtube.com/embed/'+previewfile+'?modestbranding=1&autoplay=1&rel=0&showsearch=0&controls=0" frameborder="0" class="you_tube"></iframe>');
+		}else{
+			jwplayer("videopreview").setup({
 				file: baseurl+'uploads/videos/'+previewfile,
 				height: 400,
 				width: 685,
 				image: baseurl+'uploads/images/preview.jpg',
 			}).play();
+		}
 		
 	})
 	
@@ -149,114 +160,6 @@ function UrlExists(url) {
 
 	
 </script>
-<style>
-div.tab_title{
-	height: 40px;
-    margin: 6px 0;
-    padding-left: 28px;
-    width: 80%;
-}
-div.tab_title2{
-	height: 40px;
-    margin: 5px 0;
-    padding-left: 28px;
-    width: 80%;
-}
-div.tab_title1{
-	float: left;
-	height: 100%;
-	width: 26%;
-	margin-left: -27px;
-	margin-top: -8px;
-}
-
-.infomessage{
-	background: none repeat scroll 0 0 #00ADEB;
-    border: 1px solid black;
-    color: #FFFFFF;
-    font-size: 25px;
-    height: 45px;
-    margin-top: -200px;
-    padding-top: 25px;
-    position: fixed;
-    text-align: center;
-    top: 60%;
-    width: 98%;
-    z-index: 100;
-}
-
-.video_preveiw {
-  /*  margin: 51px 5px 4px 82px; */
-   margin: 25px 5px 4px 58px;
-    position: absolute;
-    text-align: center;
-}
-img#video_bg{
-	float:left;
-}
-img.step_done{
-	height: 80%;
-    margin: -38% 7% -2% 2%;
-    position: relative;
-    width: 100%;
-	z-index: 1;
-	display:none;
-}
-span.number {
-    background: none repeat scroll 0 0 #78A0B1; 
-   /*  background:url("<?php echo base_url(); ?>/images/check.png"); */
-    border-radius: 10px 10px 10px 10px;
-    color: #FFFFFF;
-    float: left;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 3px 12px;
-    position: relative;
-   /*  right: 26px; */
-    text-decoration: none !important;
-    top:12px;
-}
-
-.idArea{
-	float: left;
-    margin: 4% 2% 1% 8%;
-    padding: 1% 1% 0 3%;
-    text-align: center;
-    width: 77%;
-	display:none;
-}
-.id_control{
-	float: left;
-    padding: 4px 3px 2px 6px;
-    width: 65%;
-}
-.sign_up_acc{
-
-}
-.lable_txt{
-	color: #000000;
-    font-weight: bold;
-    padding: 4px 2px 2px 9px;
-}
-.save_btn{
-	background: url("<?php echo base_url();?>images/btnBg.png") repeat-x scroll left top transparent;
-     border: medium none red;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 0 0 7px #696948;
-    color: #78A0B1;
-    font-size: 19px;
-    font-weight: bold;
-    margin: 13px 4px 3px 3px;
-    padding: 6px 0;
-    text-align: center;
-    text-transform: capitalize;
-    width: 40%;
-}
-
-fieldset { margin: 10px 0 22px 0; border: 1px solid #095D92; padding: 12px 17px; background-color: #DFF3FF; }
-legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #FFFFFF; font-weight: bold; padding: 4px 8px; }
-
-</style>
 
 <div id="response"></div>
 <form name="frmVideo" method="post" >		
@@ -284,18 +187,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 							<div class="<?php  if(strlen($programs->leftnav_title)<=16){ echo 'tab_title'; }else{ echo 'tab_title2'; } ?>"><?php echo $programs->leftnav_title;?></div>
 						</li>
 					</a>
-							<!--<li>
-								<a href="#" class="video_tabs" onclick="set_my_video(this,<?php //echo $programs->id;?>);">
-								<div>	
-									<div class="tab_title1">		
-									<img src="<?php //echo base_url();?>images/check.png" class="step_done" />		
-									<span class="number"><?php //echo ++$count; ?></span>
-									</div>
-									<div class="tab_title"><?php //echo $programs->leftnav_title;?></div>
-									 
-								</div>
-								</a>
-							</li>-->
+							
 							
 							<input type="hidden" id="txtVideo_<?php echo $programs->id;?>"  name="txtVideo_<?php echo $programs->id;?>" value="<?php echo $programs->video_name_in_folder; ?>">
 							<input type="hidden" id="txtTitle_<?php echo $programs->id;?>"  name="txtTitle_<?php echo $programs->id;?>" value="<?php echo $programs->video_title; ?>">
@@ -342,12 +234,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 								<div class="<?php  if(strlen($video_data['next_video_'.$tab_menu_id]->tab_title)<=16){ echo 'tab_title'; }else{ echo 'tab_title2'; } ?>"><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title; ?></div>
 							</li>
 						</a>
-					<!-- <li>
-						<a href="#" class="video_tabs" onclick="set_my_video(this,'<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>');">
-							<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
-							<span class="number"><?php echo ++$count; ?></span><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title; ?> 
-						</a>
-					</li>-->
+					
 					<!-- End of Next Tab Li code start here -->
 					<?php } ?>
 				</ul>
@@ -361,7 +248,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 		<img src="<?php echo base_url();?>images/webBg2.png" id="video_bg">
 		<div class="video_preveiw" style="">
 					<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
-					<div id="videopreview">Loading the player...</div>
+					<div id="videopreview"></div>
 		</div>
 		
 		
@@ -394,8 +281,6 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 	
 </form>
 
-<!--/**********************************************************/-->
-		
-<!--/**********************************************************/-->	
+
 </div>
 <!-- /wrapperMain -->

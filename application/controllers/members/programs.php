@@ -30,6 +30,7 @@ class Programs extends CI_Controller {
 			$this->data['client_full_data']=$this->client->get_current_login_client_detail();
 			$this->data['metatitle'] = 'Programs Sign-Up ';
 			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
+			$this->data['stylelist'][]='css/members/program.css';
 			$this->data['query'] = $this->programs_model->getProgram_for_clentdashboard();
 			$this->data['video_query'] = $this->video->GetAllVideoData();
 			// echo $this->db->last_query(); 

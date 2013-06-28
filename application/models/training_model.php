@@ -59,7 +59,7 @@ class Training_model extends CI_Model{
                             $video_str = substr($training->video,-11);
                             $video="
             <iframe width='500' height='300'
-                    src='http://www.youtube.com/embed/$video_str?modestbranding=1' 
+                    src='http://www.youtube.com/embed/$video_str?modestbranding=1&rel=0&showsearch=0&controls=0' 
                     frameborder='0' allowfullscreen 
                     style='margin: 27px 40px 30px 40px;'>
             </iframe>

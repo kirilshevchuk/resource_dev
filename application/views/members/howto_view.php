@@ -20,67 +20,8 @@ foreach($video_query->result() as $singlevideo ){
 	
 
 ?>
-		
-		<?php /* if(isset($stylelist)):
-            foreach ($stylelist as $style):?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
-        <?php endforeach;
-        endif; 
-        if(isset($scriptlist)): 
-            foreach ($scriptlist as $script):?>
-        <script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
-        <?php endforeach;
-        endif; */ ?>
-<style>
-    /*
-.nextbtn{
-	cursor:pointer;
-	background: url("../images/btnBg.png") repeat-x scroll left top transparent;
-    border: medium none red;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 0 0 7px #696948;
-    color: #78A0B1;
-    font-size: 19px;
-    font-weight: bold;
-    margin: 14px 80px;
-    padding: 6px 0;
-    text-align: center;
-    text-transform: capitalize;
-    width: 76%;
-}
+	
 
-img#video_bg{
-	float:left;
-}
-
-.m_t_tab-close {
-    background: none repeat scroll 0 0 #245679;
-    color: #FFFFFF;
-    font-size: 20px;
-    padding: 14px;
-}
-.tab_close {
-    cursor: pointer;
-    margin-top: 15px;
-}
-.video_preveiw{
-	margin: 27px 40px 30px 40px;
-	position: absolute;
-    text-align: center;
-}
-.show-tab-content {
-    background: none repeat scroll 0 0 #FFFFFF;
-    color: #000000;
-    min-height: 360px;
-    padding: 15px 7px 10px 14px;
-    width: 97%;
-}
-img.procees_img{
-	 margin: 5% 33%;
-	 font-size: 55px;
-}
-*/
-</style>
 <script>
 function set_init(){
 
@@ -129,18 +70,23 @@ function set_init(){
 		var baseurl = $("#baseurl").val();
 
 		var previewfile = $("#next_video").val();
-		if(previewfile=="")
-		{
-			previewfile = "20051210-w50s.flv";
+		var regExp = /youtube\.com/;
+		var match = previewfile.match(regExp);
+		if(match=='youtube.com'){
+			var previewfile = previewfile.substr(previewfile.length - 11);
+			$('#videopreview').html();
+			$('#videopreview').html('<iframe width="500" height="300" src="http://www.youtube.com/embed/'+previewfile+'?modestbranding=1&autoplay=1&rel=0&showsearch=0&controls=0" frameborder="0" class="you_tube_next"></iframe>');
+			// alert("yyy");
+		}else{
+			jwplayer("videopreview").setup({
+					file: baseurl+'uploads/videos/'+previewfile,
+					height: 400,
+					width: 685,
+					stretching:"exactfit",
+					image: baseurl+'uploads/images/preview.jpg',
+				}).play(true);
 		}
-		jwplayer("videopreview").setup({
-				file: baseurl+'uploads/videos/'+previewfile,
-				height: 400,
-				width: 685,
-				stretching:"exactfit",
-				image: baseurl+'uploads/images/preview.jpg',
-			}).play(true);
-	}
+	} 
 	
 	function load_train_data(cat_id){
 		var title=$('#title_'+cat_id).val();
@@ -198,6 +144,7 @@ function set_init(){
 			}).play(false);
 		}
 	} 
+	
 	$(document).ready(function(){
 		var firstCategory = $("#firstCategory").val();
 		load_train_data(firstCategory);
@@ -236,13 +183,14 @@ function set_init(){
 			?>
 
 			<input type="hidden" id="firstCategory" value="<?php echo $first_cat->id;?>">
-			<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
 			<input type="hidden" id="id_videopreview" value="default.mp4">
 				
+		<?php endif; ?>
+		
+		<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
 		<div id="ma">
 		
 		</div>
-		<?php endif; ?>
 				
 	</div>
 </div>

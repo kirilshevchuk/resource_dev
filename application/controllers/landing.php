@@ -34,8 +34,9 @@ class Landing extends CI_Controller {
 		$this->data['stylelist'][]='css/landing.css';
 		$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-		
-		$this->load->view('temp_landing_view',$this->data);
+		//$this->load->view('landing_view',$this->data);
+		$i=mt_rand(1,4);
+		$this->load->view("landing_view{$i}",$this->data);
 	 }
 	public function affuser($id=false){
 		$session_login_client=$this->session->userdata('client_login');
