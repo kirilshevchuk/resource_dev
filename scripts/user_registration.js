@@ -63,3 +63,14 @@ function username_check(){
 
 
 }
+$(document).ready(function(){
+    var form_submited = 0;
+    $("#signup_form").submit(function(){
+        if(form_submited===1){
+            return false;
+        }
+        else{
+            form_submited=1;
+        }
+    });
+});
