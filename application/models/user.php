@@ -3,7 +3,7 @@
 	{
 		function __construct(){
 			parent::__construct();
-			$this->load->library('email');		
+			$this->load->library('email');
 		}
 		
 		public function send_signup_mail($email){		 
@@ -370,7 +370,15 @@ Login: 'Teame name'
 				return $this->db->trans_status();//giving the status of the transaction 
 		
 		} */
-	 
-	 
+	 public function setCookie($username,$password){
+             setcookie("username",$username, time()+3600);
+             setcookie("password",$password, time()+3600);
+             setcookie("remeber_me",$this->input->post("remeber_me"), time()+3600);
+         }
+	 public function unsetCookie($username,$password){
+             setcookie("username",$username, time()+3);
+             setcookie("password",$password, time()+3);
+             setcookie("remeber_me",$this->input->post("remeber_me"), time()+3);
+         }
 	}
 	?>

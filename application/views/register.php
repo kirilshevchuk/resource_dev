@@ -132,7 +132,7 @@ background: none !important;
             $video_str = substr($login_video,-11);
         ?>
             <iframe width="744" height="417" style='margin:29px 0px 0px 45px; position: absolute;'
-                    src="http://www.youtube.com/embed/<?php echo $video_str; ?>?modestbranding=1" 
+                    src="http://www.youtube.com/embed/<?php echo $video_str; ?>?modestbranding=1&rel=0&controls=0&autoplay=1" 
                     frameborder="0" allowfullscreen>
             </iframe>
         <?php else: ?>

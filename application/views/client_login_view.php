@@ -36,7 +36,22 @@ jQuery(function($){
 		return valid;
 	});
 	
-})	
+});
+
+$(document).ready(function(){
+    $("#login_username").focus(function(){
+        $("#login_username_lable").hide();
+    });
+    $("#login_password").focus(function(){
+        $("#login_password_lable").hide();
+    });
+    $("#login_username").focusout(function(){
+        if($(this).val()==='')$("#login_username_lable").show();
+    });
+    $("#login_password").focusout(function(){
+        if($(this).val()==='')$("#login_password_lable").show();
+    });
+});
 
 
 
@@ -112,7 +127,7 @@ text-align: right;
 	margin:5em auto 1em;
 	background:#fff;
 	border:8px solid #eee;
-	width:500px;
+	width:350px;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
@@ -121,6 +136,7 @@ text-align: right;
 	box-shadow:0 0 10px #4e707c;
 	text-align:left;
 	position:relative;
+        overflow: hidden;
 	}
 #login a, #login a:visited{color:#0283b2;}
 #login a:hover{color:#111;}
@@ -208,7 +224,29 @@ text-align: right;
 	-webkit-box-shadow:0 0 5px #700;
 	box-shadow:0 0 5px #700;
 	}
-
+        #other_commands li {
+            display: inline;
+            padding: 2px;
+            margin: 0px;
+            /*border-left: 1px solid;*/
+        }
+        #other_commands{
+            margin:10px 5px;
+            float:right;
+        }
+        .logo{
+            width: 180px;
+            float: none;
+        }
+        #login{
+            margin:10px auto;
+        }
+.input_lable {
+position: absolute;
+top: 12px;
+left: 15px;
+color: #c7c7c7;
+}
 
 /* //  login form */	
 		
@@ -220,47 +258,44 @@ text-align: right;
     <div id ="header">
         <div class="wrapperMain">
             <!--header-->
-            <?php $this->load->view('global/header.php'); ?>
+            <?php //$this->load->view('global/header.php'); ?>
             <!--/header-->
         </div>
     </div>
 
 
-<h1>Login here</h1>
+	<div class="logo">
+		<h3><a href="<?php echo base_url(); ?>">Logo</a></h3>
+	</div>
 <form id="login" method="post" action="<?php echo base_url();?>login"> 
-
-    <h1>Log in to your <strong>EasyAccessProfits.com</strong> account!</h1>
-	
 	<font style="font-size:12px;color:red;text-align:center;">
 		<?php echo form_error('password'); ?>
 	</font>	
 	
     <div>
-    	<label for="login_username">Username</label> 
+        <span id="login_username_lable" class ="input_lable">Username</span>
     	<input type="text" name="username" id="login_username" class="field required" title="Please provide your username" />
     </div>			
 
     <div>
-    	<label for="login_password">Password</label>
+        <span id="login_password_lable" class ="input_lable">Password</span>
     	<input type="password" name="password" id="login_password" class="field required" title="Password is required" />
     </div>			
     
     <!--<p class="forgot"><a href="#">Forgot your password?</a></p>-->
     			
-    <div class="submit">
-        <button name="client_login" type="submit">Log in</button>   
-        
-        <!--<label>
-        	<input type="checkbox" name="remember" id="login_remember" value="yes" />
-            Remember my login on this computer
-        </label>   -->
+    <div class="submit" style="overflow:hidden;">
+        <input type="checkbox" id="remeber_me" name="remeber_me" />Remember me
+        <button style="float:right;" name="client_login" type="submit">LOG IN</button>   
     </div>
-    
+    <ul id="other_commands">
+        <li><a href="<?php echo base_url(); ?>createaccount">Register</a></li>
+        <li>|</li>
+        <li><a href="<?php echo base_url(); ?>recovery">Lost Your Password</a></li>
+    </ul>
     
   
 </form>	
-    <p class="register">No account? <a href="<?php echo base_url(); ?>createaccount">Create your account here!</a></p>
-    <p class="register">Forgot password? <a href="<?php echo base_url(); ?>recovery">Click here to contact support!</a></p>
 
 </body>
 </html>

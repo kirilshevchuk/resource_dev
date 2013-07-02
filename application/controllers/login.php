@@ -10,6 +10,8 @@
 			$this->load->model('client','',TRUE);
 			$this->load->library('email');
 			$this->load->library('form_validation');
+                        $this->load->helper('cookie');
+                        
 		}
 	 	 
 		function admin_login(){//admin login--index
@@ -114,7 +116,15 @@
 		if (!empty($session_login_client)) {
 			redirect('members/programs', 'refresh');
 		}//*/
-			if($this->input->post('client_login')!==NULL){
+                $m_post = $this->session->userdata('my_post');
+                
+                if(!empty($m_post)){
+                    $_POST['username']=$m_post["username"];
+                    $_POST['password']=$m_post["password"];
+                    $_POST['remeber_me']=$m_post["remeber_me"];
+                    $this->session->unset_userdata('my_post');
+                }
+			if($this->input->post('username')){
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 				$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_client_database');
 
@@ -140,8 +150,19 @@
 					}
 					// echo 'sssss';
 				}
-			}else{
-					$this->load->view('client_login_view');
+			}
+                        elseif(isset($_COOKIE["username"])){
+                            $post = array(
+                                "username"=>$_COOKIE["username"],
+                                "password"=>$_COOKIE["password"],
+                                "remeber_me"=>$_COOKIE["remeber_me"]
+                            );
+                            $this->session->set_userdata('my_post', $post);
+                            redirect("login",'refresh');//*/
+                            return;
+                        }
+                        else{
+                            $this->load->view('client_login_view');
 			}
 		}
 		/*
@@ -178,6 +199,13 @@
 			$result = $this->client->client_login($username, $password);
 			if($result)
 			{
+                            if($this->input->post("remeber_me")==='on'){
+                                /*
+                                setcookie("username",$username, time()+3600);
+                                setcookie("password",$password, time()+3600);
+                                setcookie("remeber_me",$this->input->post("remeber_me"), time()+3600);//*/
+                                $this->user->setCookie($username,$password);
+                            }
 				$sess_array = array();
 				foreach($result as $row)
 				{
@@ -211,6 +239,10 @@
 			}
 			else
 			{
+                                /*setcookie("username",$username, time()+3);
+                                setcookie("password",$password, time()+3);
+                                setcookie("remeber_me",$this->input->post("remeber_me"), time()+3);//*/
+                            $this->user->unsetCookie($username,$password);
 				$this->form_validation->set_message('check_client_database', 'Invalid username or password');
 				return false;
 			}

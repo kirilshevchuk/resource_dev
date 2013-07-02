@@ -24,16 +24,7 @@
 			<div class="infomessage"><?php echo "Empower network user name set successfully"?> </div>
 <?php }
 
-	if(isset($stylelist)):
-            foreach ($stylelist as $style):?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
-        <?php endforeach;
-        endif; 
-        if(isset($scriptlist)): 
-            foreach ($scriptlist as $script):?>
-        <script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
-        <?php endforeach;
-        endif; ?>
+?>
 
 <script>
 			

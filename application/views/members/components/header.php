@@ -37,6 +37,39 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 			} , 1750);
 			
 		</script>
+                <style>
+.sponsor {
+padding-left: 15px;
+color: #333333;
+float: right;
+margin: 5px 0px;
+width: 242px;
+border: 1px solid;
+padding: 5px 5px;
+border-radius: 5px;
+font-size: 12px;
+}
+nav.maniNav {
+font: 12px Arial,Helvetica,sans-serif;
+margin-bottom: 30px;
+height: auto;
+overflow: hidden;
+margin-top: 3px;
+width: 620px;
+float: left;
+}
+nav.maniNav ul li {
+display: block;
+line-height: normal;
+width: 155px;
+text-align: center;
+margin: 0;
+padding: 0;
+float: left;
+background: url(../images/navBg.png) repeat-x left top;
+padding-top: 2px;
+}
+                </style>
     </head>
 <body>
 <!-- Code of contact support pop-up hidden inline form -->
@@ -88,13 +121,6 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 										<li><a  class="last modalbox" href="#inline">Contact Support</a></li>
 									</ul></div>
 								 </nav>
-								<div class="sponsor">
-									<span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
-									<br/>
-									<span>Your Affiliate Id : </span><a href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>" target="_blank">
-                                                                            <?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
-                                                                        </a>
-								 </div>
 							</div>
 							<!-- /header right -->
 						</div>
@@ -103,34 +129,6 @@ if (array_key_exists('sponser_full_name', $session_data)) {
             <!-- container -->
             <div id="container">
             	<div class="wrapperMain containermain">
-<!--<ul id="nav">
-	<li><a href="http://www.script-tutorials.com/">Home</a></li>
-	<li><a class="hsubs" href="#">Menu 1</a>
-	<ul class="subs">
-		<li><a href="#">Submenu 1</a></li>
-		<li><a href="#">Submenu 2</a></li>
-		<li><a href="#">Submenu 3</a></li>
-		<li><a href="#">Submenu 4</a></li>
-		<li><a href="#">Submenu 5</a></li>
-	</ul>
-	</li>
-	<li><a href="http://www.script-tutorials.com/">Home</a></li>
-</ul>-->
-				<!--	<nav class="maniNav">
-						<ul>
-							<li><a href="<?php echo base_url(); ?>members/clientdashboard">Dashboard</a></li>
-							<li><a href="<?php echo base_url(); ?>members/training">E.A.P Training</a></li>                 
-							<li><a href="<?php echo base_url(); ?>members/promotesite" >Promote Web</a></li>
-							<li><a href="<?php echo base_url(); ?>home/programs">Programs Joined</a></li>
-							<li><a href="#">Tools</a></li>
-							<li>
-								<a href="<?php echo base_url(); ?>members/promotesite/downclient">Downline</a>
-							</li>
-							<li><a href="#">Bonuses</a></li>
-							<li><a class="last" href="#">Contact Support</a></li>
-
-						</ul>
-					</nav>-->
 					<div id="navigation">
 					<nav class="maniNav">
 						<ul>
@@ -164,5 +162,13 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 							
 							
 						</ul>
-					</nav></div>
+					</nav>
+								<div class="sponsor">
+									<span id="sponsor">Your Sponsor :<br/>  <a href="#"><?php echo $sponser; ?></a></span>
+									<br/>
+									<span>Your Affiliate Id : </span><br/><a href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>" target="_blank">
+                                                                            <?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
+                                                                        </a>
+								 </div>
+                                        </div>
 					
