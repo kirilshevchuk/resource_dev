@@ -53,7 +53,7 @@ class Landing extends CI_Controller {
          public function termsofservice(){
 		$this->data['title']='Terms Of Service';
 		$this->data['stylelist'][]='css/style.css';
-		$this->data['stylelist'][]='css/landing.css';
+		//$this->data['stylelist'][]='css/landing.css';
 		$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
              
@@ -62,7 +62,6 @@ class Landing extends CI_Controller {
          public function privacypolicy(){
 		$this->data['title']='Terms Of Service';
 		$this->data['stylelist'][]='css/style.css';
-		$this->data['stylelist'][]='css/landing.css';
 		$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
              
@@ -71,8 +70,8 @@ class Landing extends CI_Controller {
          public function earningdisclaimer(){
 		$this->data['title']='Terms Of Service';
 		$this->data['stylelist'][]='css/style.css';
-		$this->data['stylelist'][]='css/landing.css';
-		$this->data['stylelist'][]='css/jsplayer_custom.css';
+		//$this->data['stylelist'][]='css/landing.css';
+		//$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
              
              $this->load->view('earningdisclaimer',$this->data);             

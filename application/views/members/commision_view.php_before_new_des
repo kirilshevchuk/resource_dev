@@ -1,7 +1,6 @@
 <?php if (isset($status) && $status=="success"){?>
 			<div class="infomessage"><?php echo "Successfully"?> </div>
 <?php } 
-
 /**************** code to fetch next step data **************/
 $video_data=array();
 
@@ -17,10 +16,10 @@ foreach($video_query->result() as $singlevideo ){
 		// echo '</pre>';
 		
 /**************** End of code to fetch next step data **************/
-	
+		
 
 ?>
-	
+		
 
 <script>
 function set_init(){
@@ -29,6 +28,7 @@ function set_init(){
 		var previewfile=$("#first_video").val();
 		var videopreview=$("#first_video_index").val();
 		set_video(videopreview);
+		// alert(videopreview);
 		// alert(previewfile);
 		/* if(previewfile=="")
 		{
@@ -86,22 +86,22 @@ function set_init(){
 					image: baseurl+'uploads/images/preview.jpg',
 				}).play(true);
 		}
-	} 
+	}
 	
 	function load_train_data(cat_id){
+		// alert(cat_id);
 		var title=$('#title_'+cat_id).val();
 		$("div.video_title").text(title);
 		
 		$('.cat_tabs').removeClass('active');
 		$('#ctab_'+cat_id).addClass('active');
-		// alert(cat_id);
 		var base_url=$("#baseurl").val();
 		var dataString = 'cat_id=' +cat_id;  
 		var process_image='<img src="'+base_url+'images/loader.gif" class="procees_img" alt="wait...">';
 		$("div#ma").html(process_image);
 		$.ajax({  
 		  type: "POST",  
-		  url: base_url+"members/howto/showdata/"+cat_id,  
+		  url: base_url+"members/commisions/showdata/"+cat_id,  
 		  data: dataString,  
 		  success: function(msg) {  
 				// alert(msg);
@@ -109,6 +109,7 @@ function set_init(){
 				set_init();
 		  }  
 		});  
+		
 	}
 	
 	function show_div(obj,index){
@@ -123,6 +124,7 @@ function set_init(){
 		
 		set_video(index);
 	}
+	
 	
 	function set_video(index){
 		var baseurl = $("#baseurl").val();
@@ -141,54 +143,43 @@ function set_init(){
 					width: 500,
 					stretching:"exactfit",
 					image: baseurl+'uploads/images/preview.jpg',
-			}).play(false);
+				}).play(false);
 		}
 	} 
-	
 	$(document).ready(function(){
 		var firstCategory = $("#firstCategory").val();
 		load_train_data(firstCategory);
 	});
-	
 	
 	//jQuery(document).on('click', '.jwdisplayIcon', function(event) { jwplayer( 'videopreview' ).pause(); })
 	
 </script>
 <div class="video_title">Welcome User</div>	
 	<div class="webleft">
-			<div class="leftnav2">
+			<div class="leftnav">
 				<ul>
-                	<?php foreach($query->result() as $category ){ ?>
-						<a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#">
-						<li onclick="load_train_data(<?php echo $category->id; ?>);" class="video_tabs">
-						<div class="tab_title1">
-							<?php echo $category->category_name; ?>
+					<?php foreach($query->result() as $category ){ ?>
+						<li onclick="load_train_data(<?php echo $category->id; ?>);" >
+							<a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#"><?php echo $category->category_name; ?></a>
 							<input type="hidden" id="title_<?php echo $category->id; ?>" value="<?php echo $category->category_name; ?>" >
-						</div></li></a>
-                        
-                        
-                        
-                        
+						</li>
 					<?php } ?>
-                    
+					
 					<!-- Next Tab Li code start here -->
-		<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
-			<a id="" class="cat_tabs" href="#">
-				<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);" class="video_tabs">
-					<div class="tab_title1">
-						<?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?>
-						<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
-						<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
-					</div>
-				</li>
-			</a>	<!-- End of Next Tab Li code start here -->
-		<?php } ?>
+						<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
+						<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);">
+							<a id="next_tab_title" class="cat_tabs" href="#"><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?></a>
+							<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
+							<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
+						</li>
+					<!-- End of Next Tab Li code start here -->
+					<?php } ?>
 				</ul>
 			</div>
 	</div>
-	<div class="webright2">
+	<div class="webright">
 			<?php 
-                        if($query->num_rows>0):
+				 if($query->num_rows>0):
 				$first_cat = $query->row();
 			?>
 
@@ -204,3 +195,4 @@ function set_init(){
 				
 	</div>
 </div>
+<!-- /wrapperMain -->

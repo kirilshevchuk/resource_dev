@@ -103,8 +103,8 @@
 		session_start();
 		$this->session->unset_userdata('client_login');
 		$this->session->unset_userdata('menu_data_in_session');
-		session_destroy();
-		redirect('/', 'refresh');
+                $this->session->set_userdata('client_logut', TRUE);
+		redirect('login', 'refresh');
 	 }
 	 
 	}

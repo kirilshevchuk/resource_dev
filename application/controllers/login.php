@@ -112,6 +112,12 @@
 		 }
 		 
 		function index(){//clientlogin
+                    $session_logout= $this->session->userdata('client_logut');
+                    if($session_logout){
+                        $this->user->unsetCookie("","");
+                        $this->session->unset_userdata('client_logut');
+                        redirect('/','refresh');
+                    }
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
 			redirect('members/programs', 'refresh');

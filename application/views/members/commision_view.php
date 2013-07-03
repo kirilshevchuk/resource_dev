@@ -16,7 +16,6 @@ foreach($video_query->result() as $singlevideo ){
 		// echo '</pre>';
 		
 /**************** End of code to fetch next step data **************/
-		
 
 ?>
 		
@@ -156,28 +155,37 @@ function set_init(){
 </script>
 <div class="video_title">Welcome User</div>	
 	<div class="webleft">
-			<div class="leftnav">
+					<div class="leftnav2"> 
 				<ul>
-					<?php foreach($query->result() as $category ){ ?>
-						<li onclick="load_train_data(<?php echo $category->id; ?>);" >
-							<a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#"><?php echo $category->category_name; ?></a>
-							<input type="hidden" id="title_<?php echo $category->id; ?>" value="<?php echo $category->category_name; ?>" >
+                <?php foreach($query->result() as $category ){ ?>
+                 	<a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#">
+						<li onclick="load_train_data(<?php echo $category->id; ?>);" class="video_tabs">
+							<div class="tab_title1">
+								<?php echo $category->category_name; ?>
+                                <input type="hidden" id="title_<?php echo $category->id; ?>" value="<?php echo $category->category_name; ?>" >
+							</div>
 						</li>
-					<?php } ?>
+					</a>
 					
 					<!-- Next Tab Li code start here -->
-						<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
-						<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);">
-							<a id="next_tab_title" class="cat_tabs" href="#"><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?></a>
-							<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
-							<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
-						</li>
-					<!-- End of Next Tab Li code start here -->
-					<?php } ?>
-				</ul>
+		<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
+			<a id="" class="cat_tabs" href="#">
+				<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);" class="video_tabs">
+					<div class="tab_title1">
+						<?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?>
+						<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
+						<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
+					</div>
+				</li>
+			</a>	<!-- End of Next Tab Li code start here -->
+		<?php } ?>
+					
+					
+               <?php } ?></ul>
 			</div>
 	</div>
-	<div class="webright">
+	
+	<div class="webright2">
 			<?php 
 				 if($query->num_rows>0):
 				$first_cat = $query->row();
@@ -192,7 +200,6 @@ function set_init(){
 		<div id="ma">
 		
 		</div>
-				
+               
 	</div>
 </div>
-<!-- /wrapperMain -->

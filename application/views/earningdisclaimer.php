@@ -19,12 +19,12 @@
 <!--<center><img src="<?php echo base_url();?>images/header.png" width="960" height="91"/></center></div>-->
 				<div class="wrapperMain">
 					<!--header-->
-					<?php $this->load->view('global/header.php'); ?>
+					<?php $this->load->view('members/components/header.php'); ?>
 					<!--/header-->
 				</div>
 <div id="wrapper">
     <?php $session_menu = $this->session->userdata('menu_data_in_session'); 
-    if(!empty($session_menu)):
+    if(!empty($session_menu)&& FALSE):
     ?>
     <nav class="maniNav">
         <ul>
@@ -40,9 +40,7 @@
 
 <div id="text-holder-top"></div>
 <div id="text-holder-side">
-<p style="text-align:center"><strong><span style="color:black; font-family:arial,sans-serif">www.EasyAccessProfits.com</span></strong><strong><span style="color:black; font-family:arial,sans-serif">&nbsp;</span></strong></p>
-
-<p style="text-align:center"><br />
+<p><br />
 <strong><span style="color:black; font-family:arial,sans-serif"><strong>Earning Disclaimer And Legal Notice</strong></span></strong></p>
 
 <p><span style="color:black; font-family:arial,sans-serif; font-size:10.5pt">Earnings Disclaimer:&nbsp; While every effort has been made to accurately represent our products and their potential there is no guarantee that you will earn any money using the techniques and ideas in these materials.&nbsp; Examples in these materials are not to be interpreted as a promise or guarantee of earnings.</span></p>
@@ -64,7 +62,7 @@
 
 </div>
 
-    <?php $this->load->view('global/footerlinks.php'); ?>
+    <?php $this->load->view('members/components/footer.php'); ?>
 
 </body>
 </html>
