@@ -18,7 +18,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 ?>
 <html>
     <head>
-        <title>::-<?php if(isset($metatitle)){ echo $metatitle; }else { echo 'allMoney';}?>-::</title>
+        <title>::-<?php if(isset($metatitle)){ echo $metatitle; }else { echo 'Easy Access Profits';}?>-::</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css">
 		<script src="<?php echo base_url()?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
                 <script src="<?php echo base_url()?>scripts/jquery.zclip.js" type="text/javascript"></script>
@@ -37,6 +37,10 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 				$('.infomessage').fadeOut('fast');
 			} , 1750);
                         $(document).ready(function(){
+                            $("#user_affiliate_link").click(function(){
+                                //alert("clicked");
+                                window.open($(this).attr('href'),'_blank');
+                            });
                             $("a#user_affiliate_link").zclip({
                                 path:'<?php  echo base_url(); ?>scripts/ZeroClipboard.swf',
                                 copy:"<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>"
@@ -55,16 +59,16 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 <div id="inline">
 	<form id="contact" name="contact" action="#" method="post">
 		<fieldset id="support">
-		<legend id="support">Please complete the following form</legend>
+		<legend id="support">For support, please fill in the form below:</legend>
 
-		<label for="email"><span class="required">*</span> Email</label>
+		<label for="email"><span class="required">*</span> Best Email:</label>
 		<input name="email" type="email" id="email" class="txt" />
 
 		<br />
-		<label for="comments"><span class="required">*</span> Your comments</label>
+		<label for="comments"><span class="required">*</span> Support Request:</label>
 		<textarea name="msg" id="msg"></textarea>
 		
-		<button id="send" class="button">Send E-mail</button>
+		<button id="send" class="button">Get Support Now</button>
 		</fieldset>
 	</form>
 </div>
@@ -133,12 +137,16 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 						</ul>
 					</nav></div>
                     <div id="navigation-right">
-                    <div class="textare">
-                    <span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
-									<br/>
-									<span>Your Affiliate Id : </span><a style="font-size:11px;" id="user_affiliate_link" href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>" target="_blank">
-                                                                            <?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
-                                                                        </a>
-                    </div></div>
+						<div class="textare">
+							<span id="sponsor">Your Sponsor : <br/>
+                                                            <a href="#"><?php echo $sponser; ?></a></span>
+							<br/>
+							<span>Your Affiliate Id : </span>
+							<a style="font-size:11px;" id="user_affiliate_link" href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>" 
+                                                           target="_blank" title="Click here to copy your affiliate id.">
+									<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
+							</a>
+						</div>
+					</div>
                     
 					

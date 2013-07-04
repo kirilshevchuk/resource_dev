@@ -129,8 +129,10 @@
 				// die();
                     if($this->form_validation->run()==FALSE){
 						// echo 'I m in error';
-						$this->data['query'] = $this->logo->GetInitData();
-						$this->load->view('user_registration',$this->data);
+						// $this->data['query'] = $this->logo->GetInitData();
+						
+						// $this->load->view('register',$this->data);
+						$this->index();
                      }else{
 							// echo 'I m Not in error';
 							redirect('members/programs', 'refresh');

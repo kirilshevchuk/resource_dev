@@ -106,14 +106,13 @@ class Programs_Model extends CI_Model{
 			$next_url=$row['custom_link'];
 			$base_url=base_url();
 			$html="
-				<img src='{$base_url}images/webBg2.png' id='video_bg'>
 				<div class='video_preveiw' style=''>
 							<script type='text/javascript'>jwplayer.key='oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==';</script>
 							<div id='videopreview'>Loading the player...</div>
 				</div>
 			
 				<div class='idArea' >
-				 <a href='{$next_url}' id='nextbtn_url' style='cursor:pointer;textdecoration:none;' target='_blank'><input type='button' class='nextbtn' value='Click Here To Go To The Next Step' /></a>
+				 <a href='{$next_url}' id='nextbtn_url' style='cursor:pointer;textdecoration:none;'><input type='button' class='nextbtn' value='Click Here To Go To The Next Step' /></a>
 				</div>
 			";
 		}

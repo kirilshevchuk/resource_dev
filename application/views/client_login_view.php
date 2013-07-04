@@ -190,6 +190,7 @@ overflow: hidden;
 	border: 0px;
         padding: 0px 71px;
         height: 40px;
+        width: 142px;
         margin-left: 35px;
 	background:url(<?php echo base_url(); ?>images/new_components/login_button_bg.png) repeat #3C4B5E;
 	-moz-border-radius:0px;

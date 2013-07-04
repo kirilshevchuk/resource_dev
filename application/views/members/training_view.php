@@ -21,14 +21,17 @@ foreach($video_query->result() as $singlevideo ){
 
 ?>
 
+
 <div class="video_title">Welcome User</div>	
 	<div class="webleft">
-			<div class="leftnav2">
+			<div class="leftnav3">
 				<ul>
 					<?php foreach($query->result() as $category ){ ?>
                     <a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#" >
                     <li onclick="load_train_data(<?php echo $category->id; ?>);" class="video_tabs">
 							<div class="tab_title1">
+                           <!-- <div class="spanarrow2">
+                            </div>-->
 								<?php echo $category->category_name; ?>
                                 <input type="hidden" id="title_<?php echo $category->id; ?>" value="<?php echo $category->category_name; ?>" >
 							</div>
@@ -38,14 +41,16 @@ foreach($video_query->result() as $singlevideo ){
                
                <?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
                	<a id="next_tab_title" class="cat_tabs" class="cat_tabs" href="#">
+
 						<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);" class="video_tabs">
-							<div class="tab_title1">
-								<?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?>
-								<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
-								<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
-							</div>
-						</li>
-				</a>						<!-- End of Next Tab Li code start here -->
+                        <div class="tab_title1">
+                       <!-- <div class="spanarrow2">
+                            </div>-->
+				<?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?>
+
+							<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
+							<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
+</div></li></a>						<!-- End of Next Tab Li code start here -->
 					<?php } ?>
 				</ul>
 			</div>

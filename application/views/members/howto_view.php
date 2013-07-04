@@ -156,12 +156,14 @@ function set_init(){
 </script>
 <div class="video_title">Welcome User</div>	
 	<div class="webleft">
-			<div class="leftnav2">
+			<div class="leftnav3">
 				<ul>
                 	<?php foreach($query->result() as $category ){ ?>
 						<a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#">
 						<li onclick="load_train_data(<?php echo $category->id; ?>);" class="video_tabs">
 						<div class="tab_title1">
+                        <!--<div class="spanarrow2">
+                            </div>-->
 							<?php echo $category->category_name; ?>
 							<input type="hidden" id="title_<?php echo $category->id; ?>" value="<?php echo $category->category_name; ?>" >
 						</div></li></a>
@@ -174,19 +176,22 @@ function set_init(){
 					<!-- Next Tab Li code start here -->
 		<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
 			<a id="" class="cat_tabs" href="#">
-				<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);" class="video_tabs">
+			<li onclick="load_next_step(<?php echo $tab_menu_id; ?>);" class="video_tabs">
 					<div class="tab_title1">
-						<?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?>
-						<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
-						<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
-					</div>
-				</li>
-			</a>	<!-- End of Next Tab Li code start here -->
-		<?php } ?>
+                    <!--<div class="spanarrow2">
+                            </div>
+-->
+			<?php echo $video_data['next_video_'.$tab_menu_id]->tab_title;  ?>
+            
+     						<input type="hidden" id="next_video_title" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>" >
+							<input type="hidden" id="next_video" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>" >
+</div></li></a>					<!-- End of Next Tab Li code start here -->
+					
+					<?php } ?>
 				</ul>
 			</div>
 	</div>
-	<div class="webright2">
+	<div class="webright3">
 			<?php 
                         if($query->num_rows>0):
 				$first_cat = $query->row();
@@ -198,9 +203,12 @@ function set_init(){
 		<?php endif; ?>
 		
 		<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
-		<div id="ma">
-		
-		</div>
+            <div id="ma">
+            
+            </div>
+        <div id="nextdata">
+        
+        </div>
 				
 	</div>
 </div>

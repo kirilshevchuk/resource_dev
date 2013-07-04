@@ -84,7 +84,7 @@
                             }
 							
 			    o.removeClass('hover');
-                            //alert("Your affiliate link successfully copyed to clipboard.");
+                            alert("Your affiliate link is now copied to your clipboard.");
                         }
 
                         if (settings.clickAfter) {
