@@ -75,7 +75,7 @@ function set_init(){
 		if(match=='youtube.com'){
 			var previewfile = previewfile.substr(previewfile.length - 11);
 			$('#videopreview').html();
-			$('#videopreview').html('<iframe width="500" height="300" src="http://www.youtube.com/embed/'+previewfile+'?modestbranding=1&autoplay=1&rel=0&showsearch=0&controls=0" frameborder="0" class="you_tube_next"></iframe>');
+			$('#videopreview').html('<iframe width="700" height="400" src="http://www.youtube.com/embed/'+previewfile+'?modestbranding=1&autoplay=1&rel=0&showsearch=0&controls=0" frameborder="0" class="you_tube_next"></iframe>');
 			// alert("yyy");
 		}else{
 			jwplayer("videopreview").setup({

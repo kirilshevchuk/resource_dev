@@ -112,7 +112,7 @@ class Programs_Model extends CI_Model{
 				</div>
 			
 				<div class='idArea' >
-				 <a href='{$next_url}' id='nextbtn_url' style='cursor:pointer;textdecoration:none;'><input type='button' class='nextbtn' value='Click Here To Go To The Next Step' /></a>
+				 <a href='{$next_url}' id='nextbtn_url' style='cursor:pointer;textdecoration:none;' ><input type='button' class='nextbtn' value='Click Here To Go To The Next Step' /></a>
 				</div>
 			";
 		}

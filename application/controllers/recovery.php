@@ -67,7 +67,7 @@ class Recovery extends CI_Controller {
                 }//*/
 		$this->load->view('recovery/recovery_view',$this->data);
 	 }
-         public function reset($recoveryid) {
+	 public function reset($recoveryid) {
         $this->data['title'] = 'Password recovery';
         $this->data['stylelist'][] = 'css/style.css';
         // $this->data['stylelist'][] = 'css/landing.css';

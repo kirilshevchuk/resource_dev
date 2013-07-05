@@ -174,13 +174,13 @@ background: none !important;
                         <div class="formArea">
                             <form action="<?php echo base_url();?>createaccount/verifysignup" method="post" >
                                 <div class="input_line">
-                                <input class="smallinput"  type="text" name="login_firstname" id="login_firstname" placeholder="First Name*" style="background:#141a23;">
-                                <input class="smallinput" type="text" name="login_lastname" id="login_lastname" placeholder="Last Name*" style="background:#141a23;">
+                                <input class="smallinput"  type="text" name="login_firstname" id="login_firstname" placeholder="Name*" style="background:#141a23;">
+								<input  class="smallinput" type="email" name="login_email" required id="login_email" placeholder="Email Address*" style="background:#141a23;">
                                 </div>
-                                <div class="input_line">
+                               <!-- <div class="input_line">
                                 <input  class="smallinput" type="text" name="login_phone" id="login_phone" placeholder="Phone Number*" style="background:#141a23;" >
-                                <input  class="smallinput" type="email" name="login_email" required id="login_email" placeholder="Email Address*" style="background:#141a23;">
-                                </div>
+                                <input class="smallinput" type="text" name="login_lastname" id="login_lastname" placeholder="Last Name*" style="background:#141a23;">
+                                </div>-->
                                 <div class="input_line">
                                 <input  class="smallinput" type="text" required name="login_username" onKeyUp="username_check()" id="login_username" placeholder="Username* (minimum length 5)" style="background:#141a23;" >
                                 <img id="tick" class='imgtick' src="<?php echo base_url();?>images/tick.png" 

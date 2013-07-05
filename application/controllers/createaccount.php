@@ -121,7 +121,7 @@
 	 
 	 function verifysignup(){
                $this->form_validation->set_rules('login_firstname','FirstName','required|xss_clean');
-               $this->form_validation->set_rules('login_lastname','LastName','required|xss_clean');
+               // $this->form_validation->set_rules('login_lastname','LastName','required|xss_clean');
 			   $this->form_validation->set_rules('login_username','Username','trim|required|min_length[5]|xss_clean');			   
                $this->form_validation->set_rules('login_email','Email','required|valid_email|xss_clean');
                $this->form_validation->set_rules('login_password','Password','required|min_length[5]|xss_clean|callback_insert_database');
@@ -145,9 +145,9 @@
 		$wholedata=array();
 		//Field validation succeeded.  insert to database
 		$firstname = $this->input->post('login_firstname');
-		$lastname = $this->input->post('login_lastname');
+		// $lastname = $this->input->post('login_lastname');
 		$username = $this->input->post('login_username');
-		$loginphone = $this->input->post('login_phone');
+		// $loginphone = $this->input->post('login_phone');
 		$loginemail = $this->input->post('login_email');
 		$encryptpass=md5($loginpassword);
 		$strdate=date("Y-m-d h:i:s");
@@ -157,13 +157,11 @@
 			$is_afflitate_user=$this->session->userdata('affuserid');
 			$wholedata1=array(	
 								'first_name' => $firstname ,
-								'last_name' => $lastname ,
 								'user_name' => $username ,
 								'password' => $encryptpass ,
 								'real_password' => $loginpassword ,
 								'role'       => 'user',
 								'user_email' => $loginemail,										
-								'phone_number' => $loginphone, 	
 								'signup_date' => $strdate 	
 							);
 			if(isset($is_afflitate_user) && $is_afflitate_user!=''){
@@ -180,7 +178,7 @@
 			{	
 				// echo 'invalid_affliate_id_eeeeeeeeee';
 				$this->data['error_message']='Either invalid Link or Some error occur';
-				$this->data['error_redirect']=base_url().'register';
+				$this->data['error_redirect']=base_url().'createaccount';
 				$this->load->view('error_view.php',$this->data);
 				return false;
 				die();
@@ -234,7 +232,6 @@
 			$this->data['error_message']='Opps! User name allready exist error<br/>Click below link for login';
 			$this->data['error_redirect']=base_url();
 			$this->load->view('error_view.php',$this->data);
-			return false;
 			return false;
 			die();
 		}

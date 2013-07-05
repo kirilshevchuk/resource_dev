@@ -166,7 +166,7 @@ Easy Access Profits
 					$userarray = array(
 						'id' => $lastuserid,
 						'user_name'	=> $wholedata['user_name'],
-						'full_name' =>$wholedata['first_name']." ".$wholedata['last_name'],
+						'full_name' =>$wholedata['first_name'],
 						'role'  => $wholedata['role'],
 						'user_track_id'  => $track_id
 					);

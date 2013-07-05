@@ -30,7 +30,7 @@
 		font-size: 14px;
 	}
 </style>
-
+<div id="page_main_content">
 <?php $this->load->view('members/components/submenu'); ?>
 
 <!-- promoteArea -->
@@ -105,4 +105,4 @@
 </form>
  </div>
 <!-- /promoteArea -->
-    
+</div>
