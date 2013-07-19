@@ -8,7 +8,7 @@
 	
 <div class="promoteArea">
 <form method="post" action="<?php echo base_url()?>members/promotesite/invite" novalidate>
-	<table id="rounded-corner" align="center" style="back">
+	<table id="rounded-corner" class="tools_section"  align="center" style="back">
 		<thead>
 			<tr>
 				<th scope="col" colspan="2" align="center" >Invite User</th>
@@ -48,7 +48,7 @@
 			<tr>
 				<td colspan="2" align="center">
 				<input type="submit" class="btn" value="Invite" >
-					<a href="<?php echo base_url()?>members/clientdashboard"> 
+					<a href="<?php echo base_url()?>members/programs"> 
 						<input type="button" class="btn" value="cancel">
 					</a>
 				</td>

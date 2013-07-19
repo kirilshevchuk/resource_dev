@@ -80,18 +80,94 @@ iframe#wel_data{
 background: none !important;
 }
 </style> 
-  </head>
+	<script type="text/javascript" >
+	function validate(obj){ 
+		var errors = 0;
+		var message = "";
+		frmobj=document.frmAccount;
+		var is_avail_flag=frmobj.is_avail.value;
+		// alert(is_avail_flag);
+		if (frmobj.login_firstname.value == "")
+		{
+			errors++;
+			message += "["+errors+"] Please enter your First Name ! \n\n";
+			if (errors == 1)
+				frmobj.login_firstname.focus();
+		}
+		if (frmobj.login_email.value == "")
+		{
+			errors++;
+			message += "["+errors+"] Please enter your Email Id Name ! \n\n";
+			if (errors == 1)
+				frmobj.login_email.focus();
+		}else if (frmobj.login_email.value != ""){
+			var emailRegxp = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i;
+			if(!frmobj.login_email.value.match(emailRegxp))
+			{
+				errors++;
+				message += "["+errors+"] Enter valid Email.The address should be of this form name@company.com !\n\n";
+				 if (errors == 1)
+				   frmobj.login_email.focus();
+			}
+		}
+		if (frmobj.login_username.value == "")
+		{
+			errors++;
+			message += "["+errors+"] Please enter User name ! \n\n";
+			if (errors == 1)
+				frmobj.login_username.focus();
+		}else if(frmobj.login_username.value.length<5){
+			errors++;
+			message += "["+errors+"] User name contain atleast 5-character ! \n\n";
+			if (errors == 1)
+				frmobj.login_username.focus();
+		}
+		if (frmobj.login_password.value == "")
+		{
+			errors++;
+			message += "["+errors+"] Please enter password! \n\n";
+			if (errors == 1)
+				frmobj.login_password.focus();
+		}else if(frmobj.login_password.value.length<5){
+			errors++;
+			message += "["+errors+"] Password contain atleast 5-character ! \n\n";
+			if (errors == 1)
+				frmobj.login_password.focus();
+		}
+		
+		if(is_avail_flag==0){
+			errors++;
+			message += "["+errors+"] UserName allready exist ! \n\n";
+			if (errors == 1)
+				frmobj.login_username.focus();
+		}
+		
+		if (errors > 0)
+		{
+			alert("Data Not Valid: \n\n" + message);
+			return false;
+		}else{
+			jQuery("body").mask("Waiting...");
+			jQuery(obj).hide();
+			return true;		
+		}
+			
+	}
+		
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-41990556-1', 'easyaccessprofits.com');
+	  ga('send', 'pageview');//*/
+	</script>
+</head>
 
 <?php
-	// $t=$this->session->all_userdata();
-	// echo '<pre>';
-	// print_r($stylelist);
-	// echo '</pre>';
 	$is_afflitate_user=$this->session->userdata('affuserid');
 	$is_fresh_signup=1;
 	if(isset($is_afflitate_user) && $is_afflitate_user!=''){
-		//echo 'refere by some user';
-		// $this->session->unset_userdata('affuserid');
 		$is_fresh_signup=0;
 	}else{
 		//echo 'Fresh Sign up';
@@ -113,42 +189,36 @@ background: none !important;
 								break;
 		}
 	}
-	// $logo=$logo_data['0'];	
-
-	// echo '<pre>';
-	// print_r($d);
-	// echo '</pre>';
 ?><div id="wrapper">
 	<div class="siteHeaderBg">
         <div class="wrapperOuter">
              <div class="wrapperMain">
 					<!--header-->
-						<div class="siteHeader">
+						<div class="siteHeader" style="text-align:center">
 							<!-- logo -->
-							<div class="logo">
+							<div class="logo" style="float:none">
 								<h3><a href="<?php echo base_url(); ?>">Logo</a></h3>
 							</div>
 							<!-- /logo -->
-							<!-- header right -->
-							<div class="siteHeaderRight">
+							<!-- header right 
+							<div class="siteHeaderRight">-->
 								
 								 
-							</div>
-							<!-- /header right -->
+							<!--</div>
+							 /header right -->
 						</div>
 						<!--/header-->
 			 </div>
 
 <body>
     <input type="hidden" id="baseurl" value="<?php echo base_url();?>">
-    <input type="hidden" id="is_avail" name="is_avail" value="-1">
 	<div id="wrapper">
 		<div class="siteHeaderBg">
 			<div class="wrapperOuter">
 				
             <!-- container -->
             <div id="container">
-            	 <div class="profitsContainer">
+				<div class="profitsContainer">
                         <div id="video_viewer">
                                
 							<?php if(preg_match("/youtube\.com/", $login_video)): 
@@ -172,15 +242,11 @@ background: none !important;
                         <div id="msgarea-container3">
                      <p class="get_started"><?php if(isset($title_text) && ($title_text!='')){ echo $title_text; }else{ echo 'Get Started Right Now!'; } ?> </p>
                         <div class="formArea">
-                            <form action="<?php echo base_url();?>createaccount/verifysignup" method="post" >
+                            <form name="frmAccount" action="<?php echo base_url();?>createaccount/verifysignup" method="post" >
                                 <div class="input_line">
                                 <input class="smallinput"  type="text" name="login_firstname" id="login_firstname" placeholder="Name*" style="background:#141a23;">
 								<input  class="smallinput" type="email" name="login_email" required id="login_email" placeholder="Email Address*" style="background:#141a23;">
                                 </div>
-                               <!-- <div class="input_line">
-                                <input  class="smallinput" type="text" name="login_phone" id="login_phone" placeholder="Phone Number*" style="background:#141a23;" >
-                                <input class="smallinput" type="text" name="login_lastname" id="login_lastname" placeholder="Last Name*" style="background:#141a23;">
-                                </div>-->
                                 <div class="input_line">
                                 <input  class="smallinput" type="text" required name="login_username" onKeyUp="username_check()" id="login_username" placeholder="Username* (minimum length 5)" style="background:#141a23;" >
                                 <img id="tick" class='imgtick' src="<?php echo base_url();?>images/tick.png" 
@@ -195,8 +261,10 @@ background: none !important;
 									<input type="hidden" name="afflitate_user_id" id="afflitate_user_id" value="<?php echo $is_afflitate_user; ?>">
 								<?php } ?>
                                 <div class="input_line">
-                                <input  type="submit" id="register_user" value="" >
+                                <input  type="submit" id="register_user" value="" onclick="return validate(this);" >
                                 </div>
+								<input type="hidden" id="is_avail" name="is_avail" value="-1">
+
                             </form>
 		</div></div>
 							
@@ -215,4 +283,10 @@ background: none !important;
   </div>
 				
 </body>
+<script type="text/javascript">
+cvn = "ReachCreateAccountPage";
+cva = "0.00";
+</script>
+<script type="text/javascript" src="http://viewthisnow.linktrackr.com/api/conversion"></script>
+<noscript><img src="http://viewthisnow.linktrackr.com/api/pixel/?cvn=ReachCreateAccountPage&cva=0.00" alt="_" width="1" height="1" border="0" /></noscript>
 </html>

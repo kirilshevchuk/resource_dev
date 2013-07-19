@@ -123,6 +123,10 @@ text-align: right;
 }
 /* login form 
 */
+body {
+	background:url(http://easyaccessprofits.com/images/login.jpg) center center;
+	}
+
 #login {
 margin: 5em auto 1em;
 background: url(<?php echo base_url(); ?>images/new_components/login_form_bg.png) repeat #3c4b5d;
@@ -234,6 +238,7 @@ overflow: hidden;
         .logo{
             width: 180px;
             float: none;
+			margin-top:50px;
         }
         #login{
             margin:10px auto;
@@ -248,7 +253,7 @@ color: #c7c7c7;
 width: 100%;
 margin: 80px 0px;
 padding: 20px 0px 76px;
-background: url(<?php echo base_url(); ?>images/new_components/login_form_part_bg.png) repeat #3C4B5E;
+
 }
 
 /* //  checkbox styles */	

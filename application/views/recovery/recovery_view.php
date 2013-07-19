@@ -289,6 +289,11 @@ select {
 	margin-top:10px;
 	margin-bottom:10px;
 }
+input[type="text"]#loginoremail {
+	background-color:#FFF !important;
+	color:#000;
+
+}
 		
 </style>
 
@@ -307,7 +312,7 @@ select {
     <div id="recovery_form">
     <?php 
     if(isset($msg)): ?>
-        <p><?php echo $msg; ?> </p>
+        <p ><?php echo $msg; ?> </p>
     <?php else: //*/
     echo form_open("recovery");
     $listoption = array(

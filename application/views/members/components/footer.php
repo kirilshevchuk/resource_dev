@@ -24,4 +24,10 @@
 
 </div>
 </body>
+<?php 
+if(isset($view_name) && ($view_name=='programs_view')){
+?>
+<img src="http://viewthisnow.linktrackr.com/api/pixel/?cvn=Reached%20Inside%20EAP%20System" width="1" height="1" border="0" />
+
+<?php } ?>
 </html>

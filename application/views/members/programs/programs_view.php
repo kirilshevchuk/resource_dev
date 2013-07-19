@@ -262,6 +262,7 @@ function show_message_div(){
 
 <!-- /wrapperMain -->
 <div id="msgarea">
+    <div id="ms_container">
 <div id="msgarea-container">
 <?php 
 		if(isset($html)){
@@ -291,4 +292,4 @@ function show_message_div(){
 	
 	
 </form>
-</div></div>
+</div></div></div>

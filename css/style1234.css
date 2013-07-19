@@ -1324,11 +1324,10 @@ margin-left: 20px !important;
 {
 	width:100% !important;
 	height:320px !important;
-	/*float:left !important;*/
+	float:left !important;
 	background:#12252E;
-        margin: 10px auto;
-	/*position:relative;
-	top:30px;*/
+	position:relative;
+	top:30px;
 }
 #msgarea2
 {
@@ -1339,18 +1338,11 @@ margin-left: 20px !important;
 	position:relative;
 	top:30px;
 }
-#ms_container {
-width: 960px;
-margin: 1px auto;
-overflow: hidden;
-}
 #msgarea-container
 {
-width: 700px;
-float: right;
-height: 300px;
-padding: 5px 0px 0px 0px;
-margin: 0 auto;
+	width:700px;
+	height:300px;
+	margin: 0 730px;
 }#msgarea-container3
 {
 	width:800px;
@@ -1463,7 +1455,7 @@ text-align: right;
 }
 
 /****** Start of Style added by developer ***********************/
-table.tools_section input[type="text"],input[type="password"],input[type="email"]{
+table.tools_section input[type="text"]{
 	background:#FFF;
 	color:#000;
 }
